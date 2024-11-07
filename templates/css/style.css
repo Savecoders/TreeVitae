@@ -216,7 +216,7 @@ body {
 /* Enlaces de navegación */
 .nav__links {
   display: flex;
-  gap: 2.6rem;
+  gap: 2.6em;
   list-style: none;
 }
 
@@ -403,6 +403,12 @@ body {
   background-color: var(--background-300);
 }
 
+@media (max-width: 1200px) {
+  .nav__links {
+    display: none;
+  }
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   body {
@@ -417,6 +423,7 @@ body {
   }
 
   .nav__links {
+    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
