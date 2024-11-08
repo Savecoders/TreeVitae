@@ -5,7 +5,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../css/style.css" />
     <link rel="icon" href="../../assets/icons/logo.svg" type="image/svg+xml" />
-    <title>TreeVitae | Posts</title>
+    <title>TreeVitae</title>
+    <style>
+      .hero {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding-top: 4em;
+        padding-bottom: 4em;
+        gap: 4em;
+      }
+
+      .hero__title__company {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 3.4em;
+        font-size-adjust: 0.545;
+        font-weight: 600;
+        text-align: center;
+        color: transparent;
+        background: linear-gradient(
+          135deg,
+          var(--primary-base) 0%,
+          var(--primary-500) 25%,
+          #05fa77 50%,
+          var(--accent-500) 75%,
+          var(--accent-base) 100%
+        );
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-size: 400% 400%;
+        line-height: 1.2;
+        animation: gradient 10s ease infinite;
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0 0;
+        }
+        25% {
+          background-position: 100% 0;
+        }
+        50% {
+          background-position: 100% 100%;
+        }
+        75% {
+          background-position: 0 100%;
+        }
+        100% {
+          background-position: 0 0;
+        }
+      }
+
+      .hero__figures {
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        padding: 2.4em;
+        gap: 2.4em;
+        place-content: center;
+      }
+
+      .hero__figure {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        aspect-ratio: 1/1;
+        box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.04);
+        filter: brightness(0.9);
+        transition: all 0.2s ease-in-out;
+        overflow: hidden;
+        object-fit: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      /* .hero__figure 1, 3, 5 */
+      .hero__figure:nth-child(1),
+      .hero__figure:nth-child(3),
+      .hero__figure:nth-child(5) {
+        border-radius: 50%;
+        height: 100%;
+      }
+
+      .hero__figure:nth-child(2),
+      .hero__figure:nth-child(4) {
+        border-radius: 16px;
+      }
+
+      .hero__figure img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.8);
+      }
+
+      .hero__figure:hover {
+        filter: brightness(1);
+      }
+
+      .hero__figure:has(a) {
+        background-color: var(--accent-base);
+      }
+
+      .hero__figure > #link-initiatives {
+        text-decoration: none;
+        font-size: 2ch;
+        font-family: 'Raleway', sans-serif;
+        font-weight: 600;
+        color: var(--background-base);
+        transition: all 0.1s ease-in-out;
+      }
+
+      .hero__figure > #link-initiatives:hover {
+        text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+      }
+
+      @media (max-width: 700px) {
+        .hero__title__company {
+          font-size: 2.4em;
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -40,6 +163,31 @@
           </a>
         </div>
       </nav>
+
+      <main class="main__container__content">
+        <section class="hero">
+          <h1 class="hero__title__company">
+            Conectando vida y naturaleza para un futuro sostenible
+          </h1>
+          <div class="hero__figures">
+            <div class="hero__figure">
+              <img src="../../assets/images/image1.png" alt="Hero 1" />
+            </div>
+            <div class="hero__figure">
+              <img src="../../assets/images/image2.png" alt="Hero 2" />
+            </div>
+            <div class="hero__figure">
+              <a id="link-initiatives" href="../initiatives/viewall.html"> See Initiatives </a>
+            </div>
+            <div class="hero__figure">
+              <img src="../../assets/images/image3.png" alt="Hero 3" />
+            </div>
+            <div class="hero__figure">
+              <img src="../../assets/images/image4.png" alt="Hero 3" />
+            </div>
+          </div>
+        </section>
+      </main>
 
       <footer class="footer">
         <div class="logo__container">
