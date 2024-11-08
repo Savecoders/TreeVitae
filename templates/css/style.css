@@ -336,12 +336,18 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
-  padding: 1rem 2rem;
+  padding: 1rem;
 }
 
 /* Breadcrumbs */
 
 .flex-row {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.flex-col {
   display: flex;
   flex-direction: row;
   gap: 8px;
@@ -401,6 +407,12 @@ body {
 
 .tag:hover {
   background-color: var(--background-300);
+}
+
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 1200px) {
