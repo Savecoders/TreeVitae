@@ -13,16 +13,15 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        padding-top: 4em;
-        padding-bottom: 4em;
+        margin-top: 3.2em;
         gap: 4em;
       }
 
-      .hero__title__company {
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 3.4em;
-        font-size-adjust: 0.545;
-        font-weight: 600;
+      #hero__title__company {
+        font-family: 'Inter', sans-serif;
+        font-size: 6.2em;
+        font-size-adjust: ch-width 0.64;
+        font-weight: 700;
         text-align: center;
         color: transparent;
         background: linear-gradient(
@@ -61,9 +60,8 @@
       .hero__figures {
         display: grid;
         width: 100%;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        padding: 2.4em;
-        gap: 2.4em;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 2em;
         place-content: center;
       }
 
@@ -74,7 +72,6 @@
         width: 100%;
         aspect-ratio: 1/1;
         box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.04);
-        filter: brightness(0.9);
         transition: all 0.2s ease-in-out;
         overflow: hidden;
         object-fit: cover;
@@ -92,7 +89,7 @@
 
       .hero__figure:nth-child(2),
       .hero__figure:nth-child(4) {
-        border-radius: 16px;
+        border-radius: 36px;
       }
 
       .hero__figure img {
@@ -107,25 +104,138 @@
       }
 
       .hero__figure:has(a) {
-        background-color: var(--accent-base);
+        backdrop-filter: blur(20px) saturate(200%);
+        -webkit-backdrop-filter: blur(20px) saturate(200%);
+        background-color: rgba(52, 182, 143, 0.14);
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.125);
       }
 
-      .hero__figure > #link-initiatives {
+      .link-initiatives {
         text-decoration: none;
         font-size: 2ch;
         font-family: 'Raleway', sans-serif;
         font-weight: 600;
-        color: var(--background-base);
+        color: var(--text-900);
         transition: all 0.1s ease-in-out;
       }
 
-      .hero__figure > #link-initiatives:hover {
+      .link-initiatives:hover {
         text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
       }
 
-      @media (max-width: 700px) {
-        .hero__title__company {
-          font-size: 2.4em;
+      .hero__info__container {
+        display: grid;
+        gap: 3em;
+        width: 100%;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      }
+
+      .hero__info {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        padding: 4em;
+        backdrop-filter: blur(20px) saturate(200%);
+        -webkit-backdrop-filter: blur(20px) saturate(200%);
+        background-color: rgba(52, 182, 143, 0.14);
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.125);
+      }
+
+      .hero__info__description {
+        font-size: 2.2ch;
+        font-family: 'Raleway', sans-serif;
+        line-height: 1.2;
+        font-weight: 400;
+        color: var(--secondary-950);
+      }
+
+      #paragraph__banner {
+        display: flex;
+        width: 100%;
+        padding: 2em;
+        margin-top: 4em;
+        margin-bottom: 4em;
+      }
+
+      #paragraph__banner p {
+        font-size: 4ch;
+        font-family: 'Raleway', sans-serif;
+        font-weight: 600;
+        color: var(--text-800);
+        text-align: center;
+        line-height: 1.4;
+      }
+
+      .promo__banner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2em;
+        min-height: 480px;
+        margin: 3em 0;
+      }
+
+      .promo__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        aspect-ratio: 16/9;
+        box-sizing: border-box;
+        max-width: 480px;
+        border-radius: 24px;
+      }
+
+      .promo__content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        text-align: right;
+        gap: 2em;
+        width: 100%;
+      }
+
+      .promo__content h2 {
+        font-size: 5ch;
+        font-family: 'Raleway', sans-serif;
+        font-weight: 600;
+        color: var(--text-900);
+      }
+
+      .promo__content p {
+        font-size: 3ch;
+        color: var(--text-800);
+        line-height: 1.4;
+      }
+
+      #paragraph__banner .highlight {
+        font-weight: 700;
+        color: var(--accent-base);
+      }
+
+      @media (max-width: 1000px) {
+        #hero__title__company {
+          font-size: 3em;
+        }
+
+        .hero__info:last-child {
+          grid-column: 1 / -1;
+        }
+      }
+
+      @media (max-width: 800px) {
+        .promo__banner {
+          flex-direction: column;
+        }
+        .promo__image {
+          max-width: 100%;
+          height: auto;
+          aspect-ratio: unset;
+          border-radius: 24px;
+          margin-bottom: 2em;
         }
       }
     </style>
@@ -165,11 +275,9 @@
       </nav>
 
       <main class="main__container__content">
-        <section class="hero">
-          <h1 class="hero__title__company">
-            Conectando vida y naturaleza para un futuro sostenible
-          </h1>
-          <div class="hero__figures">
+        <div class="hero">
+          <h1 id="hero__title__company">Conectando vida y naturaleza para un futuro sostenible</h1>
+          <section class="hero__figures">
             <div class="hero__figure">
               <img src="../../assets/images/image1.png" alt="Hero 1" />
             </div>
@@ -177,7 +285,7 @@
               <img src="../../assets/images/image2.png" alt="Hero 2" />
             </div>
             <div class="hero__figure">
-              <a id="link-initiatives" href="../initiatives/viewall.html"> See Initiatives </a>
+              <a class="link-initiatives" href="../initiatives/viewall.html"> See Initiatives </a>
             </div>
             <div class="hero__figure">
               <img src="../../assets/images/image3.png" alt="Hero 3" />
@@ -185,8 +293,56 @@
             <div class="hero__figure">
               <img src="../../assets/images/image4.png" alt="Hero 3" />
             </div>
-          </div>
-        </section>
+          </section>
+
+          <aside class="hero__info__container">
+            <div class="hero__info">
+              <p class="hero__info__description">
+                En cada Iniciativa encontrarás inspiración para transformar espacios y crear un
+                impacto positivo.
+              </p>
+            </div>
+            <div class="hero__info">
+              <p class="hero__info__description">
+                Únete y Participa en la creación de iniciativas que apoyen la conservación de la
+                biodiversidad y la preservación de la naturaleza.
+              </p>
+            </div>
+
+            <div class="hero__info">
+              <a href="#" class="link-initiatives">Explore news Posts</a>
+            </div>
+          </aside>
+        </div>
+
+        <aside id="paragraph__banner">
+          <p>
+            Nosotros estamos comprometidos con la
+            <span class="highlight">naturaleza y nuestros usuarios</span> por eso damos lugar a que
+            puedan <span class="highlight">crear iniciativas</span> que apoyen la conservación de la
+            biodiversidad y la preservación de la naturaleza.
+          </p>
+        </aside>
+
+        <hr class="separetor__horizontal" />
+
+        <div class="promo__banner">
+          <img
+            src="../../assets/images/planting-young-tree-stockcake.webp"
+            alt="Girl planting trees"
+            class="promo__image"
+          />
+          <section class="promo__content">
+            <h2>Se parte de nuestra comunidad y apoya vuestras iniciativas</h2>
+            <p>
+              ¡Únete a una iniciativa y contribuye a la conservación de la biodiversidad y la
+              preservación de la naturaleza!
+            </p>
+            <a href="#" class="btn outerline"> Registrate y unete!</a>
+          </section>
+        </div>
+
+        <hr class="separetor__horizontal" />
       </main>
 
       <footer class="footer">
