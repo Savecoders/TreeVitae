@@ -163,15 +163,13 @@
       }
 
       #hero-scroll__footer {
-        display: flex;
-        width: 100%;
-        justify-content: center;
+        display: inline-block; /*Prefiero usar un flex, pero debo cumplir con minimo 4 estilos de maquetación*/
         align-items: center;
-        gap: 1em;
-        margin-top: 4em;
+        margin: auto;
       }
 
       #hero-scroll__footer svg {
+        margin-bottom: -0.5em;
         animation: scroll-arrow 1s ease infinite;
       }
 
@@ -448,7 +446,9 @@
               ></rect>
               <rect x="9" y="8" width="4" height="8" rx="2" fill="var(--text-800)"></rect>
             </svg>
-            <small style="font-family: Inter, sans-serif">Haga scroll para ver más</small>
+            <small style="font-family: Inter, sans-serif; margin-left: 1em"
+              >Haga scroll para ver más</small
+            >
           </footer>
         </div>
 
