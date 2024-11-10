@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -52,6 +52,12 @@
         font-weight: 600;
         color: var(--accent-base);
         margin: 0;
+        text-decoration: none;
+      }
+
+      .card__title:hover {
+        text-decoration: underline;
+        color: var(--accent-500);
       }
 
       .card__description {
@@ -112,7 +118,7 @@
     <div class="container">
       <nav class="navbar">
         <div class="logo__container">
-          <img src="../../assets/icons/logo.svg" alter="logo" />
+          <img src="../../assets/icons/logo.svg" alt="logo" />
           <a class="logo__name" href="../home/index.html">TreeVitae</a>
         </div>
 
@@ -136,7 +142,7 @@
         <div class="nav__btns">
           <a href="#" class="link__outerline">Register</a>
           <a href="#" class="btn primary__with-icon">
-            <img src="../../assets/icons/user.svg" alt="" />
+            <img src="../../assets/icons/user.svg" alt="user icon" />
             Login</a
           >
         </div>
@@ -150,17 +156,17 @@
 
         <h1>Iniciativas</h1>
 
-        <form action="" class="form__search">
+        <form action="post" class="form__search">
           <div class="search__container">
             <input type="text" placeholder="Buscar" />
             <button class="btn outerline">
-              <img src="../../assets/icons/search.svg" alt="" />
+              <img src="../../assets/icons/search.svg" alt="search icon" />
               Search
             </button>
           </div>
 
           <!-- Etiquetas -->
-          <section class="tags" role="list" aria-label="Tags">
+          <section class="tags" role="group" aria-label="tags">
             <div class="tag" role="listitem">Desarrollo</div>
             <div class="tag" role="listitem">Diseño</div>
             <div class="tag" role="listitem">Marketing</div>
@@ -203,7 +209,7 @@
               </figure>
             </div>
             <article class="card__content">
-              <h3 class="card__title">Iniciativa Name</h3>
+              <a class="card__title" href="./view.html">Iniciativa Name</a>
               <p class="card__description">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                 incididunt ut labore et dolore magna aliqua.
@@ -234,7 +240,7 @@
               </figure>
             </div>
             <article class="card__content">
-              <h3 class="card__title">Iniciativa Name</h3>
+              <a class="card__title" href="./view.html">Iniciativa Name</a>
               <p class="card__description">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                 incididunt ut labore et dolore magna aliqua.
@@ -264,7 +270,7 @@
               </figure>
             </div>
             <article class="card__content">
-              <h3 class="card__title">Iniciativa Name</h3>
+              <a class="card__title" href="./view.html">Iniciativa Name</a>
               <p class="card__description">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                 incididunt ut labore et dolore magna aliqua.
@@ -294,7 +300,7 @@
               </figure>
             </div>
             <article class="card__content">
-              <h3 class="card__title">Iniciativa Name</h3>
+              <a class="card__title" href="./view.html">Iniciativa Name</a>
               <p class="card__description">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                 incididunt ut labore et dolore magna aliqua.
@@ -324,7 +330,7 @@
               </figure>
             </div>
             <article class="card__content">
-              <h3 class="card__title">Iniciativa Name</h3>
+              <a class="card__title" href="./view.html">Iniciativa Name</a>
               <p class="card__description">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                 incididunt ut labore et dolore magna aliqua.
@@ -354,7 +360,7 @@
               </figure>
             </div>
             <article class="card__content">
-              <h3 class="card__title">Iniciativa Name</h3>
+              <a class="card__title" href="./view.html">Iniciativa Name</a>
               <p class="card__description">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                 incididunt ut labore et dolore magna aliqua.
@@ -384,7 +390,7 @@
               </figure>
             </div>
             <article class="card__content">
-              <h3 class="card__title">Iniciativa Name</h3>
+              <a class="card__title" href="./view.html">Iniciativa Name</a>
               <p class="card__description">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                 incididunt ut labore et dolore magna aliqua.
@@ -398,7 +404,7 @@
       </main>
       <footer class="footer">
         <div class="logo__container">
-          <img src="../../assets/icons/logo.svg" alter="logo" />
+          <img src="../../assets/icons/logo.svg" alt="logo" />
           <a class="logo__name" href="#">TreeVitae</a>
         </div>
 
@@ -406,7 +412,7 @@
           <section class="footer__section">
             <h2>Acerca de nosotros</h2>
             <a href="#" class="btn primary__with-icon primary__with-icon">
-              <img src="../../assets/icons/user.svg" alt="" />
+              <img src="../../assets/icons/user.svg" alt="user icon" />
               Login</a
             >
           </section>
@@ -420,13 +426,13 @@
           <section class="footer__section">
             <h2>Social Media</h2>
             <a href="#" class="link" target="_blank"
-              >Github <img src="../../assets/icons/external-link.svg" />
+              >Github <img src="../../assets/icons/external-link.svg" alt="external link icon" />
             </a>
             <a href="#" class="link" target="_blank"
-              >Youtube <img src="../../assets/icons/external-link.svg"
+              >Youtube <img src="../../assets/icons/external-link.svg" alt="external link icon"
             /></a>
             <a href="#" class="link" target="_blank"
-              >Discord <img src="../../assets/icons/external-link.svg"
+              >Discord <img src="../../assets/icons/external-link.svg" alt="external link icon"
             /></a>
           </section>
         </div>
