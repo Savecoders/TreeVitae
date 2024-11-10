@@ -1,0 +1,18 @@
+{
+  "files.autoSave": "afterDelay",
+  "editor.experimental.asyncTokenizationLogging": true,
+  "editor.minimap.enabled": false,
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "editor.wordWrap": "on",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[svg]": {
+    "editor.defaultFormatter": "jock.svg"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
