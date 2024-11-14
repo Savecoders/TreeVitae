@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Abraham Andres Farfan Sanchez">
-    <link rel="stylesheet" href="../../css/style.css">
-    <link rel="icon" href="../../assets/icons/logo.svg" type="image/svg+xml">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Abraham Andres Farfan Sanchez" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="icon" href="../../assets/icons/logo.svg" type="image/svg+xml" />
     <title>Preguntas | TreeVitae</title>
     <style>
       /* Titulo principal */
-      .main__title{
+      .main__title {
         color: var(--text-base);
       }
 
       /* Contenedor de la imagen */
-      .image__container{
+      .image__container {
         position: relative;
         border-radius: 32px;
         width: 100%;
@@ -23,7 +23,7 @@
       }
 
       /* Imagen */
-      .image__phrase{
+      .image__phrase {
         width: 100%;
         height: auto;
         object-fit: cover;
@@ -32,12 +32,12 @@
       }
 
       /* Contenedor del mensaje */
-      .messagge__container{
+      .messagge__container {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color:rgba(0, 26, 20, 0.6);
+        background-color: rgba(0, 26, 20, 0.6);
         color: var(--primary-500);
         text-align: center;
         padding: 16px;
@@ -50,22 +50,22 @@
       }
 
       /* Mensaje */
-      .messagge{
+      .messagge {
         font-size: 3vw;
       }
 
       /* Autor de la frase */
-      .author__phrase{
+      .author__phrase {
         font-size: 14px;
       }
 
       /* article principal */
-      #article__main{
+      #article__main {
         margin: 10px;
       }
 
       /* Contenedor de los cards */
-      .container__cards{
+      .container__cards {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: auto repeat(2, 1fr);
@@ -74,8 +74,8 @@
       }
 
       /*Titulo de los contribuidores*/
-      .title__contributors{
-        grid-column: 1 / -1; 
+      .title__contributors {
+        grid-column: 1 / -1;
         font-size: 24px;
         color: var(--secondary-base);
         text-align: center;
@@ -83,85 +83,85 @@
       }
 
       /* Card de la informacion de los contribuidores */
-      .card{
+      .card {
         display: grid;
         justify-content: center;
         padding: 10px;
-        background-color:#051e1b;
+        background-color: #051e1b;
       }
 
       /* Pseudoclase */
-      .card:hover{
+      .card:hover {
         background-color: var(--primary-100);
         cursor: pointer;
       }
 
       /* Pseudoelemento */
-      .answer__question::selection{
+      .answer__question::selection {
         background-color: var(--primary-300);
         color: var(--background-950);
       }
 
       /* Imagen de los contribuidores */
-      .image{
+      .image {
         width: 200px;
         height: 200px;
       }
 
       /* Nombre de los contribuidores */
-      .name__contributors{
+      .name__contributors {
         text-align: center;
-        background-color:#676464;
+        background-color: #676464;
         border-radius: 5px;
         padding: 10px;
       }
 
       /* Titulo preguntas */
-      .title__questions{
+      .title__questions {
         color: var(--secondary-base);
         margin-bottom: 20px;
         font-size: 30px;
       }
 
       /* Mensaje final*/
-      .messagge__end{
+      .messagge__end {
         color: var(--primary-500);
         text-align: right;
         font-size: 18px;
       }
 
       /* Preguntas */
-      .questions{
+      .questions {
         font-size: 28px;
       }
 
       /* Estilo de las repuestas */
-      .article__section{
+      .article__section {
         padding: 32px;
       }
 
       /* Repuestas preguntas */
-      .answer__question{
+      .answer__question {
         color: #999999;
         margin-top: 20px;
         text-align: justify;
       }
 
       /* Titulo de la iniciativa */
-      .title__iniciative{
+      .title__iniciative {
         color: var(--primary-base);
         font-size: 40px;
         text-align: justify;
       }
 
       /* Parrafo */
-      .paragraph{
+      .paragraph {
         font-size: 16px;
         text-align: justify;
       }
 
       /* Link de la iniciativa */
-      .link__iniciative{
+      .link__iniciative {
         color: var(--primary-base);
         text-align: right;
         font-size: 18px;
@@ -170,7 +170,7 @@
       /* Media querry para que sea flexible en dispositivos mobiles */
       @media (max-width: 800px) {
         .container__cards {
-          grid-template-columns: repeat(2, 1fr); 
+          grid-template-columns: repeat(2, 1fr);
         }
       }
 
@@ -181,12 +181,11 @@
       }
 
       /*Media querry para el tamaño de la letra del mensaje que esta adentro de la imagen*/
-      @media (max-width: 600px){
-        .messagge{
+      @media (max-width: 600px) {
+        .messagge {
           font-size: 4vw;
         }
       }
-
     </style>
   </head>
   <body>
@@ -194,7 +193,7 @@
       <header>
         <nav class="navbar">
           <div class="logo__container">
-            <img src="../../assets/icons/logo.svg" alt="TreeVitae logo">
+            <img src="../../assets/icons/logo.svg" alt="TreeVitae logo" />
             <a class="logo__name" href="../home/index.html">TreeVitae</a>
           </div>
 
@@ -218,7 +217,7 @@
           <div class="nav__btns">
             <a href="#" class="link__outerline">Register</a>
             <a href="#" class="btn primary__with-icon">
-              <img src="../../assets/icons/user.svg" alt="User icon">
+              <img src="../../assets/icons/user.svg" alt="User icon" />
               Login
             </a>
           </div>
@@ -237,11 +236,16 @@
 
         <div class="image__container">
           <picture>
-            <img class="image__phrase" src="../../assets/images/image-phrase.png" alt="Frase de la iniciativa TreeVitae">
+            <img
+              class="image__phrase"
+              src="../../assets/images/image-phrase.png"
+              alt="Frase de la iniciativa TreeVitae"
+            />
           </picture>
           <div class="messagge__container">
             <cite class="messagge">
-              "Creando conexiones sostenibles entre las personas y la naturaleza para un mañana más verde"<small class="author__phrase"><u style="margin: 10px;">-TreeVitae</u></small>
+              "Creando conexiones sostenibles entre las personas y la naturaleza para un mañana más
+              verde"<small class="author__phrase"><u style="margin: 10px">-TreeVitae</u></small>
             </cite>
           </div>
         </div>
@@ -251,127 +255,185 @@
             <h2 class="title__contributors">Contribuidores</h2>
             <div class="card">
               <figure>
-                <img class="image" src="../../assets/images/colaborador1.png" alt="Colaborador Pablo Pincay">
-                <figcaption class="name__contributors"><strong>Pablo Pincay</strong><br><code style="font-family: monospace;">Co-Founder and CEO</code></figcaption>
+                <img
+                  class="image"
+                  src="../../assets/images/colaborador1.png"
+                  alt="Colaborador Pablo Pincay"
+                />
+                <figcaption class="name__contributors">
+                  <strong>Pablo Pincay</strong><br /><code style="font-family: monospace"
+                    >Co-Founder and CEO</code
+                  >
+                </figcaption>
               </figure>
             </div>
 
             <div class="card">
               <figure>
-                <img class="image" src="../../assets/images/colaborador2.png" alt="Colaborador Jose Agurto">
-                <figcaption class="name__contributors"><strong>Jose Agurto</strong><br><code style="font-family: monospace;">Co-Founder and CTO</code></figcaption>
+                <img
+                  class="image"
+                  src="../../assets/images/colaborador2.png"
+                  alt="Colaborador Jose Agurto"
+                />
+                <figcaption class="name__contributors">
+                  <strong>Jose Agurto</strong><br /><code style="font-family: monospace"
+                    >Co-Founder and CTO</code
+                  >
+                </figcaption>
               </figure>
             </div>
 
             <div class="card">
               <figure>
-                <img class="image" src="../../assets/images/colaborador3.png" alt="Colaborador Abraham Farfan">
-                <figcaption class="name__contributors"><strong>Abraham Farfán</strong><br><code style="font-family: monospace;">Lead General Engineer</code></figcaption>
+                <img
+                  class="image"
+                  src="../../assets/images/colaborador3.png"
+                  alt="Colaborador Abraham Farfan"
+                />
+                <figcaption class="name__contributors">
+                  <strong>Abraham Farfán</strong><br /><code style="font-family: monospace"
+                    >Lead General Engineer</code
+                  >
+                </figcaption>
               </figure>
             </div>
 
             <div class="card">
               <figure>
-                <img class="image" src="../../assets/images/colaborador4.jpeg" alt="Colaborador Gabriel Gabo">
-                <figcaption class="name__contributors"><strong>Gabriel Vera</strong><br><code style="font-family: monospace;">Lead TI Engineer</code></figcaption>
+                <img
+                  class="image"
+                  src="../../assets/images/colaborador4.jpeg"
+                  alt="Colaborador Gabriel Gabo"
+                />
+                <figcaption class="name__contributors">
+                  <strong>Gabriel Vera</strong><br /><code style="font-family: monospace"
+                    >Lead TI Engineer</code
+                  >
+                </figcaption>
               </figure>
             </div>
 
             <div class="card">
               <figure>
-                <img class="image" src="../../assets/images/colaborador5.png" alt="Colaborador Angel Vivanco">
-                <figcaption class="name__contributors"><strong>Angel Vivanco</strong><br><code style="font-family: monospace;">Marketing Design</code></figcaption>
+                <img
+                  class="image"
+                  src="../../assets/images/colaborador5.png"
+                  alt="Colaborador Angel Vivanco"
+                />
+                <figcaption class="name__contributors">
+                  <strong>Angel Vivanco</strong><br /><code style="font-family: monospace"
+                    >Marketing Design</code
+                  >
+                </figcaption>
               </figure>
             </div>
 
             <div class="card">
               <figure>
-                <img class="image" src="../../assets/images/colaborador6.png" alt="Colaborador Camioncitos S.A.">
-                <figcaption class="name__contributors"><strong>Camioncitos S.A.</strong><br><code style="font-family: monospace;">National Company</code></figcaption>
+                <img
+                  class="image"
+                  src="../../assets/images/colaborador6.png"
+                  alt="Colaborador Camioncitos S.A."
+                />
+                <figcaption class="name__contributors">
+                  <strong>Camioncitos S.A.</strong><br /><code style="font-family: monospace"
+                    >National Company</code
+                  >
+                </figcaption>
               </figure>
             </div>
-
           </section>
 
           <h2 class="title__questions">Preguntas Frecuentes sobre las Iniciativas</h2>
 
-          <hr class="separetor__horizontal">
+          <hr class="separetor__horizontal" />
 
           <section class="article__section">
             <h3 class="questions">¿Qué tipo de iniciativas puedo encontrar en TreeVitae?</h3>
             <p class="answer__question">
-              Ofrecemos una variedad de proyectos y soluciones diseñadas para promover la sostenibilidad y la conexión con la naturaleza, 
-              desde pequeños cambios en el hogar hasta grandes iniciativas empresariales.
+              Ofrecemos una variedad de proyectos y soluciones diseñadas para promover la
+              sostenibilidad y la conexión con la naturaleza, desde pequeños cambios en el hogar
+              hasta grandes iniciativas empresariales.
             </p>
           </section>
 
-          <hr class="separetor__horizontal">
+          <hr class="separetor__horizontal" />
 
           <section class="article__section">
             <h3 class="questions">¿Cómo puedo unirme a una iniciativa o proyecto?</h3>
             <p class="answer__question">
-              Unirte es muy sencillo. Explora las iniciativas activas en nuestra página y selecciona aquella que resuene contigo. 
-              Solo necesitas registrarte y empezarás a recibir información sobre cómo participar.
+              Unirte es muy sencillo. Explora las iniciativas activas en nuestra página y selecciona
+              aquella que resuene contigo. Solo necesitas registrarte y empezarás a recibir
+              información sobre cómo participar.
             </p>
           </section>
 
-          <hr class="separetor__horizontal">
+          <hr class="separetor__horizontal" />
 
           <section class="article__section">
-            <h3 class="questions">¿Existen beneficios adicionales al participar en estos proyectos?</h3>
+            <h3 class="questions">
+              ¿Existen beneficios adicionales al participar en estos proyectos?
+            </h3>
             <p class="answer__question">
-              Sí, además de contribuir al bienestar del planeta, muchos de nuestros proyectos ofrecen beneficios exclusivos, como 
-              descuentos en productos sostenibles y acceso a eventos de la comunidad TreeVitae.
+              Sí, además de contribuir al bienestar del planeta, muchos de nuestros proyectos
+              ofrecen beneficios exclusivos, como descuentos en productos sostenibles y acceso a
+              eventos de la comunidad TreeVitae.
             </p>
           </section>
 
-          <hr class="separetor__horizontal">
+          <hr class="separetor__horizontal" />
 
           <section class="article__section">
-            <h3 class="questions">¿Puedo proponer una iniciativa o colaborar con un proyecto existente?</h3>
+            <h3 class="questions">
+              ¿Puedo proponer una iniciativa o colaborar con un proyecto existente?
+            </h3>
             <p class="answer__question">
-              ¡Por supuesto! Estamos siempre abiertos a nuevas ideas. Si tienes una propuesta o deseas colaborar con un proyecto 
-              actual, contáctanos y exploraremos juntos cómo llevarlo a cabo.
+              ¡Por supuesto! Estamos siempre abiertos a nuevas ideas. Si tienes una propuesta o
+              deseas colaborar con un proyecto actual, contáctanos y exploraremos juntos cómo
+              llevarlo a cabo.
             </p>
           </section>
 
-          <hr class="separetor__horizontal">
+          <hr class="separetor__horizontal" />
 
           <section class="article__section">
             <h3 class="questions">¿Qué ocurre si decido salir de una iniciativa?</h3>
             <p class="answer__question">
-              No hay ningún compromiso a largo plazo. Puedes decidir retirarte de una iniciativa en cualquier momento. 
-              Te agradeceremos por tu participación y te mantendremos informado de futuras oportunidades.
+              No hay ningún compromiso a largo plazo. Puedes decidir retirarte de una iniciativa en
+              cualquier momento. Te agradeceremos por tu participación y te mantendremos informado
+              de futuras oportunidades.
             </p>
           </section>
         </article>
       </main>
 
-      <hr class="separetor__horizontal">
+      <hr class="separetor__horizontal" />
 
       <footer class="footer">
         <div class="footer__container">
           <section class="footer__section">
-            <h2 class="title__iniciative">Únete a nuestra comunidad, la que cultiva el cambio positivo.</h2>
+            <h2 class="title__iniciative">
+              Únete a nuestra comunidad, la que cultiva el cambio positivo.
+            </h2>
           </section>
           <section class="footer__section">
             <h3>Acerca de nuestra iniciativa</h3>
             <p class="paragraph">
-              Creemos que un impacto duradero se logra cuando las personas se unen en torno a valores compartidos. Por eso, 
-              invitamos no solo a los profesionales que buscan iniciativas sostenibles, sino también a quienes sienten pasión 
-              por la naturaleza y el bienestar de nuestro planeta.
+              Creemos que un impacto duradero se logra cuando las personas se unen en torno a
+              valores compartidos. Por eso, invitamos no solo a los profesionales que buscan
+              iniciativas sostenibles, sino también a quienes sienten pasión por la naturaleza y el
+              bienestar de nuestro planeta.
             </p>
             <a class="link__iniciative" href="#"><em>Explora nuestras iniciativas -></em></a>
           </section>
-
         </div>
       </footer>
-      
-      <hr class="separetor__horizontal">
+
+      <hr class="separetor__horizontal" />
 
       <footer class="footer">
         <div class="logo__container">
-          <img src="../../assets/icons/logo.svg" alt="TreeVitae logo">
+          <img src="../../assets/icons/logo.svg" alt="TreeVitae logo" />
           <a class="logo__name" href="#">TreeVitae</a>
         </div>
 
@@ -379,7 +441,7 @@
           <section class="footer__section">
             <h2>Acerca de nosotros</h2>
             <a href="#" class="btn primary__with-icon">
-              <img src="../../assets/icons/user.svg" alt="User icon">
+              <img src="../../assets/icons/user.svg" alt="User icon" />
               Login
             </a>
           </section>
@@ -394,20 +456,20 @@
             <h2>Social Media</h2>
             <a href="#" class="link" target="_blank"
               >Github
-              <img src="../../assets/icons/external-link.svg" alt="External link icon">
+              <img src="../../assets/icons/external-link.svg" alt="External link icon" />
             </a>
             <a href="#" class="link" target="_blank"
               >Youtube
-              <img src="../../assets/icons/external-link.svg" alt="External link icon">
+              <img src="../../assets/icons/external-link.svg" alt="External link icon" />
             </a>
             <a href="#" class="link" target="_blank"
               >Discord
-              <img src="../../assets/icons/external-link.svg" alt="External link icon">
+              <img src="../../assets/icons/external-link.svg" alt="External link icon" />
             </a>
           </section>
         </div>
 
-        <hr class="separetor__horizontal">
+        <hr class="separetor__horizontal" />
 
         <div class="content__made-with">
           <p class="made__text">
@@ -423,8 +485,10 @@
           </p>
         </div>
 
-        <p class="copyright">Copyright © 2022 TreeVitae. Todos los derechos reservados. Este sitio web y sus contenidos están protegidos por derechos de autor. 
-          Queda prohibida su reproducción total o parcial sin el permiso previo por escrito de TreeVitae.
+        <p class="copyright">
+          Copyright © 2022 TreeVitae. Todos los derechos reservados. Este sitio web y sus contenidos
+          están protegidos por derechos de autor. Queda prohibida su reproducción total o parcial
+          sin el permiso previo por escrito de TreeVitae.
         </p>
       </footer>
     </div>
