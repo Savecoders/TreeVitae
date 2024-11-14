@@ -82,10 +82,9 @@
         filter: brightness(0.8);
       }
 
-      .card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-        background-color: var(--background-50);
+      .card--clicked {
+        transform: scale(2);
+        z-index: 100;
       }
 
       .media__item small {
@@ -157,10 +156,10 @@
 
         <h1>Iniciativas</h1>
 
-        <form action="post" class="form__search">
+        <form class="form__search" method="dialog">
           <div class="search__container">
-            <input type="text" placeholder="Buscar" />
-            <button class="btn outerline">
+            <input id="searchInput" type="text" placeholder="Buscar" required />
+            <button id="btnSearch" class="btn outerline">
               <img src="../../assets/icons/search.svg" alt="search icon" />
               Search
             </button>
@@ -190,218 +189,14 @@
         <!-- Container cards Iniciativas -->
         <section class="container__cards" aria-label="Iniciativas">
           <!-- cards -->
-          <aside class="card">
-            <div class="media__row">
-              <figure class="media__item">
-                <img src="../../assets/icons/users.svg" alt="user-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/link-2.svg" alt="link-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/heart-pulse.svg" alt="heart-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/image.svg" alt="image-icon" />
-                <small>10</small>
-              </figure>
-            </div>
-            <article class="card__content">
-              <a class="card__title" href="./view.html">TreeVitae</a>
-              <p class="card__description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua.
-              </p>
-            </article>
-            <picture class="card__picture">
-              <img src="../../assets/images/iniciativa-default.png" alt="Iniciativa 1" />
-            </picture>
-          </aside>
-          <!--  -->
-          <aside class="card">
-            <div class="media__row">
-              <figure class="media__item">
-                <img src="../../assets/icons/users.svg" alt="user-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/link-2.svg" alt="link-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/heart-pulse.svg" alt="heart-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/image.svg" alt="image-icon" />
-                <small>10</small>
-              </figure>
-            </div>
-            <article class="card__content">
-              <a class="card__title" href="./view.html">TreeVitae</a>
-              <p class="card__description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua.
-              </p>
-            </article>
-            <picture class="card__picture">
-              <img src="../../assets/images/iniciativa-default.png" alt="Iniciativa 1" />
-            </picture>
-          </aside>
-          <aside class="card">
-            <div class="media__row">
-              <figure class="media__item">
-                <img src="../../assets/icons/users.svg" alt="user-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/link-2.svg" alt="link-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/heart-pulse.svg" alt="heart-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/image.svg" alt="image-icon" />
-                <small>10</small>
-              </figure>
-            </div>
-            <article class="card__content">
-              <a class="card__title" href="./view.html">TreeVitae</a>
-              <p class="card__description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua.
-              </p>
-            </article>
-            <picture class="card__picture">
-              <img src="../../assets/images/iniciativa-default.png" alt="Iniciativa 1" />
-            </picture>
-          </aside>
-          <aside class="card">
-            <div class="media__row">
-              <figure class="media__item">
-                <img src="../../assets/icons/users.svg" alt="user-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/link-2.svg" alt="link-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/heart-pulse.svg" alt="heart-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/image.svg" alt="image-icon" />
-                <small>10</small>
-              </figure>
-            </div>
-            <article class="card__content">
-              <a class="card__title" href="./view.html">TreeVitae</a>
-              <p class="card__description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua.
-              </p>
-            </article>
-            <picture class="card__picture">
-              <img src="../../assets/images/iniciativa-default.png" alt="Iniciativa 1" />
-            </picture>
-          </aside>
-          <aside class="card">
-            <div class="media__row">
-              <figure class="media__item">
-                <img src="../../assets/icons/users.svg" alt="user-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/link-2.svg" alt="link-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/heart-pulse.svg" alt="heart-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/image.svg" alt="image-icon" />
-                <small>10</small>
-              </figure>
-            </div>
-            <article class="card__content">
-              <a class="card__title" href="./view.html">TreeVitae</a>
-              <p class="card__description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua.
-              </p>
-            </article>
-            <picture class="card__picture">
-              <img src="../../assets/images/iniciativa-default.png" alt="Iniciativa 1" />
-            </picture>
-          </aside>
-          <aside class="card">
-            <div class="media__row">
-              <figure class="media__item">
-                <img src="../../assets/icons/users.svg" alt="user-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/link-2.svg" alt="link-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/heart-pulse.svg" alt="heart-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/image.svg" alt="image-icon" />
-                <small>10</small>
-              </figure>
-            </div>
-            <article class="card__content">
-              <a class="card__title" href="./view.html">TreeVitae</a>
-              <p class="card__description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua.
-              </p>
-            </article>
-            <picture class="card__picture">
-              <img src="../../assets/images/iniciativa-default.png" alt="Iniciativa 1" />
-            </picture>
-          </aside>
-          <aside class="card">
-            <div class="media__row">
-              <figure class="media__item">
-                <img src="../../assets/icons/users.svg" alt="user-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/link-2.svg" alt="link-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/heart-pulse.svg" alt="heart-icon" />
-                <small>10</small>
-              </figure>
-              <figure class="media__item">
-                <img src="../../assets/icons/image.svg" alt="image-icon" />
-                <small>10</small>
-              </figure>
-            </div>
-            <article class="card__content">
-              <a class="card__title" href="./view.html">TreeVitae</a>
-              <p class="card__description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua.
-              </p>
-            </article>
-            <picture class="card__picture">
-              <img src="../../assets/images/iniciativa-default.png" alt="Iniciativa 1" />
-            </picture>
-          </aside>
         </section>
+
+        <div class="btn__container">
+          <button class="btn outerline" id="loadMore">
+            <img src="../../assets/icons/IconUse.svg" alt="plus icon" />
+            Load more initiatives
+          </button>
+        </div>
       </main>
       <footer class="footer">
         <div class="logo__container">
@@ -456,5 +251,8 @@
         <p class="copyright">Copyright © 2022 TreeVitae. All rights reserved.</p>
       </footer>
     </div>
+
+    <!-- cargar el script de la pagina -->
+    <script type="module" src="../../js/initiatives/viewall.js"></script>
   </body>
 </html>
