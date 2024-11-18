@@ -6,6 +6,116 @@
     <link rel="stylesheet" href="../../css/style.css" />
     <link rel="icon" href="../../assets/icons/logo.svg" type="image/svg+xml" />
     <title>Contacto | TreeVitae</title>
+    <style>
+      
+      .container__form {
+        background-color: var(--background-50);
+        padding: 20px;
+        width: 700px;
+        margin: auto;
+        box-shadow: 0px 0px 35px var(--background-50);
+        border-radius: 10px;
+        margin-top: 50px;
+      }
+
+      .title__form {
+        text-align: center;
+        color: var(--primary-base);
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 22px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .container__component{
+        display: grid;
+        padding: 20px;
+        gap: 15px;
+        width: 100%;
+        max-width: 1920px;
+        padding-left: max(20px, 4%);
+        padding-right: max(20px, 4%);
+      }
+
+      #container__second {
+        margin: 20px 0;
+        border: 1px solid var(--primary-400);
+        border-radius: 5px;
+        padding: 10px;
+      }
+
+      #label__form {
+        padding: 0 6px;
+        font-family: sans-serif;
+        color: var(--primary-base);
+        border: 1px solid var(--primary-400);
+        border-radius: 5px;
+      }
+
+      .label__name {
+        color: var(--primary-base);
+        font-size: 18px;
+        font-family: sans-serif;
+        line-height: 2;
+      }
+
+      .input__text {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px 12px;
+        border: 1px solid var(--accent-400);
+        background-color: var(--background-50);
+        color: var(--text-base);
+        box-shadow: 0px 0px 10px var(--background-50);
+        border-radius: 4px;
+        outline: none;
+        transition: border-color 0.3s ease;
+      }
+
+      .input__text:focus {
+        border-color: var(--primary-400);
+        box-shadow: 0px 0px 12px var(--primary-400);
+      }
+
+      .textarea__comment{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px 12px;
+        border: 1px solid var(--accent-400);
+        background-color: var(--background-50);
+        color: var(--text-base);
+        box-shadow: 0px 0px 10px var(--background-50);
+        border-radius: 4px;
+        outline: none;
+        transition: border-color 0.3s ease;
+        resize: none;
+        height: 100px;
+      }
+
+      .textarea__comment:focus {
+        border-color: var(--primary-400);
+        box-shadow: 0px 0px 12px var(--primary-400);
+      }
+
+      .submit__button {
+        width: 100%;
+        padding: 10px;
+        background-color: var(--primary-base);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+      }
+
+      .submit__button:hover {
+        background-color: var(--primary-400);
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -47,6 +157,29 @@
           <span class="breadcrumbs__arrow"> / </span>
           <a href="#">Contacto</a>
         </div>
+
+        <form class="container__form" id="formulario" onsubmit="return validarFormulario()">
+          <h2 class="title__form">Formulario de contacto</h2>
+          <fieldset id="container__second">
+            <legend id="label__form">Datos Personales</legend>
+            <div class="container__component">
+              <label class="label__name" for="nombreIniciativa">Escriba el nombre de su iniciativa: </label>
+              <input class="input__text" type="text" placeholder="Iniciativa Plantar Arboles" id="nombreIniciativa" name="nombreIniciativa">
+            </div>
+            <div class="container__component">
+              <label class="label__name" for="correoElectronico">Correo Electrónico: </label>
+              <input class="input__text" type="email" placeholder="ejemplo@correo.com" id="correoElectronico">
+            </div>
+            <div class="container__component">
+              <label class="label__name" for="comentario">Comentario de la iniciativa: </label>
+              <textarea class="textarea__comment" name="" id="comentario" name="comentario"></textarea>
+            </div>
+            <div class="container__component">
+              <button type="submit" class="submit__button">Enviar mensaje</button>
+            </div>
+          </fieldset>
+        </form>
+
       </main>
 
       <footer class="footer">
@@ -106,5 +239,6 @@
         <p class="copyright">Copyright © 2022 TreeVitae. All rights reserved.</p>
       </footer>
     </div>
+    <script src="../../js/initiatives/contact.js"></script>
   </body>
 </html>
