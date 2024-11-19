@@ -30,8 +30,8 @@
 
       .container__component{
         display: grid;
-        padding: 20px;
-        gap: 15px;
+        padding: 10px;
+        gap: 10px;
         width: 100%;
         max-width: 1920px;
         padding-left: max(20px, 4%);
@@ -51,6 +51,15 @@
         color: var(--primary-base);
         border: 1px solid var(--primary-400);
         border-radius: 5px;
+      }
+
+      .container__personal{
+        display: flex;
+        gap: 20px;
+      }
+
+      .container__personal .container__component{
+        flex: 1;
       }
 
       .label__name {
@@ -162,17 +171,29 @@
           <h2 class="title__form">Formulario de contacto</h2>
           <fieldset id="container__second">
             <legend id="label__form">Datos Personales</legend>
-            <div class="container__component">
-              <label class="label__name" for="nombreIniciativa">Escriba el nombre de su iniciativa: </label>
-              <input class="input__text" type="text" placeholder="Iniciativa Plantar Arboles" id="nombreIniciativa" name="nombreIniciativa">
+            <div class="container__personal">
+              <div class="container__component">
+                <label class="label__name" for="nombres">Nombres: </label>
+                <input class="input__text" type="text" placeholder="Abrahm Andres*" id="nombres" name="nombres">
+              </div>
+              <div class="container__component">
+                <label class="label__name" for="apellidos">Apellidos: </label>
+                <input class="input__text" type="text" placeholder="Farfan Sanchez*" id="apellidos" name="apellidos">
+              </div>
+            </div>
+            <div class="container__personal">
+              <div class="container__component">
+                <label class="label__name" for="correoElectronico">Correo Electrónico: </label>
+                <input class="input__text" type="email" placeholder="ejemplo@correo.com" id="correoElectronico">
+              </div>
+              <div class="container__component">
+                <label class="label__name" for="telefono">Telefóno: </label>
+                <input class="input__text" type="text" placeholder="0987654321*" id="telefono" name="telefono">
+              </div>
             </div>
             <div class="container__component">
-              <label class="label__name" for="correoElectronico">Correo Electrónico: </label>
-              <input class="input__text" type="email" placeholder="ejemplo@correo.com" id="correoElectronico">
-            </div>
-            <div class="container__component">
-              <label class="label__name" for="comentario">Comentario de la iniciativa: </label>
-              <textarea class="textarea__comment" name="" id="comentario" name="comentario"></textarea>
+              <label class="label__name" for="mensaje">Mensaje: </label>
+              <textarea class="textarea__comment" name="" id="mensaje" name="mensaje"></textarea>
             </div>
             <div class="container__component">
               <button type="submit" class="submit__button">Enviar mensaje</button>
