@@ -260,14 +260,19 @@ body {
 .nav__item {
   width: 80%;
   margin: 0 auto;
-  cursor: pointer;
   padding: 20px 0;
   font-size: 2ch;
 }
 
 .nav__item a {
   color: var(--text-900);
+  font-size: 1.8ch;
   text-decoration: none;
+  width: fit-content;
+}
+
+.nav__item a:hover {
+  color: var(--text-base);
 }
 
 .nav__btns {
@@ -672,5 +677,13 @@ input[type='date'] {
     padding: 0;
     position: relative;
     font-size: 1.8ch;
+  }
+
+  .nav__btns {
+    flex-direction: row;
+    gap: 3em;
+    margin: 0;
+    width: auto;
+    align-items: center;
   }
 }
