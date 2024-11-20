@@ -84,17 +84,18 @@
 
       /* Card de la informacion de los contribuidores */
       .card {
-        display: grid;
+        display: flex;
         justify-content: center;
+        align-items: center;
         padding: 10px;
-        background-color: #051e1b;
+        position: relative;
       }
 
       /* Pseudoclase */
       .card:hover {
-        background-color: var(--primary-100);
-        cursor: pointer;
-      }
+          transform: scale(1.05);
+          transition: transform 0.3s ease;
+        }
 
       /* Pseudoelemento */
       .answer__question::selection {
@@ -102,18 +103,35 @@
         color: var(--background-950);
       }
 
+      .questions::selection{
+        background-color: var(--primary-300);
+        color: var(--background-950);
+      }
+
       /* Imagen de los contribuidores */
       .image {
-        width: 200px;
-        height: 200px;
+        width: 250px;
+        height: 270px;
+        border-radius: 10px;
+        display: block;
       }
 
       /* Nombre de los contribuidores */
       .name__contributors {
+        position: absolute;
+        bottom: -4%;
+        left: 50%;
+        width: 55%;
         text-align: center;
-        background-color: #676464;
-        border-radius: 5px;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
         padding: 10px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
       }
 
       /* Titulo preguntas */
@@ -123,11 +141,42 @@
         font-size: 30px;
       }
 
-      /* Mensaje final*/
+      /* Mensaje final */
       .messagge__end {
         color: var(--primary-500);
         text-align: right;
         font-size: 18px;
+      }
+
+      /* Oculta el triángulo que sale por defecto */
+      details summary::marker {
+        display: none;
+      }
+
+      /* Colocar el triangulo a la derecha */
+      details summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        cursor: pointer;
+      }
+
+      /* Triángulo personalizado a la derecha */
+      details summary::after {
+        content: '▶';
+        margin-left: auto;
+        transition: transform 0.3s ease;
+        background-color:#051e1b;
+        border-radius: 5px;
+        right: 0;
+        padding: 5px;
+        font-size: 0.8em;
+      }
+
+      /* Rotación del triángulo cuando está abierto */
+      details[open] summary::after {
+        transform: rotate(90deg); 
       }
 
       /* Preguntas */
@@ -144,6 +193,8 @@
       .answer__question {
         color: #999999;
         margin-top: 20px;
+        padding: 0 10px;
+        line-height: 1.6;
         text-align: justify;
       }
 
@@ -177,6 +228,12 @@
       @media (max-width: 500px) {
         .container__cards {
           grid-template-columns: 1fr;
+        }
+        .card .name__contributors {
+          font-size: 14px;
+        }
+        .messagge {
+          font-size: 5vw;
         }
       }
 
@@ -336,22 +393,23 @@
                   alt="Colaborador Camioncitos S.A."
                 />
                 <figcaption class="name__contributors">
-                  <strong>Camioncitos S.A.</strong><br /><code style="font-family: monospace"
+                  <strong>Camioncitos</strong><br /><code style="font-family: monospace"
                     >National Company</code
                   >
                 </figcaption>
               </figure>
             </div>
           </section>
-
+          <br><br>
           <h2 class="title__questions">Preguntas Frecuentes sobre las Iniciativas</h2>
 
           <hr class="separetor__horizontal" />
 
           <section class="article__section">
             <details>
-              <summary class="questions">
-                ¿Qué tipo de iniciativas puedo encontrar en TreeVitae?
+              <summary>
+                <span class="questions">¿Qué tipo de iniciativas puedo encontrar en TreeVitae?</span>
+                <span class="custom-marker"></span>
               </summary>
               <p class="answer__question">
                 Ofrecemos una variedad de proyectos y soluciones diseñadas para promover la
@@ -365,7 +423,10 @@
 
           <section class="article__section">
             <details>
-              <summary class="questions">¿Cómo puedo unirme a una iniciativa o proyecto?</summary>
+              <summary>
+                <span class="questions">¿Cómo puedo unirme a una iniciativa o proyecto?</span>
+                <span class="custom-marker"></span>
+              </summary>
               <p class="answer__question">
                 Unirte es muy sencillo. Explora las iniciativas activas en nuestra página y
                 selecciona aquella que resuene contigo. Solo necesitas registrarte y empezarás a
@@ -378,8 +439,9 @@
 
           <section class="article__section">
             <details>
-              <summary class="questions">
-                ¿Existen beneficios adicionales al participar en estos proyectos?
+              <summary>
+                <span class="questions">¿Existen beneficios adicionales al participar en estos proyectos?</span>
+                <span class="custom-marker"></span>
               </summary>
               <p class="answer__question">
                 Sí, además de contribuir al bienestar del planeta, muchos de nuestros proyectos
@@ -393,8 +455,9 @@
 
           <section class="article__section">
             <details>
-              <summary class="questions">
-                ¿Puedo proponer una iniciativa o colaborar con un proyecto existente?
+              <summary>
+                <span class="questions">¿Puedo proponer una iniciativa o colaborar con un proyecto existente?</span>
+                <span class="custom-marker"></span>                
               </summary>
               <p class="answer__question">
                 ¡Por supuesto! Estamos siempre abiertos a nuevas ideas. Si tienes una propuesta o
@@ -408,7 +471,10 @@
 
           <section class="article__section">
             <details>
-              <summary class="questions">¿Qué ocurre si decido salir de una iniciativa?</summary>
+              <summary >
+                <span class="questions">¿Qué ocurre si decido salir de una iniciativa?</span>
+                <span class="custom-marker"></span>
+              </summary>
               <p class="answer__question">
                 No hay ningún compromiso a largo plazo. Puedes decidir retirarte de una iniciativa
                 en cualquier momento. Te agradeceremos por tu participación y te mantendremos
