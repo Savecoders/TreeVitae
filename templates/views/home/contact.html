@@ -7,13 +7,15 @@
     <link rel="icon" href="../../assets/icons/logo.svg" type="image/svg+xml" />
     <title>Contacto | TreeVitae</title>
     <style>
-      
+
+      .container__principal{
+        display: flex;
+      }
+
       .container__form {
-        background-color: var(--background-50);
         padding: 20px;
-        width: 700px;
+        width: 900px;
         margin: auto;
-        box-shadow: 0px 0px 35px var(--background-50);
         border-radius: 10px;
         margin-top: 50px;
       }
@@ -28,6 +30,19 @@
         margin-bottom: 10px;
       }
 
+      .container__first{
+        display: flex;
+        gap: 30px;
+      }
+
+      #container__second {
+        margin: 20px 0;
+        border: 1px solid var(--primary-400);
+        border-radius: 5px;
+        padding: 10px;
+        flex: 3;
+      }
+
       .container__component{
         display: grid;
         padding: 10px;
@@ -36,13 +51,6 @@
         max-width: 1920px;
         padding-left: max(20px, 4%);
         padding-right: max(20px, 4%);
-      }
-
-      #container__second {
-        margin: 20px 0;
-        border: 1px solid var(--primary-400);
-        border-radius: 5px;
-        padding: 10px;
       }
 
       #label__form {
@@ -124,6 +132,60 @@
       .submit__button:hover {
         background-color: var(--primary-400);
       }
+
+      .info__container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; 
+        flex: 1;
+      }
+
+      .info__box {
+        flex: 1; 
+        padding: 20px;
+        background-color: var(--background-50);
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px var(--background-50);
+      }
+
+      .title__info{
+        margin: 10px;
+      }
+
+      .info__box .title__info {
+        color: var(--primary-base);
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      .info__box .paragraph__formulario {
+        color: var(--text-base);
+        font-size: 12px;
+        margin: 10px;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 800px){
+        .container__form{
+          width: 100%;
+          padding: 15px;
+        }
+
+        .container__first {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        #container__second {
+          width: 100%;
+          padding: 15px;
+        }
+
+        .info__container {
+          width: 100%;
+        }
+      }
+
     </style>
   </head>
   <body>
@@ -166,41 +228,57 @@
           <span class="breadcrumbs__arrow"> / </span>
           <a href="#">Contacto</a>
         </div>
-
-        <form class="container__form" id="formulario" onsubmit="return validarFormulario()">
-          <h2 class="title__form">Formulario de contacto</h2>
-          <fieldset id="container__second">
-            <legend id="label__form">Datos Personales</legend>
-            <div class="container__personal">
-              <div class="container__component">
-                <label class="label__name" for="nombres">Nombres: </label>
-                <input class="input__text" type="text" placeholder="Abrahm Andres*" id="nombres" name="nombres">
-              </div>
-              <div class="container__component">
-                <label class="label__name" for="apellidos">Apellidos: </label>
-                <input class="input__text" type="text" placeholder="Farfan Sanchez*" id="apellidos" name="apellidos">
-              </div>
-            </div>
-            <div class="container__personal">
-              <div class="container__component">
-                <label class="label__name" for="correoElectronico">Correo Electrónico: </label>
-                <input class="input__text" type="email" placeholder="ejemplo@correo.com" id="correoElectronico">
-              </div>
-              <div class="container__component">
-                <label class="label__name" for="telefono">Telefóno: </label>
-                <input class="input__text" type="text" placeholder="0987654321*" id="telefono" name="telefono">
-              </div>
-            </div>
-            <div class="container__component">
-              <label class="label__name" for="mensaje">Mensaje: </label>
-              <textarea class="textarea__comment" name="" id="mensaje" name="mensaje"></textarea>
-            </div>
-            <div class="container__component">
-              <button type="submit" class="submit__button">Enviar mensaje</button>
-            </div>
-          </fieldset>
-        </form>
-
+        <h1 style="text-align: center;">Contactanos</h1>
+        <article class="container__principal">
+          <form class="container__form" id="formulario" onsubmit="return validarFormulario()">
+            <h2 class="title__form">Formulario de contacto</h2>
+            <section class="container__first">
+              <fieldset id="container__second">
+                <legend id="label__form">Datos Personales</legend>
+                <section class="container__personal">
+                  <div class="container__component">
+                    <label class="label__name" for="nombres">Nombres: </label>
+                    <input class="input__text" type="text" placeholder="Abrahm Andres*" id="nombres" name="nombres">
+                  </div>
+                  <div class="container__component">
+                    <label class="label__name" for="apellidos">Apellidos: </label>
+                    <input class="input__text" type="text" placeholder="Farfan Sanchez*" id="apellidos" name="apellidos">
+                  </div>
+                </section>
+                <section class="container__personal">
+                  <div class="container__component">
+                    <label class="label__name" for="correoElectronico">Correo Electrónico: </label>
+                    <input class="input__text" type="email" placeholder="ejemplo@correo.com" id="correoElectronico">
+                  </div>
+                  <div class="container__component">
+                    <label class="label__name" for="telefono">Telefóno: </label>
+                    <input class="input__text" type="text" placeholder="0987654321*" id="telefono" name="telefono">
+                  </div>
+                </section>
+                <div class="container__component">
+                  <label class="label__name" for="mensaje">Mensaje: </label>
+                  <textarea class="textarea__comment" name="" id="mensaje" name="mensaje"></textarea>
+                </div>
+                <div class="container__component">
+                  <button type="submit" class="submit__button">Enviar mensaje</button>
+                </div>
+              </fieldset>
+              <section class="info__container">
+                <div class="info__box">
+                  <h3 class="title__info">Dirección</h3>
+                  <p class="paragraph__formulario">Av.9 de Octubre.</p>
+                  <br>
+                  <h3 class="title__info">Contacto</h3>
+                  <p class="paragraph__formulario">Telefóno: 0987654123</p>
+                  <p class="paragraph__formulario">Correo Electrónico: treeVitae@gmail.com</p>
+                  <br>
+                  <h3 class="title__info">Horario de atención</h3>
+                  <p class="paragraph__formulario">Abierto: 8:00 a.m <br> Cerrado: 17:00 p.m</p>
+                </div>
+              </section>
+            </section>
+          </form>
+        </article>
       </main>
 
       <footer class="footer">
