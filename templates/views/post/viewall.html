@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Alex Gabriel Vera Lopez" />
     <link rel="stylesheet" href="../../css/style.css" />
     <link rel="icon" href="../../assets/icons/logo.svg" type="image/svg+xml" />
     <title>TreeVitae | Posts</title>
@@ -123,6 +124,26 @@
         position: absolute;
         pointer-events: none;
         font-size: 12px;
+      }
+      .relevance select,
+      .all-time select {
+        background: var(--backgroud-base);
+        color: var(--text-900);
+        border: 1px solid var(--text-700);
+        padding: 5px;
+        font-size: 14px;
+        border-radius: 20px;
+      }
+
+      .relevance select:focus,
+      .all-time select:focus {
+        outline: none;
+      }
+
+      .relevance select option,
+      .all-time select option {
+        background: var(--background-base);
+        color: var(--text-900);
       }
 
       select:hover,
@@ -294,6 +315,7 @@
         >
           <div class="relevance">
             <select
+              id="relevance"
               style="
                 background-color: transparent;
                 font-size: 32px;
@@ -303,11 +325,15 @@
                 position: relative;
               "
             >
-              <option value="option 0">Relevance</option>
+              <option value="likes">Relevance</option>
+
+              <option value="likes">More likes</option>
+              <option value="comments">More comments</option>
             </select>
           </div>
           <div class="all-time">
             <select
+              id="all-time"
               style="
                 background-color: transparent;
                 font-size: 32px;
@@ -317,11 +343,13 @@
                 position: relative;
               "
             >
-              <option value="option 0">All Time</option>
+              <option value="allTime">All Time</option>
+              <option value="lastMonth">Last Month</option>
+              <option value="lastWeek">Last Week</option>
+              <option value="lastyear">Last Year</option>
             </select>
           </div>
         </div>
-
         <!-- Posts -->
         <section class="container_post_list">
           <!-- Posts 1-->
@@ -348,7 +376,7 @@
                   </div>
                   <div class="iconItem">
                     <img src="../../assets/icons/IconUse_Comments.svg" alt="iconComments" />
-                    <span>44 Comments</span>
+                    <span>440 Comments</span>
                   </div>
                 </div>
               </div>
@@ -369,7 +397,7 @@
                   </figure>
                   <p class="profile_Name">TreeVitae</p>
                 </div>
-                <span>27d</span>
+                <span>5d</span>
               </div>
               <a class="title_post" href="./view.html"
                 >[BSPWM] The new Picom Animations are awesome! And an app to edit my rices on the
@@ -379,7 +407,7 @@
                 <div class="iconCount">
                   <div class="iconItem">
                     <img src="../../assets/icons/IconUse_Likes.svg" alt="iconLikes" />
-                    <span>44 Likes</span>
+                    <span>100 Likes</span>
                   </div>
                   <div class="iconItem">
                     <img src="../../assets/icons/IconUse_Comments.svg" alt="iconComments" />
@@ -404,7 +432,7 @@
                   </figure>
                   <p class="profile_Name">TreeVitae</p>
                 </div>
-                <span>27d</span>
+                <span>3m</span>
               </div>
               <a class="title_post" href="./view.html"
                 >[BSPWM] The new Picom Animations are awesome! And an app to edit my rices on the
@@ -414,11 +442,11 @@
                 <div class="iconCount">
                   <div class="iconItem">
                     <img src="../../assets/icons/IconUse_Likes.svg" alt="iconLikes" />
-                    <span>44 Likes</span>
+                    <span>700 Likes</span>
                   </div>
                   <div class="iconItem">
                     <img src="../../assets/icons/IconUse_Comments.svg" alt="iconComments" />
-                    <span>44 Comments</span>
+                    <span>300 Comments</span>
                   </div>
                 </div>
               </div>
@@ -439,7 +467,7 @@
                   </figure>
                   <p class="profile_Name">TreeVitae</p>
                 </div>
-                <span>27d</span>
+                <span>7m</span>
               </div>
               <a class="title_post" href="./view.html"
                 >[BSPWM] The new Picom Animations are awesome! And an app to edit my rices on the
@@ -474,7 +502,7 @@
                   </figure>
                   <p class="profile_Name">TreeVitae</p>
                 </div>
-                <span>27d</span>
+                <span>1y</span>
               </div>
               <a class="title_post" href="./view.html"
                 >[BSPWM] The new Picom Animations are awesome! And an app to edit my rices on the
@@ -559,5 +587,6 @@
         <p class="copyright">Copyright © 2022 TreeVitae. All rights reserved.</p>
       </footer>
     </div>
+    <script src="../../js/post/viewall.js"></script>
   </body>
 </html>
