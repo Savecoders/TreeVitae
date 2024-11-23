@@ -311,6 +311,7 @@ body {
   justify-content: center;
 }
 
+/* BOTONES DE FORMULARIO */
 .primary__with-icon {
   gap: 8px;
   border-radius: 6px;
@@ -564,7 +565,7 @@ body {
   font-style: oblique;
   font-weight: lighter;
 }
-
+/* inputs para fecha */
 input[type='text'],
 input[type='email'],
 input[type='password'],
