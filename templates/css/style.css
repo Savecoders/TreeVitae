@@ -451,6 +451,10 @@ body {
   gap: 1em;
 }
 
+.footer__section .btn {
+  width: fit-content;
+}
+
 .footer p {
   color: var(--text-900);
 }

@@ -143,33 +143,44 @@
     <div class="container">
       <nav class="navbar">
         <div class="logo__container">
-          <img src="../../assets/icons/logo.svg" alt="logo" />
+          <img src="../../assets/icons/logo.svg" alt="TreeVitae logo" />
           <a class="logo__name" href="../home/index.html">TreeVitae</a>
         </div>
 
         <!-- Para el Responsive <div class="nav__hamburguer"></div> -->
 
-        <ul class="nav__links">
-          <li class="nav__item">
-            <a href="../initiatives/viewall.html">Iniciativas</a>
-          </li>
-          <li class="nav__item">
-            <a href="../post/viewall.html">Posts</a>
-          </li>
-          <li class="nav__item">
-            <a href="../home/preguntas.html">Preguntas</a>
-          </li>
-          <li class="nav__item">
-            <a href="../home/contact.html">About</a>
-          </li>
-        </ul>
+        <div class="nav__hamburguer">
+          <div class="nav__hamburguer__line"></div>
+          <div class="nav__hamburguer__line"></div>
+          <div class="nav__hamburguer__line"></div>
+        </div>
 
-        <div class="nav__btns">
-          <a href="#" class="link__outerline">Register</a>
-          <a href="#" class="btn primary__with-icon">
-            <img src="../../assets/icons/user.svg" alt="user icon" />
-            Login</a
-          >
+        <div class="nav__overlay">
+          <ul class="nav__links">
+            <li class="nav__item">
+              <a href="../initiatives/viewall.html">Iniciativas</a>
+            </li>
+            <li class="nav__item">
+              <a href="../post/viewall.html">Posts</a>
+            </li>
+            <li class="nav__item">
+              <a href="../home/preguntas.html">Preguntas</a>
+            </li>
+            <li class="nav__item">
+              <a href="../home/contact.html">About</a>
+            </li>
+            <ul class="nav__btns">
+              <li lass="nav__item">
+                <a href="../user/register.html" class="link__outerline">Register</a>
+              </li>
+              <li lass="nav__item">
+                <a href="../user/login.html" class="btn primary__with-icon">
+                  <img src="../../assets/icons/user.svg" alt="User icon" />
+                  Login
+                </a>
+              </li>
+            </ul>
+          </ul>
         </div>
       </nav>
       <main class="main__container__content">
@@ -270,5 +281,6 @@
 
     <!-- cargar el script de la pagina -->
     <script type="module" src="../../js/initiatives/viewall.js"></script>
+    <script type="module" src="../../js/components/navbar.js"></script>
   </body>
 </html>

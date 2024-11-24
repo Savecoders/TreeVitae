@@ -1,315 +1,344 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="author" content="Jose Andres Agurto Pincay">
-        <link rel="stylesheet" href="../../css/style.css" />
-        <link rel="icon" href="../../assets/icons/logo.svg" type="image/svg+xml" />
-        <title>Actividad | TreeVitae</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Jose Andres Agurto Pincay" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="icon" href="../../assets/icons/logo.svg" type="image/svg+xml" />
+    <title>Actividad | TreeVitae</title>
 
     <style>
-        /* Estilos generales */
-        .container__principal {
-            display: flex;
-        }
+      /* Estilos generales */
+      .container__principal {
+        display: flex;
+      }
 
+      .container__form {
+        padding: 20px;
+        width: 900px;
+        margin: auto;
+        border-radius: 10px;
+        margin-top: 50px;
+      }
+
+      /* Estilo para el título principal */
+      .title__form {
+        text-align: center;
+        color: var(--primary-base);
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 22px;
+        padding: 10px;
+        margin-bottom: 10px;
+        letter-spacing: 1.5px;
+      }
+
+      /* Estilo para los labels */
+      .form__container label {
+        font-size: 1.8ch;
+        font-weight: 600;
+        color: var(--text-900);
+        font-family: 'Raleway', sans-serif;
+      }
+
+      .container__first {
+        display: flex;
+        gap: 30px;
+      }
+
+      #container__second {
+        margin: 20px 0;
+        border: 1px solid var(--primary-400);
+        border-radius: 5px;
+        padding: 10px;
+        flex: 3;
+        width: 50%;
+      }
+
+      #label__form {
+        font-size: 1.2em;
+        border: 1px solid var(--primary-400);
+        padding: 10px;
+      }
+
+      .container__component {
+        display: grid;
+        padding: 10px;
+        gap: 10px;
+        width: 100%;
+        max-width: 1920px;
+        padding-left: max(20px, 4%);
+        padding-right: max(20px, 4%);
+      }
+
+      .textarea__comment {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 1rem 1.5rem;
+        border: 1px solid var(--background-950);
+        background-color: transparent;
+        color: var(--text-base);
+        box-shadow: 0px 0px 10px var(--background-50);
+        border-radius: 8px;
+        outline: none;
+        transition: border-color 0.3s ease;
+      }
+
+      .label__name {
+        line-height: 3;
+        font-size: 19px;
+      }
+
+      input[type='datetime-local'] {
+        border: 1px solid var(--background-950);
+        border-radius: 8px;
+        padding: 1rem 1.5rem;
+        background-color: var(--background-base);
+        width: 100%;
+        cursor: text;
+      }
+
+      .input__text:focus,
+      .textarea__comment:focus,
+      input[type='datetime-local']:focus,
+      input[type='radio']:focus {
+        border-color: var(--primary-400);
+        box-shadow: 0px 0px 12px var(--primary-400);
+      }
+
+      .input__radio-group {
+        font-size: 19px;
+      }
+
+      .textarea__comment {
+        resize: none;
+        height: 100px;
+      }
+
+      .container__component .input__radio-group {
+        display: flex;
+        gap: 50px;
+      }
+
+      .error {
+        color: red;
+        font-size: 0.9em;
+        margin-left: 17px;
+      }
+
+      @media (max-width: 900px) {
         .container__form {
-            padding: 20px;
-            width: 900px;
-            margin: auto;
-            border-radius: 10px;
-            margin-top: 50px;
-        }
-
-        /* Estilo para el título principal */
-        .title__form {
-            text-align: center;
-            color: var(--primary-base);
-            text-transform: uppercase;
-            font-weight: 600;
-            font-size: 22px;
-            padding: 10px;
-            margin-bottom: 10px;
-            letter-spacing: 1.5px;
-        }
-
-        /* Estilo para los labels */
-        .form__container label {
-            font-size: 1.8ch;
-            font-weight: 600;
-            color: var(--text-900);
-            font-family: 'Raleway', sans-serif;
+          width: 100%;
+          padding: 15px;
         }
 
         .container__first {
-            display: flex;
-            gap: 30px;
+          flex-direction: column;
+          gap: 20px;
         }
 
         #container__second {
-            margin: 20px 0;
-            border: 1px solid var(--primary-400);
-            border-radius: 5px;
-            padding: 10px;
-            flex: 3;
-            width: 50%;
+          width: 100%;
+          padding: 15px;
         }
 
-        #label__form{
-            font-size: 1.2em;
-            border: 1px solid var(--primary-400);
-            padding: 10px;
+        .container__principal {
+          flex-direction: column;
         }
-
-        .container__component {
-            display: grid;
-            padding: 10px;
-            gap: 10px;
-            width: 100%;
-            max-width: 1920px;
-            padding-left: max(20px, 4%);
-            padding-right: max(20px, 4%);
-        }
-
-        .textarea__comment {
-            width: 100%;
-            box-sizing: border-box;
-            padding: 1rem 1.5rem;
-            border: 1px solid var(--background-950);
-            background-color: transparent;
-            color: var(--text-base);
-            box-shadow: 0px 0px 10px var(--background-50);
-            border-radius: 8px;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-
-        .label__name{
-            line-height: 3;
-            font-size: 19px;
-        }
-
-        input[type='datetime-local'] {
-            border: 1px solid var(--background-950);
-            border-radius: 8px;
-            padding: 1rem 1.5rem;
-            background-color: var(--background-base);
-            width: 100%;
-            cursor: text;
-        }
-
-        .input__text:focus, .textarea__comment:focus, input[type='datetime-local']:focus, input[type='radio']:focus{
-            border-color: var(--primary-400);
-            box-shadow: 0px 0px 12px var(--primary-400);
-        }
-
-        .input__radio-group{
-            font-size: 19px;
-        }
-
-        .textarea__comment {
-            resize: none;
-            height: 100px;
-        }
-
-        .container__component .input__radio-group {
-            display: flex;
-            gap: 50px; 
-        }
-
-        .error {
-            color: red;
-            font-size: 0.9em;
-            margin-left: 17px;
-        } 
-
-
-        @media (max-width: 900px) {
-            .container__form {
-                width: 100%;
-                padding: 15px;
-            }
-
-            .container__first {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            #container__second {
-                width: 100%;
-                padding: 15px;
-            }
-
-            .container__principal {
-                flex-direction: column;
-            }
-        }
+      }
     </style>
-
-    </head>
-    <body>
-        <div class="container">
-        <nav class="navbar">
-            <div class="logo__container">
-            <img src="../../assets/icons/logo.svg" alt="TreeVitae logo" />
-            <a class="logo__name" href="../home/index.html">TreeVitae</a>
-            </div>
-
-            <!-- Para el Responsive <div class="nav__hamburguer"></div> -->
-
-            <ul class="nav__links">
-            <li class="nav__item">
-                <a href="../initiatives/viewall.html">Iniciativas</a>
-            </li>
-            <li class="nav__item">
-                <a href="../post/viewall.html">Posts</a>
-            </li>
-            <li class="nav__item">
-                <a href="../home/preguntas.html">Preguntas</a>
-            </li>
-            <li class="nav__item">
-                <a href="../home/contact.html">About</a>
-            </li>
-            </ul>
-
-            <div class="nav__btns">
-            <a href="#" class="link__outerline">Register</a>
-            <a href="#" class="btn primary__with-icon">
-                <img src="../../assets/icons/user.svg" alt="User icon" />
-                Login
-            </a>
-            </div>
-        </nav>
-
-        <main class="main__container__content">
-            <div class="breadcrumbs flex-row">
-                <a href="../home/index.html">Home</a>
-                <span class="breadcrumbs__arrow"> / </span>
-                <a href="#">Crear Actividad</a>
-            </div>
-            <h1 style="text-align: center;">Crea una Actividad</h1>
-            <article class="container__principal">
-                <form class="container__form" id="formulario" onsubmit="return validarFormulario()">
-                    <h2 class="title__form">Formulario de actividad</h2>
-                    <section class="container__first">
-                        <fieldset id="container__second">
-                            <legend id="label__form">Datos requeridos</legend>
-        
-                            <!-- Nombre de la actividad -->
-                            <div class="container__component">
-                                <label class="label__name" for="nombre_actividad">Nombre de la actividad:</label>
-                                <input class="input__text" type="text" id="nombre_actividad" name="nombre_actividad">
-                            </div>
-        
-                            <!-- Descripción de la actividad -->
-                            <div class="container__component">
-                                <label class="label__name" for="descripcion_actividad">Descripción de la actividad: </label>
-                                <textarea class="textarea__comment" id="descripcion_actividad" name="descripcion_actividad" ></textarea>
-                            </div>
-        
-                            <!-- Fecha y hora de inicio -->
-                            <div class="container__component">
-                                <label class="label__name" for="fecha_inicio">Fecha y hora de inicio: </label>
-                                <input type="datetime-local" id="fecha_inicio" name="fecha_inicio">
-                            </div>
-        
-                            <!-- Fecha de finalización -->
-                            <div class="container__component">
-                                <label class="label__name" for="fecha_fin">Fecha y hora de finalización: </label>
-                                <input type="datetime-local" id="fecha_fin" name="fecha_fin">
-                            </div>
-        
-                            <!-- Ubicación -->
-                            <div class="container__component">
-                                <label class="label__name" for="ubicacion">Ubicación: </label>
-                                <input class="input__text" type="text" id="ubicacion" name="ubicacion">
-                            </div>
-        
-                            <!-- Contenedor de los botones radio -->
-                        
-                            <div class="container__component">
-                                <label class="label__name">¿Es virtual?:</label>
-                                <div class="input__radio-group">
-                                    <label>
-                                        <input type="radio" id="virtual_si" name="es_virtual" value="si" />
-                                        Sí
-                                    </label>
-                                    <label>
-                                        <input type="radio" id="virtual_no" name="es_virtual" value="no" />
-                                        No
-                                    </label>
-                                </div>
-                            </div>
-        
-                            <!-- Botón de enviar -->
-                            <div class="container__component" style="justify-content: center;">
-                                <button style="padding: 0.5rem;" type="submit" class="btn primary__with-icon btn-animation">Crear actividad</button>
-                            </div>
-                        </fieldset>
-                    </section>
-                </form>
-            </article>
-        </main>
-        
-        <footer class="footer">
-            <div class="logo__container">
-            <img src="../../assets/icons/logo.svg" alt="TreeVitae logo" />
-            <a class="logo__name" href="#">TreeVitae</a>
-            </div>
-
-            <div class="footer__container">
-            <section class="footer__section">
-                <h2>Acerca de nosotros</h2>
-                <a href="#" class="btn primary__with-icon">
-                <img src="../../assets/icons/user.svg" alt="User icon" />
-                Login
-                </a>
-            </section>
-
-            <section class="footer__section">
-                <h2>Contactanos</h2>
-                <a class="link" href="#">Contacto</a>
-                <a class="link" href="#">Soporte</a>
-            </section>
-
-            <section class="footer__section">
-                <h2>Social Media</h2>
-                <a href="#" class="link" target="_blank"
-                >Github
-                <img src="../../assets/icons/external-link.svg" alt="External link icon" />
-                </a>
-                <a href="#" class="link" target="_blank"
-                >Youtube
-                <img src="../../assets/icons/external-link.svg" alt="External link icon" />
-                </a>
-                <a href="#" class="link" target="_blank"
-                >Discord
-                <img src="../../assets/icons/external-link.svg" alt="External link icon" />
-                </a>
-            </section>
-            </div>
-
-            <hr class="separetor__horizontal" />
-
-            <div class="content__made-with">
-            <p class="made__text">
-                Made with ❤ by
-                <a target="_blank" class="link" href="https://github.com/Savecoders">@Savecoders</a> |
-                <a target="_blank" class="link" href="https://github.com/Angelvigar">@Angelvigar</a> |
-                <a target="_blank" class="link" href="https://github.com/AbrahamzzZ">@AbrahamzzZ</a> |
-                <a target="_blank" class="link" href="https://github.com/JoseAndresAgurtoPincay"
-                >@JoseAndresAgurtoPincay</a
-                >
-                |
-                <a target="_blank" class="link" href="https://github.com/Gabo-UG">@Gabo-UG</a>
-            </p>
-            </div>
-
-            <p class="copyright">Copyright © 2022 TreeVitae. All rights reserved.</p>
-        </footer>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar">
+        <div class="logo__container">
+          <img src="../../assets/icons/logo.svg" alt="TreeVitae logo" />
+          <a class="logo__name" href="../home/index.html">TreeVitae</a>
         </div>
-        <script src="../../js/initiatives/initiative.js"></script>
-    </body>
 
+        <!-- Para el Responsive <div class="nav__hamburguer"></div> -->
+
+        <div class="nav__hamburguer">
+          <div class="nav__hamburguer__line"></div>
+          <div class="nav__hamburguer__line"></div>
+          <div class="nav__hamburguer__line"></div>
+        </div>
+
+        <div class="nav__overlay">
+          <ul class="nav__links">
+            <li class="nav__item">
+              <a href="../initiatives/viewall.html">Iniciativas</a>
+            </li>
+            <li class="nav__item">
+              <a href="../post/viewall.html">Posts</a>
+            </li>
+            <li class="nav__item">
+              <a href="../home/preguntas.html">Preguntas</a>
+            </li>
+            <li class="nav__item">
+              <a href="../home/contact.html">About</a>
+            </li>
+            <ul class="nav__btns">
+              <li lass="nav__item">
+                <a href="../user/register.html" class="link__outerline">Register</a>
+              </li>
+              <li lass="nav__item">
+                <a href="../user/login.html" class="btn primary__with-icon">
+                  <img src="../../assets/icons/user.svg" alt="User icon" />
+                  Login
+                </a>
+              </li>
+            </ul>
+          </ul>
+        </div>
+      </nav>
+
+      <main class="main__container__content">
+        <div class="breadcrumbs flex-row">
+          <a href="../home/index.html">Home</a>
+          <span class="breadcrumbs__arrow"> / </span>
+          <a href="#">Crear Actividad</a>
+        </div>
+        <h1 style="text-align: center">Crea una Actividad</h1>
+        <article class="container__principal">
+          <form class="container__form" id="formulario" onsubmit="return validarFormulario()">
+            <h2 class="title__form">Formulario de actividad</h2>
+            <section class="container__first">
+              <fieldset id="container__second">
+                <legend id="label__form">Datos requeridos</legend>
+
+                <!-- Nombre de la actividad -->
+                <div class="container__component">
+                  <label class="label__name" for="nombre_actividad">Nombre de la actividad:</label>
+                  <input
+                    class="input__text"
+                    type="text"
+                    id="nombre_actividad"
+                    name="nombre_actividad"
+                  />
+                </div>
+
+                <!-- Descripción de la actividad -->
+                <div class="container__component">
+                  <label class="label__name" for="descripcion_actividad"
+                    >Descripción de la actividad:
+                  </label>
+                  <textarea
+                    class="textarea__comment"
+                    id="descripcion_actividad"
+                    name="descripcion_actividad"
+                  ></textarea>
+                </div>
+
+                <!-- Fecha y hora de inicio -->
+                <div class="container__component">
+                  <label class="label__name" for="fecha_inicio">Fecha y hora de inicio: </label>
+                  <input type="datetime-local" id="fecha_inicio" name="fecha_inicio" />
+                </div>
+
+                <!-- Fecha de finalización -->
+                <div class="container__component">
+                  <label class="label__name" for="fecha_fin">Fecha y hora de finalización: </label>
+                  <input type="datetime-local" id="fecha_fin" name="fecha_fin" />
+                </div>
+
+                <!-- Ubicación -->
+                <div class="container__component">
+                  <label class="label__name" for="ubicacion">Ubicación: </label>
+                  <input class="input__text" type="text" id="ubicacion" name="ubicacion" />
+                </div>
+
+                <!-- Contenedor de los botones radio -->
+
+                <div class="container__component">
+                  <label class="label__name">¿Es virtual?:</label>
+                  <div class="input__radio-group">
+                    <label>
+                      <input type="radio" id="virtual_si" name="es_virtual" value="si" />
+                      Sí
+                    </label>
+                    <label>
+                      <input type="radio" id="virtual_no" name="es_virtual" value="no" />
+                      No
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Botón de enviar -->
+                <div class="container__component" style="justify-content: center">
+                  <button
+                    style="padding: 0.5rem"
+                    type="submit"
+                    class="btn primary__with-icon btn-animation"
+                  >
+                    Crear actividad
+                  </button>
+                </div>
+              </fieldset>
+            </section>
+          </form>
+        </article>
+      </main>
+
+      <footer class="footer">
+        <div class="logo__container">
+          <img src="../../assets/icons/logo.svg" alt="TreeVitae logo" />
+          <a class="logo__name" href="#">TreeVitae</a>
+        </div>
+
+        <div class="footer__container">
+          <section class="footer__section">
+            <h2>Acerca de nosotros</h2>
+            <a href="#" class="btn primary__with-icon">
+              <img src="../../assets/icons/user.svg" alt="User icon" />
+              Login
+            </a>
+          </section>
+
+          <section class="footer__section">
+            <h2>Contactanos</h2>
+            <a class="link" href="#">Contacto</a>
+            <a class="link" href="#">Soporte</a>
+          </section>
+
+          <section class="footer__section">
+            <h2>Social Media</h2>
+            <a href="#" class="link" target="_blank"
+              >Github
+              <img src="../../assets/icons/external-link.svg" alt="External link icon" />
+            </a>
+            <a href="#" class="link" target="_blank"
+              >Youtube
+              <img src="../../assets/icons/external-link.svg" alt="External link icon" />
+            </a>
+            <a href="#" class="link" target="_blank"
+              >Discord
+              <img src="../../assets/icons/external-link.svg" alt="External link icon" />
+            </a>
+          </section>
+        </div>
+
+        <hr class="separetor__horizontal" />
+
+        <div class="content__made-with">
+          <p class="made__text">
+            Made with ❤ by
+            <a target="_blank" class="link" href="https://github.com/Savecoders">@Savecoders</a> |
+            <a target="_blank" class="link" href="https://github.com/Angelvigar">@Angelvigar</a> |
+            <a target="_blank" class="link" href="https://github.com/AbrahamzzZ">@AbrahamzzZ</a> |
+            <a target="_blank" class="link" href="https://github.com/JoseAndresAgurtoPincay"
+              >@JoseAndresAgurtoPincay</a
+            >
+            |
+            <a target="_blank" class="link" href="https://github.com/Gabo-UG">@Gabo-UG</a>
+          </p>
+        </div>
+
+        <p class="copyright">Copyright © 2022 TreeVitae. All rights reserved.</p>
+      </footer>
+    </div>
+    <script src="../../js/initiatives/initiative.js"></script>
+    <script type="module" src="../../js/components/navbar.js"></script>
+  </body>
 </html>
