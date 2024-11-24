@@ -35,14 +35,14 @@ function validarFormulario() {
   if (correoElectronico.value === '') {
     presentarMensaje('Falta su correo.', correoElectronico);
     esValido = false;
-  } else if (telefono.value === '') {
-    presentarMensaje('Falta su telefono.', telefono);
-    esValido = false;
-  } else {
+  } else{
     eliminarMensaje(correoElectronico);
   }
 
-  if (!/^\d+$/.test(telefono.value)) {
+  if (telefono.value === '') {
+    presentarMensaje('Falta su telefono.', telefono);
+    esValido = false;
+  } else if (!/^\d+$/.test(telefono.value)) {
     presentarMensaje('Solo numeros.', telefono);
     esValido = false;
   } else if (telefono.value.length !== 10) {
