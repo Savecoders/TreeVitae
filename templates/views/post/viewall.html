@@ -9,9 +9,11 @@
     <title>TreeVitae | Posts</title>
     <style>
       .main__container__content {
+      .main__container__content {
         padding: 0;
       }
 
+      .separetor__horizontal__post {
       .separetor__horizontal__post {
         border: 1px solid var(--text-300);
       }
@@ -19,6 +21,7 @@
       .container_post_list {
         display: flex;
         flex-direction: column;
+        gap: 1.5rem;
         gap: 1.5rem;
         margin-bottom: 20px;
         width: 100%;
@@ -29,9 +32,12 @@
         display: flex;
         justify-content: space-between;
         gap: 0.2rem;
+        justify-content: space-between;
+        gap: 0.2rem;
         padding: 32px;
         border-radius: 19px;
         color: var(--text-700);
+        align-items: center;
         align-items: center;
       }
 
@@ -40,6 +46,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        max-width: 70%;
         max-width: 70%;
         gap: 1rem;
         padding: 2rem;
@@ -65,6 +72,7 @@
         align-items: center;
       }
       .profile_content {
+      .profile_content {
         display: flex;
         height: 36px;
         border-right: 1px solid var(--text-200);
@@ -72,13 +80,16 @@
         align-items: center;
       }
       .profile_Name {
+      .profile_Name {
         font-family: 'Raleway';
         font-size: 32px;
         color: var(--text-600);
       }
       .profile_content figure {
+      .profile_content figure {
         padding-right: 12px;
       }
+      .post_date span {
       .post_date span {
         padding-left: 12px;
         font-family: 'Raleway';
@@ -93,6 +104,7 @@
       .iconCount {
         display: flex;
         gap: 1.5rem;
+        gap: 1.5rem;
         font-family: 'Inter';
         font-size: 20px;
       }
@@ -101,12 +113,15 @@
         display: flex;
         align-items: center;
         gap: 0.2rem;
+        gap: 0.2rem;
       }
 
       .iconItem img {
         width: 20px;
+        width: 20px;
         height: 20px;
       }
+      .title_post {
       .title_post {
         font-size: 36px;
         color: var(--text-700);
@@ -117,12 +132,20 @@
       .title_post:hover {
         text-decoration: underline;
         color: var(--accent-500);
+        text-decoration: none;
+      }
+
+      .title_post:hover {
+        text-decoration: underline;
+        color: var(--accent-500);
       }
 
       select::after {
         content: '▼';
+        content: '▼';
         position: absolute;
         pointer-events: none;
+        font-size: 12px;
         font-size: 12px;
       }
       .relevance select,
@@ -159,12 +182,21 @@
         }
         .nav__links {
           display: none;
+          display: none;
         }
         .nav__btns {
           display: none;
         }
         /* Breadcrumbs */
         .breadcrumb {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          margin: 0 auto;
+          width: 100%;
+          max-width: 300px;
+        }
           display: flex;
           justify-content: center;
           align-items: center;
@@ -206,6 +238,9 @@
         .profile_Name,
         .title_post,
         .post_date span {
+        .profile_Name,
+        .title_post,
+        .post_date span {
           font-size: 20px;
         }
         .iconCount {
@@ -226,6 +261,9 @@
         .profile_Name,
         .title_post,
         .post_date span {
+        .profile_Name,
+        .title_post,
+        .post_date span {
           font-size: 18px;
         }
 
@@ -234,7 +272,15 @@
           font-size: 14px;
         }
 
+
         /* Footer */
+        footer {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          text-align: center;
+          padding: 10px 0;
+          width: 100%;
         footer {
           display: flex;
           justify-content: space-around;
@@ -263,6 +309,7 @@
       <nav class="navbar">
         <div class="logo__container">
           <img src="../../assets/icons/logo.svg" alt="TreeVitae logo" />
+          <img src="../../assets/icons/logo.svg" alt="TreeVitae logo" />
           <a class="logo__name" href="../home/index.html">TreeVitae</a>
         </div>
 
@@ -286,6 +333,7 @@
         <div class="nav__btns">
           <a href="#" class="link__outerline">Register</a>
           <a href="#" class="btn primary__with-icon">
+            <img src="../../assets/icons/user.svg" alt="User icon" />
             <img src="../../assets/icons/user.svg" alt="User icon" />
             Login
           </a>
@@ -533,6 +581,7 @@
       <footer class="footer">
         <div class="logo__container">
           <img src="../../assets/icons/logo.svg" alt="TreeVitae logo" />
+          <img src="../../assets/icons/logo.svg" alt="TreeVitae logo" />
           <a class="logo__name" href="#">TreeVitae</a>
         </div>
 
@@ -540,6 +589,7 @@
           <section class="footer__section">
             <h2>Acerca de nosotros</h2>
             <a href="#" class="btn primary__with-icon">
+              <img src="../../assets/icons/user.svg" alt="User icon" />
               <img src="../../assets/icons/user.svg" alt="User icon" />
               Login
             </a>
@@ -556,18 +606,22 @@
             <a href="#" class="link" target="_blank"
               >Github
               <img src="../../assets/icons/external-link.svg" alt="External link icon" />
+              <img src="../../assets/icons/external-link.svg" alt="External link icon" />
             </a>
             <a href="#" class="link" target="_blank"
               >Youtube
+              <img src="../../assets/icons/external-link.svg" alt="External link icon" />
               <img src="../../assets/icons/external-link.svg" alt="External link icon" />
             </a>
             <a href="#" class="link" target="_blank"
               >Discord
               <img src="../../assets/icons/external-link.svg" alt="External link icon" />
+              <img src="../../assets/icons/external-link.svg" alt="External link icon" />
             </a>
           </section>
         </div>
 
+        <hr class="separetor__horizontal" />
         <hr class="separetor__horizontal" />
 
         <div class="content__made-with">
