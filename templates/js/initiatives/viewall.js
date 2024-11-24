@@ -1,63 +1,45 @@
-const data = [
+const initiatives = [
   {
     title: 'CamioncitosSa',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     image: '../../assets/images/iniciativa-default.png',
-    users: 10,
-    links: 10,
-    hearts: 10,
-    images: 10,
+    tags: ['recolección', 'reciclaje', 'limpieza', 'mantenimiento'],
   },
   {
     title: 'CamioncitosBolivar',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     image: '../../assets/images/iniciativa-default.png',
-    users: 10,
-    links: 10,
-    hearts: 10,
-    images: 10,
+    tags: ['recolección'],
   },
   {
     title: 'CamioncitosVivanco',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     image: '../../assets/images/iniciativa-default.png',
-    users: 10,
-    links: 10,
-    hearts: 10,
-    images: 10,
+    tags: ['recolección', 'reciclaje', 'limpieza'],
   },
   {
     title: 'TreeVitae',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     image: '../../assets/images/iniciativa-default.png',
-    users: 10,
-    links: 10,
-    hearts: 10,
-    images: 10,
+    tags: ['limpieza', 'mantenimiento'],
   },
   {
     title: 'TreeVitae',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     image: '../../assets/images/iniciativa-default.png',
-    users: 10,
-    links: 10,
-    hearts: 10,
-    images: 10,
+    tags: ['recolección', 'reciclaje', 'limpieza', 'mantenimiento'],
   },
   {
     title: 'TreeVitae',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     image: '../../assets/images/iniciativa-default.png',
-    users: 10,
-    links: 10,
-    hearts: 10,
-    images: 10,
+    tags: ['recolección', 'reciclaje'],
   },
 ];
 
@@ -75,69 +57,16 @@ const searchInput = $('#searchInput');
 const btnSearch = $('#btnSearch');
 const btnLoadMore = document.getElementById('loadMore');
 
-const componentDefaultCard = ({ title, description, image, users, links, hearts, images }) => {
+const componentTag = tag => {
+  const tagNode = document.createElement('div');
+  tagNode.classList.add('tag__content');
+  tagNode.textContent = tag;
+  return tagNode;
+};
+
+const componentDefaultCard = ({ title, description, image, tags }) => {
   const asideNode = document.createElement('aside');
   asideNode.classList.add('card');
-
-  const mediaRowNode = document.createElement('div');
-  mediaRowNode.classList.add('media__row');
-
-  const mediaItemUserNode = document.createElement('figure');
-  mediaItemUserNode.classList.add('media__item');
-
-  const userIconNode = document.createElement('img');
-  userIconNode.src = '../../assets/icons/users.svg';
-  userIconNode.alt = 'user-icon';
-
-  const userNode = document.createElement('small');
-  userNode.textContent = users;
-
-  mediaItemUserNode.appendChild(userIconNode);
-  mediaItemUserNode.appendChild(userNode);
-
-  const mediaItemLinkNode = document.createElement('figure');
-  mediaItemLinkNode.classList.add('media__item');
-
-  const linkIconNode = document.createElement('img');
-  linkIconNode.src = '../../assets/icons/link-2.svg';
-  linkIconNode.alt = 'link-icon';
-
-  const linkNode = document.createElement('small');
-  linkNode.textContent = links;
-
-  mediaItemLinkNode.appendChild(linkIconNode);
-  mediaItemLinkNode.appendChild(linkNode);
-
-  const mediaItemHeartNode = document.createElement('figure');
-  mediaItemHeartNode.classList.add('media__item');
-
-  const heartIconNode = document.createElement('img');
-  heartIconNode.src = '../../assets/icons/heart-pulse.svg';
-  heartIconNode.alt = 'heart-icon';
-
-  const heartNode = document.createElement('small');
-  heartNode.textContent = hearts;
-
-  mediaItemHeartNode.appendChild(heartIconNode);
-  mediaItemHeartNode.appendChild(heartNode);
-
-  const mediaItemImageNode = document.createElement('figure');
-  mediaItemImageNode.classList.add('media__item');
-
-  const imageIconNode = document.createElement('img');
-  imageIconNode.src = '../../assets/icons/image.svg';
-  imageIconNode.alt = 'image-icon';
-
-  const imageNode = document.createElement('small');
-  imageNode.textContent = images;
-
-  mediaItemImageNode.appendChild(imageIconNode);
-  mediaItemImageNode.appendChild(imageNode);
-
-  mediaRowNode.appendChild(mediaItemUserNode);
-  mediaRowNode.appendChild(mediaItemLinkNode);
-  mediaRowNode.appendChild(mediaItemHeartNode);
-  mediaRowNode.appendChild(mediaItemImageNode);
 
   const cardArticuleNode = document.createElement('article');
   cardArticuleNode.classList.add('card__content');
@@ -147,11 +76,19 @@ const componentDefaultCard = ({ title, description, image, users, links, hearts,
   cardTitleNode.href = './view.html';
   cardTitleNode.textContent = title;
 
+  const cardTagsContainer = document.createElement('div');
+  cardTagsContainer.classList.add('card__tags__content');
+
+  tags.forEach(tag => {
+    cardTagsContainer.appendChild(componentTag(tag));
+  });
+
   const cardDescriptionNode = document.createElement('p');
   cardDescriptionNode.classList.add('card__description');
   cardDescriptionNode.textContent = description;
 
   cardArticuleNode.appendChild(cardTitleNode);
+  cardArticuleNode.appendChild(cardTagsContainer);
   cardArticuleNode.appendChild(cardDescriptionNode);
 
   const cardPictureNode = document.createElement('picture');
@@ -162,10 +99,6 @@ const componentDefaultCard = ({ title, description, image, users, links, hearts,
   cardPictureImgNode.alt = title;
 
   cardPictureNode.appendChild(cardPictureImgNode);
-  cardArticuleNode.appendChild(cardTitleNode);
-  cardArticuleNode.appendChild(cardDescriptionNode);
-
-  asideNode.appendChild(mediaRowNode);
   asideNode.appendChild(cardArticuleNode);
   asideNode.appendChild(cardPictureNode);
 
@@ -185,7 +118,7 @@ const addCard = card => {
 };
 
 const getRandomCardValue = () => {
-  return Math.floor(Math.random() * data.length);
+  return Math.floor(Math.random() * initiatives.length);
 };
 
 // patron observer
@@ -193,14 +126,26 @@ btnLoadMore.addEventListener('click', () => {
   const childrens = containerCard.children.length;
   if (childrens < 25) {
     for (let i = 0; i < 6; i++) {
-      addCard(componentDefaultCard(data[getRandomCardValue()]));
+      addCard(componentDefaultCard(initiatives[getRandomCardValue()]));
     }
   } else {
     alert('no more iniciativas');
   }
 });
 
-const filterCardInContainer = textCriteria => {
+const showDefaultCards = () => {
+  for (let i = 0; i < 6; i++) {
+    addCard(componentDefaultCard(initiatives[i]));
+  }
+};
+
+const removeAllCards = () => {
+  while (containerCard.lastElementChild) {
+    containerCard.removeChild(containerCard.lastElementChild);
+  }
+};
+
+const filterCardNames = textCriteria => {
   // convert NodeList to array -> containerCard.children is a NodeList
   const elementByContainer = [...containerCard.children]; // array elements
   const getFindsElements = elementByContainer.filter(el => {
@@ -208,31 +153,68 @@ const filterCardInContainer = textCriteria => {
     return title.includes(textCriteria);
   });
 
-  // containerCard.innerHTML = '';
-  while (containerCard.lastElementChild) {
-    containerCard.removeChild(containerCard.lastElementChild);
-  }
+  removeAllCards();
 
+  // apply filter
   getFindsElements.forEach(el => {
     containerCard.appendChild(el);
   });
 };
 
-const pageLoad = () => {
-  data.forEach(card => {
-    addCard(componentDefaultCard(card));
+const filterCardByTags = textCriteria => {
+  removeAllCards(); // remove all cards
+  showDefaultCards(); // show default cards
+
+  const elementByContainer = [...containerCard.children]; // array elements
+
+  const getFindsElements = elementByContainer.filter(el => {
+    const tags = el.querySelectorAll('.tag__content');
+    const tagsElements = [...tags];
+    const tagsText = tagsElements.map(tag => tag.textContent);
+    return tagsText.includes(textCriteria);
+  });
+
+  removeAllCards();
+
+  // apply filter
+  getFindsElements.forEach(el => {
+    containerCard.appendChild(el);
   });
 };
 
 btnSearch.addEventListener('click', () => {
   const textCriteria = searchInput.value;
   if (textCriteria) {
-    filterCardInContainer(textCriteria);
+    filterCardNames(textCriteria);
   } else {
-    containerCard.innerHTML = '';
-    pageLoad();
+    showDefaultCards();
   }
 });
 
+// tag filter
+const tagFilter = document.querySelectorAll('.tag');
+tagFilter.forEach(tag => {
+  tag.addEventListener('click', () => {
+    // check if tag is clicked
+    if (tag.classList.contains('tag--clicked')) {
+      tag.classList.remove('tag--clicked');
+      removeAllCards();
+      showDefaultCards();
+      return;
+    }
+
+    // check if other tag is clicked
+    const otherTags = document.querySelectorAll('.tag--clicked');
+
+    if (otherTags.length > 0) {
+      otherTags.forEach(tag => tag.classList.remove('tag--clicked'));
+    }
+
+    const tagName = tag.textContent.toLowerCase();
+    tag.classList.add('tag--clicked');
+    filterCardByTags(tagName);
+  });
+});
+
 //siempre se va a ejecutar la pagina
-pageLoad();
+showDefaultCards();
