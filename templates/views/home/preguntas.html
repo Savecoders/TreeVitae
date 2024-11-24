@@ -93,9 +93,9 @@
 
       /* Pseudoclase */
       .card:hover {
-          transform: scale(1.05);
-          transition: transform 0.3s ease;
-        }
+        transform: scale(1.05);
+        transition: transform 0.3s ease;
+      }
 
       /* Pseudoelemento */
       .answer__question::selection {
@@ -103,7 +103,7 @@
         color: var(--background-950);
       }
 
-      .questions::selection{
+      .questions::selection {
         background-color: var(--primary-300);
         color: var(--background-950);
       }
@@ -167,7 +167,7 @@
         content: '▶';
         margin-left: auto;
         transition: transform 0.3s ease;
-        background-color:#051e1b;
+        background-color: #051e1b;
         border-radius: 5px;
         right: 0;
         padding: 5px;
@@ -176,7 +176,7 @@
 
       /* Rotación del triángulo cuando está abierto */
       details[open] summary::after {
-        transform: rotate(90deg); 
+        transform: rotate(90deg);
       }
 
       /* Preguntas */
@@ -256,27 +256,38 @@
 
           <!-- Para el Responsive <div class="nav__hamburguer"></div> -->
 
-          <ul class="nav__links">
-            <li class="nav__item">
-              <a href="../initiatives/viewall.html">Iniciativas</a>
-            </li>
-            <li class="nav__item">
-              <a href="../post/viewall.html">Posts</a>
-            </li>
-            <li class="nav__item">
-              <a href="../home/preguntas.html">Preguntas</a>
-            </li>
-            <li class="nav__item">
-              <a href="../home/contact.html">About</a>
-            </li>
-          </ul>
+          <div class="nav__hamburguer">
+            <div class="nav__hamburguer__line"></div>
+            <div class="nav__hamburguer__line"></div>
+            <div class="nav__hamburguer__line"></div>
+          </div>
 
-          <div class="nav__btns">
-            <a href="#" class="link__outerline">Register</a>
-            <a href="#" class="btn primary__with-icon">
-              <img src="../../assets/icons/user.svg" alt="User icon" />
-              Login
-            </a>
+          <div class="nav__overlay">
+            <ul class="nav__links">
+              <li class="nav__item">
+                <a href="../initiatives/viewall.html">Iniciativas</a>
+              </li>
+              <li class="nav__item">
+                <a href="../post/viewall.html">Posts</a>
+              </li>
+              <li class="nav__item">
+                <a href="../home/preguntas.html">Preguntas</a>
+              </li>
+              <li class="nav__item">
+                <a href="../home/contact.html">About</a>
+              </li>
+              <ul class="nav__btns">
+                <li lass="nav__item">
+                  <a href="../user/register.html" class="link__outerline">Register</a>
+                </li>
+                <li lass="nav__item">
+                  <a href="../user/login.html" class="btn primary__with-icon">
+                    <img src="../../assets/icons/user.svg" alt="User icon" />
+                    Login
+                  </a>
+                </li>
+              </ul>
+            </ul>
           </div>
         </nav>
       </header>
@@ -400,7 +411,7 @@
               </figure>
             </div>
           </section>
-          <br><br>
+          <br /><br />
           <h2 class="title__questions">Preguntas Frecuentes sobre las Iniciativas</h2>
 
           <hr class="separetor__horizontal" />
@@ -408,7 +419,9 @@
           <section class="article__section">
             <details id="pregunta1">
               <summary>
-                <span class="questions">¿Qué tipo de iniciativas puedo encontrar en TreeVitae?</span>
+                <span class="questions"
+                  >¿Qué tipo de iniciativas puedo encontrar en TreeVitae?</span
+                >
                 <span class="custom-marker"></span>
               </summary>
               <p class="answer__question">
@@ -440,7 +453,9 @@
           <section class="article__section">
             <details id="pregunta3">
               <summary>
-                <span class="questions">¿Existen beneficios adicionales al participar en estos proyectos?</span>
+                <span class="questions"
+                  >¿Existen beneficios adicionales al participar en estos proyectos?</span
+                >
                 <span class="custom-marker"></span>
               </summary>
               <p class="answer__question">
@@ -456,8 +471,10 @@
           <section class="article__section">
             <details id="pregunta4">
               <summary>
-                <span class="questions">¿Puedo proponer una iniciativa o colaborar con un proyecto existente?</span>
-                <span class="custom-marker"></span>                
+                <span class="questions"
+                  >¿Puedo proponer una iniciativa o colaborar con un proyecto existente?</span
+                >
+                <span class="custom-marker"></span>
               </summary>
               <p class="answer__question">
                 ¡Por supuesto! Estamos siempre abiertos a nuevas ideas. Si tienes una propuesta o
@@ -471,7 +488,7 @@
 
           <section class="article__section">
             <details id="pregunta5">
-              <summary >
+              <summary>
                 <span class="questions">¿Qué ocurre si decido salir de una iniciativa?</span>
                 <span class="custom-marker"></span>
               </summary>
@@ -571,5 +588,6 @@
       </footer>
     </div>
     <script src="../../js/initiatives/preguntas.js"></script>
+    <script type="module" src="../../js/components/navbar.js"></script>
   </body>
 </html>

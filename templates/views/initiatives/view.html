@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Jose Andres Agurto Pincay">
-    <link rel="stylesheet" href="../../css/style.css">
-    <link rel="icon" href="../../assets/icons/logo.svg" type="image/svg+xml">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Jose Andres Agurto Pincay" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="icon" href="../../assets/icons/logo.svg" type="image/svg+xml" />
     <title>Iniciativa</title>
     <style>
       .card__picture {
@@ -16,27 +16,27 @@
         border-radius: 32px;
         overflow: hidden;
       }
-      .hero{
-          width: 100%;
-          height: auto;
-          object-fit: cover;
-          box-sizing: border-box;
-          background-repeat: no-repeat;
-          background-position: center;
-          image-rendering: optimizeQuality;
-          mix-blend-mode: normal;
+      .hero {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        box-sizing: border-box;
+        background-repeat: no-repeat;
+        background-position: center;
+        image-rendering: optimizeQuality;
+        mix-blend-mode: normal;
       }
-      .card-compact-post{
+      .card-compact-post {
         width: 480px;
         height: 612px;
       }
-      .profile-container{
+      .profile-container {
         width: 320px;
         display: flex;
         flex-direction: column;
         gap: 32px;
       }
-      .media__row{
+      .media__row {
         display: flex;
         flex-direction: row;
         gap: 12px;
@@ -46,105 +46,104 @@
         justify-content: center;
         border-radius: 16px;
       }
-      .profile-container p{
+      .profile-container p {
         font-size: 32px;
         color: var(--text-900);
       }
-      .profile-container small{
-        font-family: "Raleway", sans-serif;
+      .profile-container small {
+        font-family: 'Raleway', sans-serif;
         font-size: 20px;
         font-weight: 600;
         color: var(--text-900);
       }
-      .about-initiative{
+      .about-initiative {
         display: flex;
         gap: 32px;
         width: 100%;
         flex-direction: column;
       }
-      .main-sidebar{
+      .main-sidebar {
         display: flex;
         flex-direction: row;
         gap: 64px;
         width: 100%;
       }
-      .paragraph{
-        font-family: "Raleway", sans-serif;
+      .paragraph {
+        font-family: 'Raleway', sans-serif;
         font-size: 24px;
         font-weight: 400;
       }
-      .tag{
+      .tag {
         text-align: center;
       }
-      .tags p{
+      .tags p {
         font-weight: 400;
         font-size: 30px;
         color: var(--text-600);
       }
-      .heading-initiative{
+      .heading-initiative {
         width: 100%;
         display: flex;
         justify-content: space-between;
       }
-      .heading-initiative h2{
-        font-family: "Raleway", sans-serif;
+      .heading-initiative h2 {
+        font-family: 'Raleway', sans-serif;
         font-size: 64px;
         font-weight: 500;
         color: var(--accent-600);
       }
-      .cards{
+      .cards {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(480px,1fr));
+        grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
       }
-      .card-compact-post{
+      .card-compact-post {
         display: flex;
         gap: 24px;
         flex-direction: column;
         padding: 32px;
       }
-      .card-compact-post header h3{
-        font-family: "Raleway", sans-serif;
+      .card-compact-post header h3 {
+        font-family: 'Raleway', sans-serif;
         font-size: 32px;
         font-weight: 500;
         color: var(--text-600);
       }
-      .card-compact-post header{
+      .card-compact-post header {
         display: flex;
         gap: 16px;
         align-items: center;
       }
-      .card-compact-post p{
-        font-family: "Raleway", sans-serif;
+      .card-compact-post p {
+        font-family: 'Raleway', sans-serif;
         font-size: 32px;
         font-weight: 200;
         color: var(--text-500);
       }
-      .card-compact-post h2{
-        font-family: "Raleway", sans-serif;
+      .card-compact-post h2 {
+        font-family: 'Raleway', sans-serif;
         font-size: 32px;
         font-weight: 500;
         color: var(--text-700);
       }
-      .figure{
+      .figure {
         display: flex;
         gap: 24px;
-        
       }
-      .figure .media__item small{
-        font-size:20px;
+      .figure .media__item small {
+        font-size: 20px;
         font-weight: lighter;
         color: var(--text-900);
       }
-      .media__item{
+      .media__item {
         display: flex;
         gap: 10px;
         align-items: center;
       }
-      @media(max-width:700px){
-        .main-sidebar{
+      @media (max-width: 700px) {
+        .main-sidebar {
           flex-direction: column-reverse;
         }
-        .profile-container{
+        .profile-container {
           width: 100%;
         }
       }
@@ -154,86 +153,94 @@
     <div class="container">
       <nav class="navbar">
         <div class="logo__container">
-          <img src="../../assets/icons/logo.svg" alt="TreeVitae logo">
+          <img src="../../assets/icons/logo.svg" alt="TreeVitae logo" />
           <a class="logo__name" href="../home/index.html">TreeVitae</a>
         </div>
 
         <!-- Para el Responsive <div class="nav__hamburguer"></div> -->
 
-        <ul class="nav__links">
-          <li class="nav__item">
-            <a href="../initiatives/viewall.html">Iniciativas</a>
-          </li>
-          <li class="nav__item">
-            <a href="../post/viewall.html">Posts</a>
-          </li>
-          <li class="nav__item">
-            <a href="../home/preguntas.html">Preguntas</a>
-          </li>
-          <li class="nav__item">
-            <a href="../home/contact.html">About</a>
-          </li>
-        </ul>
+        <div class="nav__hamburguer">
+          <div class="nav__hamburguer__line"></div>
+          <div class="nav__hamburguer__line"></div>
+          <div class="nav__hamburguer__line"></div>
+        </div>
 
-        <div class="nav__btns">
-          <a href="#" class="link__outerline">Register</a>
-          <a href="#" class="btn primary__with-icon">
-            <img src="../../assets/icons/user.svg" alt="User icon"> 
-            Login
-          </a>
+        <div class="nav__overlay">
+          <ul class="nav__links">
+            <li class="nav__item">
+              <a href="../initiatives/viewall.html">Iniciativas</a>
+            </li>
+            <li class="nav__item">
+              <a href="../post/viewall.html">Posts</a>
+            </li>
+            <li class="nav__item">
+              <a href="../home/preguntas.html">Preguntas</a>
+            </li>
+            <li class="nav__item">
+              <a href="../home/contact.html">About</a>
+            </li>
+            <ul class="nav__btns">
+              <li lass="nav__item">
+                <a href="../user/register.html" class="link__outerline">Register</a>
+              </li>
+              <li lass="nav__item">
+                <a href="../user/login.html" class="btn primary__with-icon">
+                  <img src="../../assets/icons/user.svg" alt="User icon" />
+                  Login
+                </a>
+              </li>
+            </ul>
+          </ul>
         </div>
       </nav>
       <main class="main__container__content">
-
         <div class="breadcrumbs flex-row">
           <a href="../home/index.html">Home</a>
           <span class="breadcrumbs__arrow"> / </span>
           <a href="#">NombreIniciativa</a>
-    
         </div>
 
-<!-- Mi comienzo AGURTO -->
+        <!-- Mi comienzo AGURTO -->
         <picture class="card__picture">
-          <img class="hero" src="../../assets/images/iniciativa-default.png" alt="Iniciativa 1">
+          <img class="hero" src="../../assets/images/iniciativa-default.png" alt="Iniciativa 1" />
         </picture>
 
         <div class="main-sidebar">
-
           <aside class="profile-container">
-            <img src="../../assets/images/Icon_Profile_Initiative.png" alt="Logo Profile">
-            <hr class="separetor__horizontal">
+            <img src="../../assets/images/Icon_Profile_Initiative.png" alt="Logo Profile" />
+            <hr class="separetor__horizontal" />
             <p>Interacciones</p>
             <div class="media__row">
               <figure class="media__item">
-                <img src="../../assets/icons/users.svg" alt="user-icon">
+                <img src="../../assets/icons/users.svg" alt="user-icon" />
                 <small>10</small>
               </figure>
               <figure class="media__item">
-                <img src="../../assets/icons/link-2.svg" alt="link-icon">
+                <img src="../../assets/icons/link-2.svg" alt="link-icon" />
                 <small>10</small>
               </figure>
               <figure class="media__item">
-                <img src="../../assets/icons/heart-pulse.svg" alt="heart-icon">
+                <img src="../../assets/icons/heart-pulse.svg" alt="heart-icon" />
                 <small>10</small>
               </figure>
               <figure class="media__item">
-                <img src="../../assets/icons/image.svg" alt="image-icon">
+                <img src="../../assets/icons/image.svg" alt="image-icon" />
                 <small>10</small>
               </figure>
             </div>
-            <hr class="separetor__horizontal">
+            <hr class="separetor__horizontal" />
             <p>Se Parte</p>
             <a href="#" class="btn primary__with-icon btn btn-animation">
-              <img src="../../assets/icons/pointer--outer.svg" alt="Pointer Outer">Únete a la Iniciativa
+              <img src="../../assets/icons/pointer--outer.svg" alt="Pointer Outer" />Únete a la
+              Iniciativa
             </a>
           </aside>
 
           <article class="about-initiative">
-            
             <header class="heading-initiative">
               <h2>TreeVitae</h2>
               <button class="btn outerline btn-animation">
-                <img src="../../assets/icons/heart-pulse.svg" alt="Heart Pulse">
+                <img src="../../assets/icons/heart-pulse.svg" alt="Heart Pulse" />
                 Seguir
               </button>
             </header>
@@ -243,13 +250,25 @@
             <section class="tags" aria-label="Tags">
               <p>Tags:</p>
               <div class="tag">Playa</div>
-              <div class="tag" >Limpieza</div>
-              <div class="tag" >Recolección</div>
+              <div class="tag">Limpieza</div>
+              <div class="tag">Recolección</div>
             </section>
-          <hr class="separetor__horizontal">
-          <p class="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam faucibus pretium libero eu cursus. Vestibulum eu mollis risus. Ut porta ligula id auctor ultrices. Sed id ex sed erat finibus molestie. Suspendisse quis justo porta, eleifend purus nec, laoreet lacus. Phasellus vel urna turpis. In hac habitasse platea dictumst. Praesent ac orci ultricies, porttitor nunc quis, luctus erat. Fusce et sollicitudin dui. Etiam eu dictum est. Morbi turpis tellus, vestibulum in cursus ultrices, bibendum in dolor. Proin dignissim tellus non eros consectetur, quis gravida mi malesuada. Sed neque neque, sodales sit amet mi eu, bibendum sagittis elit. Etiam malesuada quam vitae magna dignissim, sit amet ornare quam mattis.
-
-            Cras tempor in justo sit amet ornare. Morbi non turpis ac lectus cursus semper quis nec massa. Nullam tempor consectetur leo, eget commodo leo placerat nec. Sed consequat luctus diam, a venenatis lorem. Pellentesque finibus leo sit amet nunc luctus porttitor. Fusce lacus neque, vulputate nec ornare et,.</p>
+            <hr class="separetor__horizontal" />
+            <p class="paragraph">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam faucibus pretium
+              libero eu cursus. Vestibulum eu mollis risus. Ut porta ligula id auctor ultrices. Sed
+              id ex sed erat finibus molestie. Suspendisse quis justo porta, eleifend purus nec,
+              laoreet lacus. Phasellus vel urna turpis. In hac habitasse platea dictumst. Praesent
+              ac orci ultricies, porttitor nunc quis, luctus erat. Fusce et sollicitudin dui. Etiam
+              eu dictum est. Morbi turpis tellus, vestibulum in cursus ultrices, bibendum in dolor.
+              Proin dignissim tellus non eros consectetur, quis gravida mi malesuada. Sed neque
+              neque, sodales sit amet mi eu, bibendum sagittis elit. Etiam malesuada quam vitae
+              magna dignissim, sit amet ornare quam mattis. Cras tempor in justo sit amet ornare.
+              Morbi non turpis ac lectus cursus semper quis nec massa. Nullam tempor consectetur
+              leo, eget commodo leo placerat nec. Sed consequat luctus diam, a venenatis lorem.
+              Pellentesque finibus leo sit amet nunc luctus porttitor. Fusce lacus neque, vulputate
+              nec ornare et,.
+            </p>
 
             <section class="cards">
               <div class="card-compact-post">
@@ -257,18 +276,25 @@
                   <h3>TreeVitae</h3>
                   <p>| 27d</p>
                 </header>
-                <h2>[BSPWM] The new Picom Animations are awesome! And an app to edit my rices on the fly!</h2>
+                <h2>
+                  [BSPWM] The new Picom Animations are awesome! And an app to edit my rices on the
+                  fly!
+                </h2>
                 <footer class="figure">
                   <figure class="media__item">
-                    <img src="../../assets/icons/users.svg" alt="user-icon">
+                    <img src="../../assets/icons/users.svg" alt="user-icon" />
                     <small>44 likes</small>
                   </figure>
                   <figure class="media__item">
-                    <img src="../../assets/icons/users.svg" alt="user-icon">
+                    <img src="../../assets/icons/users.svg" alt="user-icon" />
                     <small>44 comentarios</small>
                   </figure>
                 </footer>
-                <img style="border-radius: 8px; filter: drop-shadow(0 0 3px #000000);" src="../../assets/images/iniciativa-default.png" alt="Iniciativa">
+                <img
+                  style="border-radius: 8px; filter: drop-shadow(0 0 3px #000000)"
+                  src="../../assets/images/iniciativa-default.png"
+                  alt="Iniciativa"
+                />
               </div>
 
               <div class="card-compact-post">
@@ -276,18 +302,25 @@
                   <h3>TreeVitae</h3>
                   <p>| 27d</p>
                 </header>
-                <h2>[BSPWM] The new Picom Animations are awesome! And an app to edit my rices on the fly!</h2>
+                <h2>
+                  [BSPWM] The new Picom Animations are awesome! And an app to edit my rices on the
+                  fly!
+                </h2>
                 <footer class="figure">
                   <figure class="media__item">
-                    <img src="../../assets/icons/users.svg" alt="user-icon">
+                    <img src="../../assets/icons/users.svg" alt="user-icon" />
                     <small>44 likes</small>
                   </figure>
                   <figure class="media__item">
-                    <img src="../../assets/icons/users.svg" alt="user-icon">
+                    <img src="../../assets/icons/users.svg" alt="user-icon" />
                     <small>44 comentarios</small>
                   </figure>
                 </footer>
-                <img style="border-radius: 8px; filter: drop-shadow(0 0 3px #000000);" src="../../assets/images/iniciativa-default.png" alt="Iniciativa">
+                <img
+                  style="border-radius: 8px; filter: drop-shadow(0 0 3px #000000)"
+                  src="../../assets/images/iniciativa-default.png"
+                  alt="Iniciativa"
+                />
               </div>
 
               <div class="card-compact-post">
@@ -295,18 +328,25 @@
                   <h3>TreeVitae</h3>
                   <p>| 27d</p>
                 </header>
-                <h2>[BSPWM] The new Picom Animations are awesome! And an app to edit my rices on the fly!</h2>
+                <h2>
+                  [BSPWM] The new Picom Animations are awesome! And an app to edit my rices on the
+                  fly!
+                </h2>
                 <footer class="figure">
                   <figure class="media__item">
-                    <img src="../../assets/icons/users.svg" alt="user-icon">
+                    <img src="../../assets/icons/users.svg" alt="user-icon" />
                     <small>44 likes</small>
                   </figure>
                   <figure class="media__item">
-                    <img src="../../assets/icons/users.svg" alt="user-icon">
+                    <img src="../../assets/icons/users.svg" alt="user-icon" />
                     <small>44 comentarios</small>
                   </figure>
                 </footer>
-                <img style="border-radius: 8px; filter: drop-shadow(0 0 3px #000000);" src="../../assets/images/iniciativa-default.png" alt="Iniciativa defecto">
+                <img
+                  style="border-radius: 8px; filter: drop-shadow(0 0 3px #000000)"
+                  src="../../assets/images/iniciativa-default.png"
+                  alt="Iniciativa defecto"
+                />
               </div>
 
               <div class="card-compact-post">
@@ -314,36 +354,40 @@
                   <h3>TreeVitae</h3>
                   <p>| 27d</p>
                 </header>
-                <h2>[BSPWM] The new Picom Animations are awesome! And an app to edit my rices on the fly!</h2>
+                <h2>
+                  [BSPWM] The new Picom Animations are awesome! And an app to edit my rices on the
+                  fly!
+                </h2>
                 <footer class="figure">
                   <figure class="media__item">
-                    <img src="../../assets/icons/users.svg" alt="user-icon">
+                    <img src="../../assets/icons/users.svg" alt="user-icon" />
                     <small>44 likes</small>
                   </figure>
                   <figure class="media__item">
-                    <img src="../../assets/icons/users.svg" alt="user-icon">
+                    <img src="../../assets/icons/users.svg" alt="user-icon" />
                     <small>44 comentarios</small>
                   </figure>
                 </footer>
-                <img style="border-radius: 8px; filter: drop-shadow(0 0 3px #000000);" src="../../assets/images/iniciativa-default.png" alt="">
+                <img
+                  style="border-radius: 8px; filter: drop-shadow(0 0 3px #000000)"
+                  src="../../assets/images/iniciativa-default.png"
+                  alt=""
+                />
               </div>
-
             </section>
-            
-            <div style="justify-content: center; display:flex;">
-              <a  href="#"  id="btnMorePost" class="btn primary__with-icon btn-animation">
-                <img  src="../../assets/icons/external-link.svg" alt="External link">Ver Más Post
+
+            <div style="justify-content: center; display: flex">
+              <a href="#" id="btnMorePost" class="btn primary__with-icon btn-animation">
+                <img src="../../assets/icons/external-link.svg" alt="External link" />Ver Más Post
               </a>
-          </div>
+            </div>
           </article>
-        </div>  
-
-
+        </div>
       </main>
 
       <footer class="footer">
         <div class="logo__container">
-          <img src="../../assets/icons/logo.svg" alt="TreeVitae logo">
+          <img src="../../assets/icons/logo.svg" alt="TreeVitae logo" />
           <a class="logo__name" href="#">TreeVitae</a>
         </div>
 
@@ -351,7 +395,7 @@
           <section class="footer__section">
             <h2>Acerca de nosotros</h2>
             <a href="#" class="btn primary__with-icon">
-              <img src="../../assets/icons/user.svg" alt="User icon">
+              <img src="../../assets/icons/user.svg" alt="User icon" />
               Login
             </a>
           </section>
@@ -366,20 +410,20 @@
             <h2>Social Media</h2>
             <a href="#" class="link" target="_blank"
               >Github
-              <img src="../../assets/icons/external-link.svg" alt="External link icon">
+              <img src="../../assets/icons/external-link.svg" alt="External link icon" />
             </a>
             <a href="#" class="link" target="_blank"
               >Youtube
-              <img src="../../assets/icons/external-link.svg" alt="External link icon">
+              <img src="../../assets/icons/external-link.svg" alt="External link icon" />
             </a>
             <a href="#" class="link" target="_blank"
               >Discord
-              <img src="../../assets/icons/external-link.svg" alt="External link icon">
+              <img src="../../assets/icons/external-link.svg" alt="External link icon" />
             </a>
           </section>
         </div>
 
-        <hr class="separetor__horizontal">
+        <hr class="separetor__horizontal" />
 
         <div class="content__made-with">
           <p class="made__text">
@@ -401,5 +445,6 @@
 
     <!-- script de la pagina -->
     <script type="module" src="../../js/initiatives/view.js"></script>
+    <script type="module" src="../../js/components/navbar.js"></script>
   </body>
 </html>
