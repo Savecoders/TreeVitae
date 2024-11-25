@@ -205,10 +205,10 @@ body {
 /* Contenedor principal */
 .container {
   display: grid;
-  padding: 20px;
+  padding: 24px;
   gap: 32px;
   width: 100%;
-  max-width: 1920px;
+  max-width: 1600px;
   padding-left: max(20px, 4%);
   padding-right: max(20px, 4%);
 }
@@ -561,49 +561,37 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 /* Errores */
-.form__container label::after {
+.form__container label::after,
+.form__container .error {
   color: var(--danger-base);
-  padding-left: 1rem;
   font-size: 1.6ch;
   font-family: 'Raleway', sans-serif;
   font-style: oblique;
-  font-weight: lighter;
 }
 /* inputs para fecha */
 input[type='text'],
 input[type='email'],
 input[type='password'],
-input[type='date'] {
+input[type='date'],
+textarea {
   border: 1px solid var(--background-950);
   border-radius: 8px;
   padding: 1rem 1.5rem;
   background-color: var(--background-base);
   width: 100%;
   cursor: text;
+}
 
-  &:focus {
-    outline: none;
-    border: 1px solid var(--primary-base);
-  }
+input:focus,
+textarea:focus {
+  outline: none;
+  border: 1px solid var(--primary-base);
+}
 
-  &::placeholder {
-    color: var(--text-400);
-  }
-
-  &:disabled {
-    background-color: var(--background-950);
-    color: var(--text-400);
-    cursor: not-allowed;
-  }
-
-  &:disabled:hover {
-    background-color: var(--background-950);
-  }
-
-  &:disabled:focus {
-    outline: none;
-    border: 1px solid var(--background-950);
-  }
+.form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .form__container .checkbox {
