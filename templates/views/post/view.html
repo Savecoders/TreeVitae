@@ -57,11 +57,38 @@
       }
 
       .hero {
-        width: 100%;
+        width: 48%;
         height: auto;
         max-width: 300px;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out; 
+        position: relative;  
+      }
+
+      /* Estilos para el modal */
+      .modal {
+        display: none; 
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .modal-content {
+        max-width: 80%;
+        max-height: 80%;
+      }
+
+      .modal img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
       }
 
       .post-actions {
@@ -81,6 +108,11 @@
         font-size: 0.9rem;
       }
 
+      .action-btn img {
+        vertical-align: middle;
+        transition: filter 0.3s ease; 
+      }
+
       .comments-section textarea {
         width: 100%;
         padding: 0.5rem;
@@ -98,13 +130,46 @@
         margin-right: 4px;
       }
 
-      .action-btn img {
-        vertical-align: middle;
+      /* Sección de Información de la Comunidad */
+      .community-info {
+        background-color: var(--primary-100);
+        padding: 1rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        width: 290px;
       }
 
-      .community-info {
-        text-align: left;
-        margin-bottom: 2rem;
+      .community-info .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        font-size: 1rem;
+        color: var(--primary-400);
+      }
+
+      .community-info .title span {
+        font-size: 2rem;
+      }
+
+      .community-info p {
+        color: var(--text-base);
+        margin-top: 1rem;
+      }
+
+      .community-info .stats {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        color: var(--text-base);
+        margin-top: 1rem;
+        font-size: 0.85rem;
+      }
+
+      .community-info .stats .stat-item img {
+        width: 1.2rem;
+        vertical-align: middle;
+        margin-left: 0.5rem;
       }
 
       .community-info h2 {
@@ -113,11 +178,6 @@
         --text-800: var(--text-800);
         margin-bottom: 0.5rem;
       }
-
-      .join-btn:hover {
-        background-color: var(--primary-200);
-      }
-
       #join-btn {
         background-color: var(--primary-base);
         border-radius: 20px;
@@ -177,7 +237,8 @@
 
       .post-item-title {
         font-size: 0.95rem;
-        color: var(--primary-500);
+        color: var(--primary-400);
+        cursor: pointer; 
         margin: 0;
       }
 
@@ -283,7 +344,9 @@
           <span class="breadcrumbs__arrow"> / </span>
           <a href="#">TitlePost</a>
         </div>
+
         <!-- Angel Enrique Vivanco Garcia -->
+
         <div class="content-container">
           <!-- Sección Izquierda -->
           <section class="left-section">
@@ -302,9 +365,9 @@
             <section class="tags">
               <h2 class="ocultar-titulo">Tags</h2>
               <strong>Tags:</strong>
-              <span>Playa</span>
-              <span>Limpieza</span>
-              <span>Recoleccion</span>
+              <span class="tags__info">Playa</span>
+              <span class="tags__info">Limpieza</span>
+              <span class="tags__info">Recoleccion</span>
             </section>
 
             <!-- Contenido del post -->
@@ -337,42 +400,48 @@
                 src="../../assets/images/iniciativa-default.png"
                 alt="Iniciativa 1"
                 class="hero"
+                id="image1"
+                data-src="../../assets/images/iniciativa-default.png"
               />
               <img
                 src="../../assets/images/iniciativa-default.png"
                 alt="Iniciativa 2"
                 class="hero"
+                id="image2"
+                data-src="../../assets/images/iniciativa-default.png"
               />
             </section>
+
+            <!-- Modal -->
+            <div id="modal" class="modal">
+              <span
+                id="close-modal"
+                style="position: fixed; top: 10px; right: 20px; cursor: pointer"
+                >&times;</span
+              >
+              <div class="modal-content">
+                <img id="modal-image" src="" alt="Imagen del post" />
+              </div>
+            </div>
 
             <!-- Acciones del post -->
             <section class="post-actions">
               <h2 class="ocultar-titulo">Post Actions</h2>
-              <button class="action-btn">
+              <button class="action-btn like-btn">
                 <img
-                  src="../../assets/icons/caret-down.svg"
-                  alt="caret-down"
-                  style="margin-right: 8px"
-                  width="20"
-                  height="24"
-                />
-                232
-                <img
+                  class="increment-icon"
                   src="../../assets/icons/caret-down-top.svg"
                   alt="caret-down-top"
-                  style="margin-left: 8px"
-                  width="20"
-                  height="24"
+                />
+                <span class="like-count">232</span>
+                <img
+                  class="no-action-icon"
+                  src="../../assets/icons/caret-down.svg"
+                  alt="caret-down"
                 />
               </button>
-              <button class="action-btn">
-                <img
-                  src="../../assets/icons/command.svg"
-                  alt="command"
-                  style="margin-right: 8px"
-                  width="20"
-                  height="24"
-                />
+              <button class="action-btn comment-btn">
+                <img src="../../assets/icons/command.svg" alt="command" />
                 232
               </button>
               <button class="action-btn">
@@ -397,59 +466,23 @@
           <!-- Sección Derecha -->
           <aside class="right-section">
             <!-- Cuadrado con información de la comunidad -->
-            <section
-              class="community-info"
-              style="
-                background-color: var(--primary-100);
-                padding: 1rem;
-                border-radius: 12px;
-                margin-bottom: 2rem;
-                width: 290px;
-                background-color: var(--primary-100);
-              "
-            >
+            <section class="community-info">
               <h2 class="ocultar-titulo">Community Information</h2>
-              <div
-                style="
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                  font-weight: bold;
-                  font-size: 1rem;
-                  color: var(--primary-400);
-                "
-              >
-                <span style="font-size: 2rem">TreeVitae</span>
+              <div class="title">
+                <span>TreeVitae</span>
                 <button id="join-btn" class="join-btn">Unirse</button>
               </div>
-              <p style="color: var(--text-base); margin-top: 1rem">
+              <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam faucibus pretium
                 libero eu cursus. Vestibulum eu mollis risus.
               </p>
-              <div
-                style="
-                  display: flex;
-                  align-items: center;
-                  font-weight: bold;
-                  color: var(--text-base);
-                  margin-top: 1rem;
-                  font-size: 0.85rem;
-                "
-              >
-                <div style="display: flex; align-items: center; margin-right: 1rem">
-                  <img
-                    src="../../assets/icons/users.svg"
-                    alt="user-icon"
-                    style="width: 1rem; vertical-align: middle; margin-right: 0.3rem"
-                  />
+              <div class="stats">
+                <div class="stat-item">
+                  <img src="../../assets/icons/users.svg" alt="user-icon" />
                   <span>1233 Miembros</span>
                 </div>
-                <div style="display: flex; align-items: center">
-                  <img
-                    src="../../assets/icons/heart-pulse.svg"
-                    alt="heart-icon"
-                    style="width: 1rem; vertical-align: middle; margin-right: 0.3rem"
-                  />
+                <div class="stat-item">
+                  <img src="../../assets/icons/heart-pulse.svg" alt="heart-icon" />
                   <span>44 Followers</span>
                 </div>
               </div>
@@ -546,5 +579,6 @@
       </footer>
     </div>
     <script type="module" src="../../js/components/navbar.js"></script>
+    <script type="module" src="../../js/post/view.js"></script>
   </body>
 </html>
