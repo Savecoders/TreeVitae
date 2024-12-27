@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     libonig-dev \
     sendmail \
-    && docker-php-ext-install mysqli mbstring zip gd \
+    && docker-php-ext-install mysqli pdo_mysql mbstring zip gd \
     && rm -rf /var/lib/apt/lists/*
 
 # Habilitar mod_rewrite de Apache
