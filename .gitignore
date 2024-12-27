@@ -473,3 +473,6 @@ fabric.properties
 .env
 env/*
 .env/
+
+#idea
+.idea/
