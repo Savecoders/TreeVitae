@@ -476,3 +476,6 @@ env/*
 
 #idea
 .idea/
+
+#data
+data/*
