@@ -387,7 +387,6 @@ ALTER TABLE `me_encanta`
 --
 ALTER TABLE `posts`
   ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`iniciativa_id`) REFERENCES `iniciativas` (`ID`),
-  ADD CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`autor_id`) REFERENCES `usuarios` (`ID`),
   ADD CONSTRAINT `posts_ibfk_3` FOREIGN KEY (`autor_id`) REFERENCES `usuarios` (`ID`);
 
 --
