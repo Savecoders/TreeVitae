@@ -1,4 +1,4 @@
-<? require_once HEADER; ?>
+<?php require_once HEADER; ?>
 <style>
     .card__picture {
         width: 100%;
@@ -352,4 +352,4 @@
     </div>
 </main>
 <script type="module" src="public/js/initiatives/view.js"></script>
-<? require_once FOOTER; ?>
+<?php require_once FOOTER; ?>

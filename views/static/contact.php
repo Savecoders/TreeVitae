@@ -1,4 +1,4 @@
-<? require_once HEADER; ?>
+<?php require_once HEADER; ?>
 <style>
     .title__principal {
         font-size: 4ch;
@@ -300,4 +300,4 @@
 </main>
 
 <script src="public/js/initiatives/contact.js"></script>
-<? require_once FOOTER; ?>
+<?php require_once FOOTER; ?>
