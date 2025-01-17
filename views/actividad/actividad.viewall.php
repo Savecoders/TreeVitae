@@ -1,3 +1,3 @@
-<? require_once HEADER; ?>
+<?php require_once HEADER; ?>
 
-<? require_once FOOTER; ?>
+<?php require_once FOOTER; ?>
