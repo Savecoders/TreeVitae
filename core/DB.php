@@ -17,7 +17,8 @@ class DB
      */
     public static function getInstance()
     {
-        loadEnv(__DIR__ . '../.env');
+        $dir = __DIR__ . '/../.env';
+        loadEnv($dir);
         $DB_NAME = $_ENV['DB_NAME'] ? $_ENV['DB_NAME'] : 'ejemplo-mvc-php';
         $DB_USER = $_ENV['DB_USER'] ? $_ENV['DB_USER'] : 'root';
         $DB_PASSWORD = $_ENV['DB_PASSWORD'] ? $_ENV['DB_PASSWORD'] : '12345';
