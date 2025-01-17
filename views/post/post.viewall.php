@@ -1,4 +1,4 @@
-<? require_once HEADER; ?>
+<?php require_once HEADER; ?>
 <style>
     .main_container_content {
         padding: 0;
@@ -495,4 +495,4 @@
 </main>
 
 <script type="module" src="public/js/post/viewall.js"></script>
-<? require_once FOOTER; ?>
+<?php require_once FOOTER; ?>
