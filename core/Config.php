@@ -8,11 +8,20 @@ define("HEADER", 'views/templates/navbar.php');
 define("FOOTER", 'views/templates/footer.php');
 
 
-// ruta de vistas modulo productos
-define("VPRODUCTOS", "views/productos/productos.");
+// ruta de vistas modulo iniciativas
+define("VINICIATIVA", "views/iniciativa/iniciativa.");
 
-// ruta de vistas modulo categorias
-define("VCATEGORIAS", "views/categorias/categorias.");
+// ruta de vistas modulo de post
+define("VPOST", "views/post/post.");
+
+// ruta de vistas modulo de usuarios
+define("VUSER", "views/user/user.");
+
+// ruta de vistas modulo de actividad
+define("VACTIVIDAD", "views/activity/activity.");
+
+// ruta de vistas modulo de Contact
+define("VCONTACT", "views/contact/contact.");
 
 // conexion bb
 define("DBNAME", "mvc");

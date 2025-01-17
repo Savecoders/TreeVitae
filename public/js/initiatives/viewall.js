@@ -57,61 +57,61 @@ const searchInput = $('#searchInput');
 const btnSearch = $('#btnSearch');
 const btnLoadMore = document.getElementById('loadMore');
 
-const componentTag = tag => {
-  const tagNode = document.createElement('div');
-  tagNode.classList.add('tag__content');
-  tagNode.textContent = tag;
-  return tagNode;
-};
+// const componentTag = tag => {
+//   const tagNode = document.createElement('div');
+//   tagNode.classList.add('tag__content');
+//   tagNode.textContent = tag;
+//   return tagNode;
+// };
 
-const componentDefaultCard = ({ title, description, image, tags }) => {
-  const asideNode = document.createElement('aside');
-  asideNode.classList.add('card');
+// const componentDefaultCard = ({ title, description, image, tags }) => {
+//   const asideNode = document.createElement('aside');
+//   asideNode.classList.add('card');
 
-  const cardArticuleNode = document.createElement('article');
-  cardArticuleNode.classList.add('card__content');
+//   const cardArticuleNode = document.createElement('article');
+//   cardArticuleNode.classList.add('card__content');
 
-  const cardTitleNode = document.createElement('a');
-  cardTitleNode.classList.add('card__title');
-  cardTitleNode.href = './view.html';
-  cardTitleNode.textContent = title;
+//   const cardTitleNode = document.createElement('a');
+//   cardTitleNode.classList.add('card__title');
+//   cardTitleNode.href = './view.html';
+//   cardTitleNode.textContent = title;
 
-  const cardTagsContainer = document.createElement('div');
-  cardTagsContainer.classList.add('card__tags__content');
+//   const cardTagsContainer = document.createElement('div');
+//   cardTagsContainer.classList.add('card__tags__content');
 
-  tags.forEach(tag => {
-    cardTagsContainer.appendChild(componentTag(tag));
-  });
+//   tags.forEach(tag => {
+//     cardTagsContainer.appendChild(componentTag(tag));
+//   });
 
-  const cardDescriptionNode = document.createElement('p');
-  cardDescriptionNode.classList.add('card__description');
-  cardDescriptionNode.textContent = description;
+//   const cardDescriptionNode = document.createElement('p');
+//   cardDescriptionNode.classList.add('card__description');
+//   cardDescriptionNode.textContent = description;
 
-  cardArticuleNode.appendChild(cardTitleNode);
-  cardArticuleNode.appendChild(cardTagsContainer);
-  cardArticuleNode.appendChild(cardDescriptionNode);
+//   cardArticuleNode.appendChild(cardTitleNode);
+//   cardArticuleNode.appendChild(cardTagsContainer);
+//   cardArticuleNode.appendChild(cardDescriptionNode);
 
-  const cardPictureNode = document.createElement('picture');
-  cardPictureNode.classList.add('card__picture');
+//   const cardPictureNode = document.createElement('picture');
+//   cardPictureNode.classList.add('card__picture');
 
-  const cardPictureImgNode = document.createElement('img');
-  cardPictureImgNode.src = image;
-  cardPictureImgNode.alt = title;
+//   const cardPictureImgNode = document.createElement('img');
+//   cardPictureImgNode.src = image;
+//   cardPictureImgNode.alt = title;
 
-  cardPictureNode.appendChild(cardPictureImgNode);
-  asideNode.appendChild(cardArticuleNode);
-  asideNode.appendChild(cardPictureNode);
+//   cardPictureNode.appendChild(cardPictureImgNode);
+//   asideNode.appendChild(cardArticuleNode);
+//   asideNode.appendChild(cardPictureNode);
 
-  asideNode.addEventListener('click', () => {
-    if (asideNode.classList.contains('card--clicked')) {
-      asideNode.classList.remove('card--clicked');
-    } else {
-      asideNode.classList.add('card--clicked');
-    }
-  });
+//   asideNode.addEventListener('click', () => {
+//     if (asideNode.classList.contains('card--clicked')) {
+//       asideNode.classList.remove('card--clicked');
+//     } else {
+//       asideNode.classList.add('card--clicked');
+//     }
+//   });
 
-  return asideNode;
-};
+//   return asideNode;
+// };
 
 const addCard = card => {
   containerCard.appendChild(card);
@@ -133,11 +133,11 @@ btnLoadMore.addEventListener('click', () => {
   }
 });
 
-const showDefaultCards = () => {
-  for (let i = 0; i < 6; i++) {
-    addCard(componentDefaultCard(initiatives[i]));
-  }
-};
+// const showDefaultCards = () => {
+//   for (let i = 0; i < 6; i++) {
+//     addCard(componentDefaultCard(initiatives[i]));
+//   }
+// };
 
 const removeAllCards = () => {
   while (containerCard.lastElementChild) {
@@ -216,5 +216,4 @@ tagFilter.forEach(tag => {
   });
 });
 
-//siempre se va a ejecutar la pagina
-showDefaultCards();
+// showDefaultCards();
