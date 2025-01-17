@@ -1,4 +1,4 @@
-<? require_once HEADER; ?>
+<?php require_once HEADER; ?>
 <style>
     .container__cards {
         display: grid;
@@ -162,7 +162,20 @@
 
     <!-- Container cards Iniciativas -->
     <section class="container__cards" aria-label="Iniciativas">
-        <!-- cards -->
+        <?php foreach ($iniciativas as $iniciativa) { ?>
+            <aside class="card">
+                <article class="card__content"><a class="card__title" href="./view.html"><?php $iniciativa['nombre'] ?></a>
+                    <!-- <div class="card__tags__content">
+                        <div class="tag__content">recolección</div>
+                        <div class="tag__content">reciclaje</div>
+                        <div class="tag__content">limpieza</div>
+                        <div class="tag__content">mantenimiento</div>
+                    </div> -->
+                    <p class="card__description"><?php $iniciativa['descripcion'] ?></p>
+                </article>
+                <picture class="card__picture"><img <?php 'src="data:image;base64,' . $iniciativa['cover'] . '"' ?> alt="CamioncitosSa"></picture>
+            </aside>
+        <?php } ?>
     </section>
 
     <div class="btn__container">
@@ -174,4 +187,4 @@
 </main>
 
 <script type="module" src="public/js/initiatives/viewall.js"></script>
-<? require_once FOOTER; ?>
+<?php require_once FOOTER; ?>

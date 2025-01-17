@@ -1,4 +1,4 @@
-<? require_once HEADER; ?>
+<?php require_once HEADER; ?>
 
 <main class="main__container__content">
     <div class="hero">
@@ -108,4 +108,4 @@
         </p>
     </div>
 </section>
-<? require_once FOOTER; ?>
+<?php require_once FOOTER; ?>

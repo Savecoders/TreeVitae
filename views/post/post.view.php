@@ -1,4 +1,4 @@
-<? require_once HEADER; ?>
+<?php require_once HEADER; ?>
 <style>
     .content-container {
         display: grid;
@@ -459,4 +459,4 @@
     </div>
 </main>
 <script type="module" src="public/js/post/view.js"></script>
-<? require_once FOOTER; ?>
+<?php require_once FOOTER; ?>
