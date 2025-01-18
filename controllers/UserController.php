@@ -2,7 +2,7 @@
 require_once 'models/repository/Usuario.repository.php';
 require_once 'models/dto/Usuario.php';
 require_once 'utils/redirectWithMessage.php';
-require_once 'utils/cleaned.php';
+require_once 'utils/cleanser.php';
 class UserController
 {
     private $model;
