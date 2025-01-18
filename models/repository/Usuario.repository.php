@@ -12,7 +12,7 @@ class UsuarioRepository implements IRepository
         $this->con = DB::getInstance();
     }
 
-    public function login($email, $password): bool
+    public function login($email, $password): array
     {
         try {
             $sql = "SELECT * FROM usuarios WHERE email = :email AND password = :password";
@@ -21,11 +21,11 @@ class UsuarioRepository implements IRepository
             $stmt->bindParam(':password', $password);
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $result;
+            return $result ? $result : [];
         } catch (PDOException $er) {
             // echo $er->getMessage();
             error_log("Error en login de UsuarioRepository " . $er->getMessage());
-            return false;
+            return [];
         }
     }
 

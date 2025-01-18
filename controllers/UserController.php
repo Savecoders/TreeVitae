@@ -49,8 +49,22 @@ class UserController
 
 
             $user = $this->model->login($email, $password);
-            if ($user) {
-                $_SESSION['user'] = $user;
+            if ($user != []) {
+
+                if (!isset($_SESSION)) {
+                    session_start();
+                }
+
+                $_SESSION['user'] = array(
+                    'ID' => $user['ID'],
+                    'email' => $user['email'],
+                    'nombre_usuario' => $user['nombre_usuario'],
+                    'password' => $user['password'],
+                    'foto_perfil' => $user['foto_perfil'],
+                    'genero' => $user['genero'],
+                    'fecha_nacimiento' => $user['fecha_nacimiento'],
+                    'fecha_registro' => $user['fecha_registro'],
+                );
                 redirectWithMessage(
                     true,
                     'Usuario Encontrado',
@@ -74,6 +88,18 @@ class UserController
                 'index.php?c=user&f=login_view'
             );
         }
+    }
+
+    public function logout()
+    {
+        session_start();
+        session_destroy();
+        redirectWithMessage(
+            true,
+            'Se cerro la session Correctamente',
+            'No hay usuario logueado',
+            'index.php'
+        );
     }
 
     public function register_view()

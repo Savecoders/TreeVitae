@@ -1,3 +1,8 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -6,7 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="public/css/styles.css" />
     <link rel="icon" href="public/assets/icons/logo.svg" type="image/svg+xml" />
-    <title>Contacto | TreeVitae</title>
+    <link rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v6.7.0/css/all.css"
+        crossorigin="anonymous">
+    <title>Login | TreeVitae</title>
     <style>
         body {
             overflow: hidden;
@@ -58,7 +66,7 @@
     <main class="main__container">
         <div style="width: 80%; max-width: 400px" class="login__container">
             <h1 class="title">Login</h1>
-            <form action="#" method="dialog">
+            <form action="index.php?c=user&f=login" method="POST">
                 <div class="form__container">
                     <label for="email">Email</label>
 
@@ -77,7 +85,31 @@
                 </div>
             </form>
         </div>
+        <?php if (isset($_SESSION['mensaje'])) { ?>
+            <div class="notify-messages">
+                <?php if ($_SESSION['type'] == 'success') { ?>
+                    <div class="message success" role="alert">
+                        <?php echo $_SESSION['mensaje']; ?>
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                <?php } else { ?>
+                    <div class="message error" role="alert">
+                        <?php echo $_SESSION['mensaje']; ?>
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                    </div>
+                <?php } ?>
+            </div>
+
+        <?php
+            unset($_SESSION['mensaje']);
+            unset($_SESSION['type']);
+        } ?>
+
+
+
     </main>
+    <script type="module" src="public/js/components/message.js"></script>
+
 </body>
 
 </html>
