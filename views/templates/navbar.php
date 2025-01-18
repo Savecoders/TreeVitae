@@ -2,10 +2,10 @@
 if (!isset($_SESSION))
     session_start();
 
-if (empty($_SESSION['user'])) { //simulacion manejo de variables de sesion
-    // redireccionar al login
+// if (empty($_SESSION['user'])) { //simulacion manejo de variables de sesion
+//     // redireccionar al login
 
-}
+// }
 ?>
 <!-- parte inicial del documento-->
 <!DOCTYPE html>
@@ -19,8 +19,7 @@ if (empty($_SESSION['user'])) { //simulacion manejo de variables de sesion
     <link rel="icon" href="public/assets/icons/logo.svg" type="image/svg+xml" />
     <!-- FONT AWESOME -->
     <link rel="stylesheet"
-        href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+        href="https://use.fontawesome.com/releases/v6.7.0/css/all.css"
         crossorigin="anonymous">
 
     <title>TreeVitae</title>
@@ -401,13 +400,21 @@ if (empty($_SESSION['user'])) { //simulacion manejo de variables de sesion
             <div class="nav__overlay">
                 <ul class="nav__links">
                     <li class="nav__item">
-                        <a href="index.php?c=iniciativa&f=viewall">Iniciativas</a>
+                        <span class="nav__parent can__open">
+                            Iniciativas
+                            <i class="fa-solid fa-angle-down arrow__down"></i>
+                        </span>
+                        <ul class="nav__inner">
+                            <li class="nav__dropdown">
+                                <a href="index.php?c=iniciativa&f=viewall" class="nav__link"><i class="ti ti-settings"></i>Ver Iniciativas</a>
+                            </li>
+                            <li class="nav__dropdown">
+                                <a href="index.php?c=iniciativa&f=viewall" class="nav__link"><i class="ti ti-settings"></i>Crea tu Iniciativa</a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav__item">
                         <a href="index.php?c=post&f=viewall">Posts</a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="index.php?c=actividad&f=viewall">Actividades</a>
                     </li>
                     <li class="nav__item">
                         <a href="index.php?c=index&f=index&p=preguntas">Preguntas</a>
@@ -415,17 +422,45 @@ if (empty($_SESSION['user'])) { //simulacion manejo de variables de sesion
                     <li class="nav__item">
                         <a href="index.php?c=index&f=index&p=contact">About</a>
                     </li>
-                    <ul class="nav__btns">
-                        <li lass="nav__item">
-                            <a href="index.php?c=user&f=register" class="link__outerline">Register</a>
+
+                    <?php if (isset($_SESSION['user'])) { ?>
+                        <li class="nav__item">
+                            <span class="nav__parent can__open">
+                                <img src="{{g.user.image_perfil}}" class="nav__image-perfil" alt="Perfil" />
+                                {{ g.user.nombre }}
+                                <div class="arrow__down"></div>
+                            </span>
+
+                            <ul class="nav__inner">
+                                <li class="nav__dropdown">
+                                    <a href="{{ url_for('user.profile') }}" class="nav__link"><i class="ti ti-user"></i> Perfil</a>
+                                </li>
+
+                                <li class="nav__dropdown">
+                                    <a href="{{ url_for('user.update') }}" class="nav__link"><i class="ti ti-settings"></i> Editar Perfil</a>
+                                </li>
+
+                                <li class="nav__dropdown">
+                                    <a href="{{ url_for('user.logout') }}" class="nav__link"><i class="ti ti-logout"></i> Cerrar Sesion</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li lass="nav__item">
-                            <a href="index.php?c=user&f=login" class="btn primary__with-icon">
-                                <img src="public/assets/icons/user.svg" alt="User icon" />
-                                Login
-                            </a>
-                        </li>
-                    </ul>
+
+                    <?php } else { ?>
+
+                        <ul class="nav__btns">
+                            <li lass="nav__item">
+                                <a href="index.php?c=user&f=register_view" class="link__outerline">Register</a>
+                            </li>
+                            <li lass="nav__item">
+                                <a href="index.php?c=user&f=login_view" class="btn primary__with-icon">
+                                    <img src="public/assets/icons/user.svg" alt="User icon" />
+                                    Login
+                                </a>
+                            </li>
+                        </ul>
+
+                    <?php } ?>
                 </ul>
             </div>
         </nav>
