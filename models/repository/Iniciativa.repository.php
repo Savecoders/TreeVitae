@@ -140,7 +140,7 @@ class IniciativaRespository implements IRepository
         }
     }
 
-    public function getById($id): array
+    public function getById($id): array | bool
     {
         try {
             $sql = "SELECT * FROM iniciativas WHERE ID = :id";

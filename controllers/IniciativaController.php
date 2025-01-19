@@ -48,7 +48,7 @@ class IniciativaController
 
             $iniciativasResult = $this->model->getById($iniciativa_id);
 
-            if (!$iniciativasResult) {
+            if (!$iniciativasResult || count($iniciativasResult) === 0 || !is_array($iniciativasResult) || !$iniciativasResult) {
                 redirectWithMessage(false, '', 'No se ha encontrado la iniciativa', 'index.php?c=iniciativa&f=viewall');
                 return;
             }
