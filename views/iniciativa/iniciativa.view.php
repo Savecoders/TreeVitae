@@ -1,4 +1,8 @@
-<?php require_once HEADER; ?>
+<?php
+require_once HEADER;
+require_once 'utils/dateFormatter.php';
+?>
+
 <style>
     .card__picture {
         width: 100%;
@@ -18,6 +22,7 @@
         background-position: center;
         image-rendering: optimizeQuality;
         mix-blend-mode: normal;
+        margin: 0;
     }
 
     .card-compact-post {
@@ -26,15 +31,18 @@
     }
 
     .profile-container {
-        width: 320px;
+        width: 100%;
+        max-width: 240px;
         display: flex;
         flex-direction: column;
-        gap: 32px;
+        gap: 16px;
     }
 
     .media__row {
         display: flex;
+        width: 100%;
         flex-direction: row;
+        flex-wrap: wrap;
         gap: 12px;
         padding-top: 24px;
         padding-bottom: 24px;
@@ -43,9 +51,9 @@
         border-radius: 16px;
     }
 
-    .profile-container p {
-        font-size: 32px;
-        color: var(--text-900);
+    p {
+        font-size: 24px;
+        color: var(--text-800);
     }
 
     .profile-container small {
@@ -53,6 +61,13 @@
         font-size: 20px;
         font-weight: 600;
         color: var(--text-900);
+    }
+
+    .profile-container>img {
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+        border-radius: 16px;
     }
 
     .about-initiative {
@@ -154,202 +169,171 @@
         align-items: center;
     }
 
-    @media (max-width: 700px) {
-        .main-sidebar {
-            flex-direction: column-reverse;
+    @media (max-width: 1100px) {
+
+        .heading-initiative {
+            flex-direction: column;
+            gap: 32px;
         }
 
-        .profile-container {
-            width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .main-sidebar {
+            gap: 16px;
+            flex-direction: column;
         }
+    }
+
+    .breadcrumbs {
+        width: fit-content;
     }
 </style>
 <main class="main__container__content">
-    <div class="breadcrumbs flex-row">
-        <a href="../home/index.html">Home</a>
-        <span class="breadcrumbs__arrow"> / </span>
-        <a href="#">NombreIniciativa</a>
-    </div>
 
-    <!-- Mi comienzo AGURTO -->
-    <picture class="card__picture">
-        <img class="hero" src="public/assets/images/iniciativa-default.png" alt="Iniciativa 1" />
-    </picture>
+    <?php if (isset($iniciativa)) { ?>
 
-    <div class="main-sidebar">
-        <aside class="profile-container">
-            <img src="public/assets/images/Icon_Profile_Initiative.png" alt="Logo Profile" />
-            <hr class="separetor__horizontal" />
-            <p>Interacciones</p>
-            <div class="media__row">
-                <figure class="media__item">
-                    <img src="public/assets/icons/users.svg" alt="user-icon" />
-                    <small>10</small>
-                </figure>
-                <figure class="media__item">
-                    <img src="public/assets/icons/link-2.svg" alt="link-icon" />
-                    <small>10</small>
-                </figure>
-                <figure class="media__item">
-                    <img src="public/assets/icons/heart-pulse.svg" alt="heart-icon" />
-                    <small>10</small>
-                </figure>
-                <figure class="media__item">
-                    <img src="public/assets/icons/image.svg" alt="image-icon" />
-                    <small>10</small>
-                </figure>
-            </div>
-            <hr class="separetor__horizontal" />
-            <p>Se Parte</p>
-            <a href="#" class="btn primary__with-icon btn btn-animation">
-                <img src="public/assets/icons/pointer--outer.svg" alt="Pointer Outer" />Únete a la
-                Iniciativa
-            </a>
-        </aside>
+        <div class="breadcrumbs flex-row">
+            <a href="index.php">Home</a>
+            <span class="breadcrumbs__arrow"> / </span>
+            <a href="index.php?c=iniciativa&f=viewall">Iniciativas</a>
+            <span class="breadcrumbs__arrow"> / </span>
+            <a href="index.php?c=iniciativa&f=view&id=<?php echo $iniciativa[0]->getId(); ?>"><?php echo $iniciativa[0]->getNombre(); ?></a>
+        </div>
 
-        <article class="about-initiative">
-            <header class="heading-initiative">
-                <h2>TreeVitae</h2>
-                <button class="btn outerline btn-animation">
-                    <img src="public/assets/icons/heart-pulse.svg" alt="Heart Pulse" />
-                    Seguir
-                </button>
-            </header>
-            <p>CreateDate: | 12 octubre 2024</p>
+        <picture class="card__picture">
+            <img class="hero" src="data:image;base64,<?php echo base64_encode($iniciativa[0]->getCover()); ?>" alt="<?php echo $iniciativa[0]->getNombre(); ?>">
+        </picture>
 
-            <!-- Etiquetas -->
-            <section class="tags" aria-label="Tags">
-                <p>Tags:</p>
-                <div class="tag">Playa</div>
-                <div class="tag">Limpieza</div>
-                <div class="tag">Recolección</div>
-            </section>
-            <hr class="separetor__horizontal" />
-            <p class="paragraph">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam faucibus pretium
-                libero eu cursus. Vestibulum eu mollis risus. Ut porta ligula id auctor ultrices. Sed
-                id ex sed erat finibus molestie. Suspendisse quis justo porta, eleifend purus nec,
-                laoreet lacus. Phasellus vel urna turpis. In hac habitasse platea dictumst. Praesent
-                ac orci ultricies, porttitor nunc quis, luctus erat. Fusce et sollicitudin dui. Etiam
-                eu dictum est. Morbi turpis tellus, vestibulum in cursus ultrices, bibendum in dolor.
-                Proin dignissim tellus non eros consectetur, quis gravida mi malesuada. Sed neque
-                neque, sodales sit amet mi eu, bibendum sagittis elit. Etiam malesuada quam vitae
-                magna dignissim, sit amet ornare quam mattis. Cras tempor in justo sit amet ornare.
-                Morbi non turpis ac lectus cursus semper quis nec massa. Nullam tempor consectetur
-                leo, eget commodo leo placerat nec. Sed consequat luctus diam, a venenatis lorem.
-                Pellentesque finibus leo sit amet nunc luctus porttitor. Fusce lacus neque, vulputate
-                nec ornare et,.
-            </p>
-
-            <section class="cards">
-                <div class="card-compact-post">
-                    <header>
-                        <h3>TreeVitae</h3>
-                        <p>| 27d</p>
-                    </header>
-                    <h2>
-                        [BSPWM] The new Picom Animations are awesome! And an app to edit my rices on the
-                        fly!
-                    </h2>
-                    <footer class="figure">
-                        <figure class="media__item">
-                            <img src="public/assets/icons/users.svg" alt="user-icon" />
-                            <small>44 likes</small>
-                        </figure>
-                        <figure class="media__item">
-                            <img src="public/assets/icons/users.svg" alt="user-icon" />
-                            <small>44 comentarios</small>
-                        </figure>
-                    </footer>
-                    <img
-                        style="border-radius: 8px; filter: drop-shadow(0 0 3px #000000)"
-                        src="public/assets/images/iniciativa-default.png"
-                        alt="Iniciativa" />
+        <div class="main-sidebar">
+            <aside class="profile-container">
+                <img src="data:image;base64,<?php echo base64_encode($iniciativa[0]->getLogo()); ?>" alt="Logo Profile" />
+                <hr class="separetor__horizontal" />
+                <p>Interacciones</p>
+                <div class="media__row">
+                    <figure class="media__item">
+                        <img src="public/assets/icons/users.svg" alt="user-icon" />
+                        <small>10</small>
+                    </figure>
+                    <figure class="media__item">
+                        <img src="public/assets/icons/link-2.svg" alt="link-icon" />
+                        <small>10</small>
+                    </figure>
+                    <figure class="media__item">
+                        <img src="public/assets/icons/heart-pulse.svg" alt="heart-icon" />
+                        <small>10</small>
+                    </figure>
+                    <figure class="media__item">
+                        <img src="public/assets/icons/image.svg" alt="image-icon" />
+                        <small>10</small>
+                    </figure>
                 </div>
-
-                <div class="card-compact-post">
-                    <header>
-                        <h3>TreeVitae</h3>
-                        <p>| 27d</p>
-                    </header>
-                    <h2>
-                        [BSPWM] The new Picom Animations are awesome! And an app to edit my rices on the
-                        fly!
-                    </h2>
-                    <footer class="figure">
-                        <figure class="media__item">
-                            <img src="public/assets/icons/users.svg" alt="user-icon" />
-                            <small>44 likes</small>
-                        </figure>
-                        <figure class="media__item">
-                            <img src="public/assets/icons/users.svg" alt="user-icon" />
-                            <small>44 comentarios</small>
-                        </figure>
-                    </footer>
-                    <img
-                        style="border-radius: 8px; filter: drop-shadow(0 0 3px #000000)"
-                        src="public/assets/images/iniciativa-default.png"
-                        alt="Iniciativa" />
-                </div>
-
-                <div class="card-compact-post">
-                    <header>
-                        <h3>TreeVitae</h3>
-                        <p>| 27d</p>
-                    </header>
-                    <h2>
-                        [BSPWM] The new Picom Animations are awesome! And an app to edit my rices on the
-                        fly!
-                    </h2>
-                    <footer class="figure">
-                        <figure class="media__item">
-                            <img src="public/assets/icons/users.svg" alt="user-icon" />
-                            <small>44 likes</small>
-                        </figure>
-                        <figure class="media__item">
-                            <img src="public/assets/icons/users.svg" alt="user-icon" />
-                            <small>44 comentarios</small>
-                        </figure>
-                    </footer>
-                    <img
-                        style="border-radius: 8px; filter: drop-shadow(0 0 3px #000000)"
-                        src="public/assets/images/iniciativa-default.png"
-                        alt="Iniciativa defecto" />
-                </div>
-
-                <div class="card-compact-post">
-                    <header>
-                        <h3>TreeVitae</h3>
-                        <p>| 27d</p>
-                    </header>
-                    <h2>
-                        [BSPWM] The new Picom Animations are awesome! And an app to edit my rices on the
-                        fly!
-                    </h2>
-                    <footer class="figure">
-                        <figure class="media__item">
-                            <img src="public/assets/icons/users.svg" alt="user-icon" />
-                            <small>44 likes</small>
-                        </figure>
-                        <figure class="media__item">
-                            <img src="public/assets/icons/users.svg" alt="user-icon" />
-                            <small>44 comentarios</small>
-                        </figure>
-                    </footer>
-                    <img
-                        style="border-radius: 8px; filter: drop-shadow(0 0 3px #000000)"
-                        src="public/assets/images/iniciativa-default.png"
-                        alt="" />
-                </div>
-            </section>
-
-            <div style="justify-content: center; display: flex">
-                <a href="#" id="btnMorePost" class="btn primary__with-icon btn-animation">
-                    <img src="public/assets/icons/external-link.svg" alt="External link" />Ver Más Post
+                <hr class="separetor__horizontal" />
+                <p>Se Parte</p>
+                <a href="#" class="btn primary__with-icon btn btn-animation">
+                    Únete a la Iniciativa
                 </a>
-            </div>
-        </article>
-    </div>
+
+                <hr class="separetor__horizontal" />
+                <p>Actividades</p>
+                <a href="#" class="btn primary__with-icon btn btn-animation">
+                    Revisar Actividades
+                </a>
+
+                <hr class="separetor__horizontal" />
+                <a href="#" class="btn outerline btn-animation">
+                    Contactarte con la iniciativa?
+                </a>
+            </aside>
+
+            <article class="about-initiative">
+                <header class="heading-initiative">
+                    <h2><?php echo $iniciativa[0]->getNombre(); ?></h2>
+                    <button style="height: fit-content;" class="btn outerline btn-animation">
+                        <i class="fa-regular fa-heart"></i>
+                        Seguir
+                    </button>
+                </header>
+                <p>Fecha de Creacion: <?php echo formatDate($iniciativa[0]->getFechaCreacion()); ?></p>
+
+                <!-- Etiquetas -->
+                <section class="tags" aria-label="Tags">
+                    <p>Tags:</p>
+                    <?php foreach ($iniciativa[0]->getTags() as $tag) { ?>
+                        <div class="tag" id="tag-<?php echo $tag->getNombre(); ?>" role="listitem">
+                            <?php echo $tag->getNombre(); ?>
+                        </div>
+                    <?php } ?>
+                </section>
+                <hr class="separetor__horizontal" />
+                <p class="paragraph">
+                    <?php echo $iniciativa[0]->getDescripcion(); ?>
+                </p>
+
+                <section class="cards">
+
+                    <div class="card-compact-post">
+                        <header>
+                            <h3>TreeVitae</h3>
+                            <p>| 27d</p>
+                        </header>
+                        <h2>
+                            [BSPWM] The new Picom Animations are awesome! And an app to edit my rices on the
+                            fly!
+                        </h2>
+                        <footer class="figure">
+                            <figure class="media__item">
+                                <img src="public/assets/icons/users.svg" alt="user-icon" />
+                                <small>44 likes</small>
+                            </figure>
+                            <figure class="media__item">
+                                <img src="public/assets/icons/users.svg" alt="user-icon" />
+                                <small>44 comentarios</small>
+                            </figure>
+                        </footer>
+                        <img
+                            style="border-radius: 8px; filter: drop-shadow(0 0 3px #000000)"
+                            src="public/assets/images/iniciativa-default.png"
+                            alt="Iniciativa" />
+                    </div>
+
+                    <div class="card-compact-post">
+                        <header>
+                            <h3>TreeVitae</h3>
+                            <p>| 27d</p>
+                        </header>
+                        <h2>
+                            [BSPWM] The new Picom Animations are awesome! And an app to edit my rices on the
+                            fly!
+                        </h2>
+                        <footer class="figure">
+                            <figure class="media__item">
+                                <img src="public/assets/icons/users.svg" alt="user-icon" />
+                                <small>44 likes</small>
+                            </figure>
+                            <figure class="media__item">
+                                <img src="public/assets/icons/users.svg" alt="user-icon" />
+                                <small>44 comentarios</small>
+                            </figure>
+                        </footer>
+                        <img
+                            style="border-radius: 8px; filter: drop-shadow(0 0 3px #000000)"
+                            src="public/assets/images/iniciativa-default.png"
+                            alt="Iniciativa defecto" />
+                    </div>
+
+
+                </section>
+
+                <div style="justify-content: center; display: flex">
+                    <a href="#" id="btnMorePost" class="btn primary__with-icon btn-animation">
+                        <img src="public/assets/icons/external-link.svg" alt="External link" />Revisa todos los Post :)
+                    </a>
+                </div>
+            </article>
+        </div>
+
+    <?php } ?>
 </main>
 <script type="module" src="public/js/initiatives/view.js"></script>
 <?php require_once FOOTER; ?>
