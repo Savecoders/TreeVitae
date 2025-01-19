@@ -25,6 +25,24 @@ class TagsRepository implements IRepository
         }
     }
 
+    public function getByInitiativeId($id): array
+    {
+        try {
+            $query = "
+                SELECT tag_id, nombre FROM iniciativa_tags
+                INNER JOIN tags on tags.id = iniciativa_tags.tag_id
+                WHERE iniciativa_tags.iniciativa_id = :id
+            ";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error en getByInitiativeId de TagsRepository " . $e->getMessage());
+            return [];
+        }
+    }
+
     public function getById($id): bool
     {
         try {
@@ -59,7 +77,6 @@ class TagsRepository implements IRepository
         $query = "UPDATE tags SET name = :name WHERE id = :id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':name', $data['name'], PDO::PARAM_STR);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
 
