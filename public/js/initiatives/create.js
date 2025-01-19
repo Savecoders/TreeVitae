@@ -1,9 +1,10 @@
 // validacion de formulario
 
 const form = document.querySelector('#initiative-form');
-const title = document.querySelector('#title');
+const title = document.querySelector('#name');
 const description = document.querySelector('#description');
 const cover = document.querySelector('#cover');
+const logo = document.querySelector('#logo');
 const gallery = document.querySelector('#gallery');
 const tagsLabel = document.querySelector('#tags__label');
 const dropZone = document.querySelector('.drop__zone');
@@ -13,9 +14,9 @@ const galleryImages = document.querySelector('.gallery__images');
 // mensajes de error
 const errorMessages = {
   title: {
-    empty: 'El titulo es requerido y no puede estar vacio',
-    minLength: 'El titulo debe tener al menos 5 caracteres',
-    maxLength: 'El titulo debe tener menos de 50 caracteres',
+    empty: 'El nombre es requerido y no puede estar vacio',
+    minLength: 'El nombre debe tener al menos 5 caracteres',
+    maxLength: 'El nombre debe tener menos de 50 caracteres',
   },
   description: {
     empty: 'La descripcion es requerida y no puede estar vacia',
@@ -24,6 +25,9 @@ const errorMessages = {
   },
   cover: {
     empty: 'La imagen de portada es requerida y no puede estar vacia',
+  },
+  logo: {
+    empty: 'El logo es requerido y no puede estar vacio',
   },
   gallery: {
     empty: 'La galeria es requerida debe tener al menos 2 imagenes',
@@ -52,6 +56,9 @@ const showError = (element, message) => {
   if (element.id === 'cover') {
     const coverError = document.querySelector('#cover-error');
     coverError.textContent = message;
+  } else if (element.id === 'logo') {
+    const logoError = document.querySelector('#logo-error');
+    logoError.textContent = message;
   } else if (element.id === 'gallery') {
     const galleryError = document.querySelector('#gallery-error');
     galleryError.textContent = message;
@@ -64,6 +71,9 @@ const cleanError = element => {
   if (element.id === 'cover') {
     const coverError = document.querySelector('#cover-error');
     coverError.textContent = '';
+  } else if (element.id === 'logo') {
+    const logoError = document.querySelector('#logo-error');
+    logoError.textContent = '';
   } else if (element.id === 'gallery') {
     const galleryError = document.querySelector('#gallery-error');
     galleryError.textContent = '';
@@ -87,8 +97,13 @@ const validateDescription = () => {
 const validateCover = () => {
   // validar si el archivo es una imagen
   if (cover.files.length === 0) {
-    console.log('no hay archivo');
     return errorMessages.cover.empty;
+  }
+};
+
+const validateLogo = () => {
+  if (logo.files.length === 0) {
+    return errorMessages.logo.empty;
   }
 };
 
@@ -145,10 +160,11 @@ cover.addEventListener('change', e => {
 });
 
 const validateForm = () => {
-  const [titleError, descriptionError, coverError, galleryError, tagsError] = [
+  const [titleError, descriptionError, coverError, logoError, galleryError, tagsError] = [
     validateTitle(),
     validateDescription(),
     validateCover(),
+    validateLogo(),
     validateGallery(),
     validateTags(),
   ];
@@ -169,6 +185,13 @@ const validateForm = () => {
   } else {
     cleanError(cover);
   }
+
+  if (logoError) {
+    showError(logo, logoError);
+  } else {
+    cleanError(logo);
+  }
+
   if (galleryError) {
     showError(gallery, galleryError);
   } else {
@@ -187,17 +210,28 @@ form.addEventListener('submit', event => {
   event.preventDefault();
   const isValid = validateForm();
   if (isValid) {
+    const selectedTags = document.querySelector('#selected_tags').value;
+    if (!selectedTags) {
+      showError(tagsLabel, errorMessages.tags.empty);
+      return;
+    }
     event.target.submit();
   }
 });
 
 tags.addEventListener('click', event => {
   const tag = event.target;
+  const selectedTagsInput = document.querySelector('#selected_tags');
+  let selectedTags = selectedTagsInput.value ? selectedTagsInput.value.split(',') : [];
+
   if (tag.classList.contains('tag--clicked')) {
     tag.classList.remove('tag--clicked');
+    selectedTags = selectedTags.filter(id => id !== tag.dataset.id);
   } else {
     tag.classList.add('tag--clicked');
+    selectedTags.push(tag.dataset.id);
   }
+  selectedTagsInput.value = selectedTags.join(',');
 });
 
 cover.addEventListener('change', e => {
@@ -209,5 +243,16 @@ cover.addEventListener('change', e => {
     const preview = document.querySelector('#preview');
     preview.src = reader.result;
     preview.classList.remove('cover-preview');
+  };
+});
+
+logo.addEventListener('change', e => {
+  const file = e.target.files[0];
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => {
+    const preview = document.querySelector('#logo-preview');
+    preview.src = reader.result;
+    preview.classList.remove('logo-preview');
   };
 });
