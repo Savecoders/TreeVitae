@@ -1,7 +1,7 @@
 <?php
-if (!isset($_SESSION))
+if (!isset($_SESSION)) {
     session_start();
-
+}
 // if (empty($_SESSION['user'])) { //simulacion manejo de variables de sesion
 //     // redireccionar al login
 
@@ -409,7 +409,7 @@ if (!isset($_SESSION))
                                 <a href="index.php?c=iniciativa&f=viewall" class="nav__link"><i class="ti ti-settings"></i>Ver Iniciativas</a>
                             </li>
                             <li class="nav__dropdown">
-                                <a href="index.php?c=iniciativa&f=viewall" class="nav__link"><i class="ti ti-settings"></i>Crea tu Iniciativa</a>
+                                <a href="index.php?c=iniciativa&f=new_view" class="nav__link"><i class="ti ti-settings"></i>Crea tu Iniciativa</a>
                             </li>
                         </ul>
                     </li>
@@ -426,8 +426,16 @@ if (!isset($_SESSION))
                     <?php if (isset($_SESSION['user'])) { ?>
                         <li class="nav__item">
                             <span class="nav__parent can__open">
-                                <img src="{{g.user.image_perfil}}" class="nav__image-perfil" alt="Perfil" />
-                                {{ g.user.nombre }}
+                                <?php if (
+                                    isset($_SESSION['user']['foto_perfil']) &&
+                                    $_SESSION['user']['foto_perfil'] != null
+                                ) { ?>
+                                    <img src="data:image/jpeg;base64,<?php echo base64_encode($_SESSION['user']['foto_perfil']); ?>"
+                                        class="nav__image-perfil" alt="Perfil" />
+                                <?php } else { ?>
+                                    <i class="fa-regular fa-user"></i>
+                                <?php } ?>
+                                <?php echo $_SESSION['user']['nombre_usuario']; ?>
                                 <div class="arrow__down"></div>
                             </span>
 
@@ -441,7 +449,7 @@ if (!isset($_SESSION))
                                 </li>
 
                                 <li class="nav__dropdown">
-                                    <a href="{{ url_for('user.logout') }}" class="nav__link"><i class="ti ti-logout"></i> Cerrar Sesion</a>
+                                    <a href="index.php?c=user&f=logout" class="nav__link"><i class="ti ti-logout"></i> Cerrar Sesion</a>
                                 </li>
                             </ul>
                         </li>

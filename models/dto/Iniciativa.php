@@ -2,9 +2,9 @@
 // DTO: Data Transfer Object
 class Iniciativa
 {
-    private $id, $nombre, $descripcion, $logo, $cover, $fecha_creacion, $creador, $galeria, $usuarios_iniciativas_list;
+    private $id, $nombre, $descripcion, $logo, $cover, $fecha_creacion, $creador, $galeria, $usuarios_iniciativas_list, $tags;
 
-    private 
+    public
 
     function __construct() {}
 
@@ -47,6 +47,11 @@ class Iniciativa
     function getGaleria()
     {
         return $this->galeria;
+    }
+
+    function getTags()
+    {
+        return $this->tags;
     }
 
     function getUsuariosIniciativas()
@@ -94,5 +99,10 @@ class Iniciativa
     function setGaleria($galeria)
     {
         $this->galeria = $galeria;
+    }
+
+    function setTags($tags)
+    {
+        $this->tags = $tags;
     }
 }

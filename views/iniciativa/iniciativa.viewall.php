@@ -147,15 +147,24 @@
                 Search
             </button>
         </div>
+        <section class="tags" role="group" aria-label="tags">
+
+            <?php foreach ($tags as $tag) { ?>
+                <div class="tag" id="tag-<?php echo $tag['nombre']; ?>" role="listitem">
+                    <?php echo $tag['nombre']; ?>
+                </div>
+            <?php } ?>
+
+        </section>
 
         <!-- Etiquetas -->
-        <section class="tags" role="group" aria-label="tags">
+        <!-- <section class="tags" role="group" aria-label="tags">
             <div class="tag" id="tag-limpieza" role="listitem">Limpieza</div>
             <div class="tag" id="tag-reciclaje" role="listitem">Reciclaje</div>
             <div class="tag" id="tag-recoleccion" role="listitem">Recolección</div>
             <div class="tag" id="tag-mantenimiento" role="listitem">Mantenimiento</div>
             <div class="tag" id="tag-organizacion" role="listitem">Organización</div>
-        </section>
+        </section> -->
     </form>
 
     <hr class="separetor__horizontal" />

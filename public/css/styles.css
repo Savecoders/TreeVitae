@@ -717,7 +717,7 @@ textarea:focus {
   animation: pop 0.6s ease-in-out;
 }
 
-.error {
+.danger {
   background-color: var(--danger-400);
   border: 2px solid var(--danger-300);
 }
@@ -727,7 +727,7 @@ textarea:focus {
   border: 2px solid var(--accent-50);
 }
 
-.error:hover {
+.danger:hover {
   background-color: var(--danger-500);
   color: var(--text-base);
 }
