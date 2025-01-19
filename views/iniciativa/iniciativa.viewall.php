@@ -173,16 +173,15 @@
     <section class="container__cards" aria-label="Iniciativas">
         <?php foreach ($iniciativas as $iniciativa) { ?>
             <aside class="card">
-                <article class="card__content"><a class="card__title" href="./view.html"><?php $iniciativa['nombre'] ?></a>
-                    <!-- <div class="card__tags__content">
-                        <div class="tag__content">recolección</div>
-                        <div class="tag__content">reciclaje</div>
-                        <div class="tag__content">limpieza</div>
-                        <div class="tag__content">mantenimiento</div>
-                    </div> -->
-                    <p class="card__description"><?php $iniciativa['descripcion'] ?></p>
+                <article class="card__content"><a class="card__title" href="index.php?c=iniciativa&f=view&id=<?php echo $iniciativa->getId(); ?>"><?php echo $iniciativa->getNombre(); ?></a>
+                    <div class="card__tags__content">
+                        <?php foreach ($iniciativa->getTags() as $tag) { ?>
+                            <div class="tag__content"><?php echo $tag->getNombre(); ?></div>
+                        <?php } ?>
+                    </div>
+                    <p class="card__description"><?php echo $iniciativa->getDescripcion(); ?></p>
                 </article>
-                <picture class="card__picture"><img <?php 'src="data:image;base64,' . $iniciativa['cover'] . '"' ?> alt="CamioncitosSa"></picture>
+                <picture class="card__picture"><img src="data:image;base64,<?php echo base64_encode($iniciativa->getCover()); ?>" alt="<?php echo $iniciativa->getNombre(); ?>"></picture>
             </aside>
         <?php } ?>
     </section>
