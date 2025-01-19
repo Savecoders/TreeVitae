@@ -2,7 +2,7 @@
 
 interface IRepository
 {
-    public function add($entity): bool;
+    public function add($entity): bool | int;
     public function update($entity): bool;
     public function delete($entity): bool;
     public function getAll(): array;
