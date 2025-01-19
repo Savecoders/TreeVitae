@@ -18,14 +18,24 @@ class DB
     public static function getInstance()
     {
         $dir = __DIR__ . '/../.env';
-        loadEnv($dir);
-        $DB_NAME = $_ENV['DB_NAME'] ? $_ENV['DB_NAME'] : 'tree_database';
-        $DB_USER = $_ENV['DB_USER'] ? $_ENV['DB_USER'] : 'root';
-        $DB_PASSWORD = $_ENV['DB_PASSWORD'] ? $_ENV['DB_PASSWORD'] : '123456';
-        $DB_HOST = $_ENV['DB_HOST'] ? $_ENV['DB_HOST'] : 'localhost';
-        $DB_PORT = $_ENV['DB_PORT'] ? $_ENV['DB_PORT'] : '3306';
 
-        $dsn = "mysql:host=$DB_HOST;dbname=$DB_NAME";
+        $DB_NAME = 'tree_database';
+        $DB_USER = 'root';
+        $DB_PASSWORD = '';
+        $DB_HOST = 'localhost';
+        $DB_PORT = '3308';
+
+        try {
+            loadEnv($dir);
+            $DB_NAME = $_ENV['DB_NAME'];
+            $DB_USER = $_ENV['DB_USER'];
+            $DB_PASSWORD = $_ENV['DB_PASSWORD'];
+            $DB_HOST = $_ENV['DB_HOST'];
+            $DB_PORT = $_ENV['DB_PORT'];
+        } catch (Exception $e) {
+        }
+
+        $dsn = "mysql:host=$DB_HOST;port=$DB_PORT;dbname=$DB_NAME";
 
         if (!self::$instance) {
             self::$instance = new PDO($dsn, $DB_USER, $DB_PASSWORD);
