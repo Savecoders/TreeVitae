@@ -16,6 +16,16 @@ class ContactController
         $this->model = new ContactRepository();
     }
 
+    /*public function viewall($iniciativa_id)
+    {
+        $contacts = $this->model->getByIniciativaId($iniciativa_id);
+        if (empty($contacts)) {
+            $_SESSION['message'] = "No se encontraron contactos para esta iniciativa.";
+        }
+        require_once VCONTACT . 'viewall.php';
+
+    }*/
+
     public function viewall()
     {
         $contactos = $this->model->getAll();
@@ -24,7 +34,7 @@ class ContactController
         }
         require_once VCONTACT . 'viewall.php';
     }
-
+    
     public function view($id)
     {
         $contacto = $this->model->getById(limpiar($id));
@@ -74,12 +84,12 @@ class ContactController
     {
         $id = limpiar($_REQUEST['id'] ?? "");
         if (!$id) {
-            redirectWithMessage(false, "", "ID inválido.", 'index.php?c=contacto');
+            redirectWithMessage(false, "", "ID inválido.", 'index.php?c=contacto&f=viewall');
             return;
         }
 
         $exito = $this->model->delete($id);
-        redirectWithMessage($exito, "Contacto eliminado correctamente.", "No se pudo eliminar el contacto.", 'index.php?c=contacto');
+        redirectWithMessage($exito, "Contacto eliminado correctamente.", "No se pudo eliminar el contacto.", 'index.php?c=contacto&f=viewall');
     }
 
     private function uploadFile($file)

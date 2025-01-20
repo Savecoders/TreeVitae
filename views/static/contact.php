@@ -221,6 +221,10 @@
           <span class="breadcrumbs__arrow"> / </span>
           <a href="#">Contacto</a>
         </div>
+
+        <div style="text-align: center; margin: 20px 0;">
+            <a href="index.php?c=contacto&f=viewall" class="submit__button__enviar">Ver todos los mensajes</a>
+        </div>
         
         <!-- Elaborado por Abraham Farfan -->
         <h1 class="title__principal">Contactanos</h1>
@@ -277,23 +281,6 @@
                   <button type="submit" class="submit__button">Enviar mensaje</button>
                 </div>
               </fieldset>
-
-              <section class="info__container">
-                <div class="info__box">
-                  <h3 class="title__info">Dirección</h3>
-                  <p class="paragraph__formulario">Av.9 de Octubre.</p>
-                  <br />
-                  <h3 class="title__info">Contacto</h3>
-                  <p class="paragraph__formulario">Telefóno: 0987654123</p>
-                  <p class="paragraph__formulario">Correo Electrónico: treeVitae@gmail.com</p>
-                  <br />
-                  <h3 class="title__info">Horario de atención</h3>
-                  <p class="paragraph__formulario">
-                    Abierto: 8:00 a.m <br />
-                    Cerrado: 17:00 p.m
-                  </p>
-                </div>
-              </section>
             </section>
           </form>
         </article>

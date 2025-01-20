@@ -328,11 +328,6 @@
             <a href="#">Contacto</a>
         </div>
 
-
-        <div style="text-align: center; margin: 20px 0;">
-            <a href="index.php?c=contacto&f=viewall" class="submit__button__enviar">Ver todos los mensajes</a>
-        </div>
-
         <!-- Elaborado por Abraham Farfan -->
         <h1 class="title__principal">Contactanos</h1>
         <article class="container__principal">
