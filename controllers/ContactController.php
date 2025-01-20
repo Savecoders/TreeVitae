@@ -16,23 +16,16 @@ class ContactController
         $this->model = new ContactRepository();
     }
 
-    /*public function viewall($iniciativa_id)
-    {
-        $contacts = $this->model->getByIniciativaId($iniciativa_id);
-        if (empty($contacts)) {
-            $_SESSION['message'] = "No se encontraron contactos para esta iniciativa.";
-        }
-        require_once VCONTACT . 'viewall.php';
-
-    }*/
-
     public function viewall()
     {
-        $contactos = $this->model->getAll();
-        if (empty($contactos)) {
-            $_SESSION['message'] = "No se encontraron contactos.";
+        try{
+            $parametro = htmlentities($_GET['id']??"");
+            $contactos = $this->model->getByIniciativaId($parametro);
+
+            require_once VCONTACT . 'viewall.php';
+        }catch(PDOException $e){
+            error_log('Error en ContactController@viewall: ' . $e->getMessage());
         }
-        require_once VCONTACT . 'viewall.php';
     }
     
     public function view($id)

@@ -3,7 +3,7 @@ require_once 'core/DB.php';
 require_once 'models/repository/IRepository.php';
 require_once 'models/dto/Contacto.php';
 
-class ContactRepository implements IRepository
+class ContactRepository 
 {
     private $con;
 
@@ -80,23 +80,6 @@ class ContactRepository implements IRepository
         }
     }
 
-    public function getAll(): array
-    {
-        try {
-            $sql = "SELECT * FROM contacto_iniciativa";
-
-            $stmt = $this->con->prepare($sql);
-
-            $stmt->execute();
-
-            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $res;
-        } catch (PDOEXception $er) {
-            error_log("Error en getAll de IniciativaRepository " . $er->getMessage());
-            return [];
-        }
-    }
-
     public function getById($id): bool
     {
         try {
@@ -135,13 +118,13 @@ class ContactRepository implements IRepository
         }
     }
 
-    /*public function getByIniciativaId($iniciativa_id): array
+    public function getByIniciativaId($iniciativa_id)
     {
         try {
-            $sql = "SELECT * FROM contacto_iniciativa WHERE iniciativa_id = :iniciativa_id";
+            $sql = "SELECT * FROM contacto_iniciativa WHERE iniciativa_id = :id";
 
             $stmt = $this->con->prepare($sql);
-            $stmt->bindParam(':iniciativa_id', $iniciativa_id);
+            $stmt->bindParam(':id', $iniciativa_id, PDO::PARAM_INT);
             $stmt->execute();
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $res;
@@ -149,5 +132,5 @@ class ContactRepository implements IRepository
             error_log("Error en getByIniciativaId de ContactRepository " . $er->getMessage());
             return [];
         }
-    }*/
+    }
 }

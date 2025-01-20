@@ -104,6 +104,7 @@
             <p class="message"><?= $_SESSION['message']; unset($_SESSION['message']); ?></p>
         <?php endif; ?>
         <?php if (!empty($contactos)): ?>
+            ?>
             <table border="1">
                 <thead>
                     <tr>
