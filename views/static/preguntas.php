@@ -1,4 +1,4 @@
-<? require_once HEADER; ?>
+<?php require_once HEADER; ?>
 <style>
     /* Titulo principal */
     .main__title {
@@ -446,4 +446,4 @@
 </footer>
 
 <hr class="separetor__horizontal" />
-<? require_once FOOTER; ?>
+<?php require_once FOOTER; ?>

@@ -53,6 +53,10 @@ class IniciativaController
                 return;
             }
 
+            $session_id = $_SESSION['user']['ID'] ?? 0;
+
+            $isUserAdmin = $this->model->isUserAdmin($iniciativa_id, $session_id);
+
             $iniciativa = $this->getIniciative([$iniciativasResult]);
 
             $title = 'Iniciativa';
@@ -159,6 +163,86 @@ class IniciativaController
         $iniciativa->setCreador($_SESSION['user']['ID']);
 
         return $iniciativa;
+    }
+
+    public function update_view()
+    {
+        // exist user session ?
+        if (!isset($_SESSION['user'])) {
+            header('Location: index.php?c=user&f=login_view');
+            return;
+        }
+
+
+        if (!isset($_GET['id'])) {
+            redirectWithMessage(false, '', 'La iniciativa que estas buscando, no esta disponible :(', 'index.php?c=iniciativa&f=viewall');
+            return;
+        }
+
+        if (!$this->model->isUserAdmin($_GET['id'], $_SESSION['user']['ID'])) {
+            redirectWithMessage(false, '', 'No tienes permisos para realizar esta acción', 'index.php?c=iniciativa&f=viewall');
+            return;
+        }
+
+        $iniciativa_id = (int) $_GET['id'];
+
+        $iniciativasResult = $this->model->getById($iniciativa_id);
+
+        if (!$iniciativasResult || count($iniciativasResult) === 0 || !is_array($iniciativasResult) || !$iniciativasResult) {
+            redirectWithMessage(false, '', 'No se ha encontrado la iniciativa', 'index.php?c=iniciativa&f=viewall');
+            return;
+        }
+
+        $iniciativa = $this->getIniciative([$iniciativasResult]);
+
+        $title = 'Actualizar Iniciativa';
+        $tagsRepository = new TagsRepository();
+        $tags = $tagsRepository->getAll();
+        require_once  VINICIATIVA . 'update.php';
+    }
+
+    public function update()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            redirectWithMessage(false, '', 'Método no permitido', 'index.php?c=iniciativa&f=viewall');
+            return;
+        }
+
+        if (!isset($_GET['id'])) {
+            redirectWithMessage(false, '', 'La iniciativa que estas buscando, no esta disponible :(', 'index.php?c=iniciativa&f=viewall');
+            return;
+        }
+
+        if (!$this->model->isUserAdmin($_GET['id'], $_SESSION['user']['ID'])) {
+            redirectWithMessage(false, '', 'No tienes permisos para realizar esta acción', 'index.php?c=iniciativa&f=viewall');
+            return;
+        }
+
+        $iniciativa_id = (int) $_GET['id'];
+
+        $iniciativa = $this->populate();
+
+        $iniciativa->setId($iniciativa_id);
+
+        $isUpdated = $this->model->update($iniciativa);
+
+        if (!$isUpdated) {
+            redirectWithMessage(false, '', 'Error al actualizar la iniciativa', 'index.php?c=iniciativa&f=update_view&id=' . $iniciativa_id);
+            return;
+        }
+
+        $galeriaRepository = new GaleriaRepository();
+        $isGaleriaAssign = $galeriaRepository->add($iniciativa);
+
+        $isTagsAssign = $this->model->assignTags($iniciativa_id, $iniciativa->getTags());
+
+        if (!$isGaleriaAssign || !$isTagsAssign) {
+            redirectWithMessage(false, '', 'Error al actualizar la iniciativa', 'index.php?c=iniciativa&f=update_view&id=' . $iniciativa_id);
+            return;
+        }
+
+        redirectWithMessage(true, 'Iniciativa actualizada con éxito', 'Iniciativa actualizada con éxito', 'index.php?c=iniciativa&f=viewall');
     }
 
     private function getIniciative($resultTable)

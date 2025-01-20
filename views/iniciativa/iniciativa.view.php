@@ -205,6 +205,12 @@ require_once 'utils/dateFormatter.php';
             <img class="hero" src="data:image;base64,<?php echo base64_encode($iniciativa[0]->getCover()); ?>" alt="<?php echo $iniciativa[0]->getNombre(); ?>">
         </picture>
 
+        <?php if (isset($isUserAdmin) && $isUserAdmin) { ?>
+            <a href="index.php?c=iniciativa&f=update_view&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn primary__with-icon btn-animation">
+                Editar Iniciativa
+            </a>
+        <?php } ?>
+
         <div class="main-sidebar">
             <aside class="profile-container">
                 <img src="data:image;base64,<?php echo base64_encode($iniciativa[0]->getLogo()); ?>" alt="Logo Profile" />
