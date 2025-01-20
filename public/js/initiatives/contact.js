@@ -2,6 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('formulario');
   const modal = document.getElementById('modalExito');
   const closeModal = document.querySelector('.modal__close');
+  const deleteButtons = document.querySelectorAll('button.btn-delete');
+  const deleteModal = document.getElementById('deleteModal');
+  const cancelButton = document.getElementById('cancelDelete');
+  const confirmButton = document.getElementById('confirmDelete');
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -24,6 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
       modal.style.display = 'none';
     }
   });
+
+  deleteButtons.forEach(button => {
+    button.addEventListener('click', openDeleteModal);
+  });
+
+  cancelButton.addEventListener('click', closeDeleteModal);
+  confirmButton.addEventListener('click', confirmDelete);
 
   const nombres = document.getElementById('nombres');
   const apellidos = document.getElementById('apellidos');
@@ -188,4 +199,53 @@ document.addEventListener('DOMContentLoaded', () => {
   if (foto) {
     foto.addEventListener('change', mostrarVistaPrevia);
   }
+
+  function openDeleteModal(e) {
+    console.log('Botón de eliminación clickeado');
+    const contactId = e.target.dataset.id;
+    if (contactId) {
+      deleteModal.style.display = 'block';
+      deleteModal.dataset.contactId = contactId;
+    } else {
+      console.error('No se encontró el ID del contacto.');
+    }
+  }
+
+  function closeDeleteModal() {
+    deleteModal.style.display = 'none';
+  }
+
+  function confirmDelete() {
+    const contactId = deleteModal.dataset.contactId;
+    if (contactId) {
+      fetch(`index.php?c=contact&f=delete&id=${contactId}`, { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            document.querySelector(`tr[data-id="${contactId}"]`).remove();
+            closeDeleteModal();
+            alert('Contacto eliminado con éxito');
+          } else {
+            alert('Error al eliminar el contacto');
+          }
+        })
+        .catch(error => console.error('Error:', error));
+    } else {
+      console.error('No se encontró el ID del contacto en el modal.');
+    }
+  }
+
+  // Agregar evento para cerrar el modal al hacer clic fuera de él
+  window.addEventListener('click', function (event) {
+    if (event.target == deleteModal) {
+      closeDeleteModal();
+    }
+  });
+
+  // Agregar evento para cerrar el modal al presionar ESC
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      closeDeleteModal();
+    }
+  });
 });

@@ -241,7 +241,7 @@ require_once 'utils/dateFormatter.php';
                 </a>
 
                 <hr class="separetor__horizontal" />
-                <a href="#" class="btn outerline btn-animation">
+                <a href="index.php?c=contact&f=viewall&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn outerline btn-animation">
                     Contactarte con la iniciativa?
                 </a>
             </aside>

@@ -134,4 +134,20 @@ class ContactRepository implements IRepository
             return [];
         }
     }
+
+    /*public function getByIniciativaId($iniciativa_id): array
+    {
+        try {
+            $sql = "SELECT * FROM contacto_iniciativa WHERE iniciativa_id = :iniciativa_id";
+
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(':iniciativa_id', $iniciativa_id);
+            $stmt->execute();
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $res;
+        } catch (PDOException $er) {
+            error_log("Error en getByIniciativaId de ContactRepository " . $er->getMessage());
+            return [];
+        }
+    }*/
 }
