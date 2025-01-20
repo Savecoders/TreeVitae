@@ -140,10 +140,10 @@ class IniciativaRespository implements IRepository
         }
     }
 
-    public function getById($id): bool
+    public function getById($id): array | bool
     {
         try {
-            $sql = "SELECT * FROM iniciativas WHERE id = :id";
+            $sql = "SELECT * FROM iniciativas WHERE ID = :id";
 
             $stmt = $this->con->prepare($sql);
 
@@ -155,7 +155,7 @@ class IniciativaRespository implements IRepository
             return $res;
         } catch (PDOEXception $er) {
             error_log("Error en getById de IniciativaRepository " . $er->getMessage());
-            return false;
+            return [];
         }
     }
 

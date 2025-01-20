@@ -436,7 +436,7 @@ if (!isset($_SESSION)) {
                                     <i class="fa-regular fa-user"></i>
                                 <?php } ?>
                                 <?php echo $_SESSION['user']['nombre_usuario']; ?>
-                                <div class="arrow__down"></div>
+                                <i class="fa-solid fa-angle-down arrow__down"></i>
                             </span>
 
                             <ul class="nav__inner">

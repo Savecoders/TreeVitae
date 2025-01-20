@@ -1,4 +1,3 @@
-
 <?php
 require_once 'core/DB.php';
 require_once 'models/repository/IRepository.php';

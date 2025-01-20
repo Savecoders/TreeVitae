@@ -21,24 +21,56 @@ class IniciativaController
 
     public function viewall()
     {
-        $iniciativas = $this->model->getAll();
-        $tagsRepository = new TagsRepository();
-        $tags = $tagsRepository->getAll();
-        $title = 'Iniciativas';
-        require_once  VINICIATIVA . 'viewall.php';
+        try {
+
+            $iniciativasResult = $this->model->getAll();
+            $iniciativas = $this->getIniciative($iniciativasResult);
+            $tagsRepository = new TagsRepository();
+            $tags = $tagsRepository->getAll();
+            $title = 'Iniciativas';
+            require_once  VINICIATIVA . 'viewall.php';
+        } catch (Exception $e) {
+            error_log('Error en IniciativaController@viewall: ' . $e->getMessage());
+            redirectWithMessage(false, '', 'No podemos mostrar las iniciativas en estos momentos', 'index.php?c=iniciativa&f=viewall');
+        }
     }
 
-    public function view($id)
+    public function view()
     {
-        $iniciativa = $this->model->getById($id);
-        $tagsRepository = new TagsRepository();
-        $tags = $tagsRepository->getAll();
-        $title = 'Iniciativa';
-        require_once  VINICIATIVA . 'view.php';
+        try {
+
+            if (!isset($_GET['id'])) {
+                redirectWithMessage(false, '', 'No se ha proporcionado un ID', 'index.php?c=iniciativa&f=viewall');
+                return;
+            }
+
+            $iniciativa_id = (int) $_GET['id'];
+
+            $iniciativasResult = $this->model->getById($iniciativa_id);
+
+            if (!$iniciativasResult || count($iniciativasResult) === 0 || !is_array($iniciativasResult) || !$iniciativasResult) {
+                redirectWithMessage(false, '', 'No se ha encontrado la iniciativa', 'index.php?c=iniciativa&f=viewall');
+                return;
+            }
+
+            $iniciativa = $this->getIniciative([$iniciativasResult]);
+
+            $title = 'Iniciativa';
+            require_once  VINICIATIVA . 'view.php';
+        } catch (Exception $e) {
+            error_log('Error en IniciativaController@view: ' . $e->getMessage());
+            redirectWithMessage(false, '', 'No podemos mostrar las iniciativas en estos momentos', 'index.php?c=iniciativa&f=viewall');
+        }
     }
 
     public function new_view()
     {
+        // exist user session ?
+        if (!isset($_SESSION['user'])) {
+            header('Location: index.php?c=user&f=login_view');
+            return;
+        }
+
         $title = 'Crear Iniciativa';
         $tagsRepository = new TagsRepository();
         $tags = $tagsRepository->getAll();
@@ -127,5 +159,36 @@ class IniciativaController
         $iniciativa->setCreador($_SESSION['user']['ID']);
 
         return $iniciativa;
+    }
+
+    private function getIniciative($resultTable)
+    {
+        $iniciativas = [];
+        foreach ($resultTable as $row) {
+            $iniciativa = new Iniciativa();
+            $iniciativa->setId($row['ID']);
+            $iniciativa->setNombre($row['nombre']);
+            $iniciativa->setDescripcion($row['descripcion']);
+            $iniciativa->setLogo($row['logo']);
+            $iniciativa->setCover($row['cover']);
+            $iniciativa->setFechaCreacion($row['fecha_creacion']);
+
+            $tagsRepository = new TagsRepository();
+            $tagsResult = $tagsRepository->getByInitiativeId($row['ID']);
+
+            $tags = [];
+            foreach ($tagsResult as $tagRow) {
+                $tag = new Tags();
+                $tag->setID($tagRow['tag_id']);
+                $tag->setNombre($tagRow['nombre']);
+                array_push($tags, $tag);
+            }
+
+            $iniciativa->setTags($tags);
+
+            $iniciativa->setCreador($row['creador_id']);
+            array_push($iniciativas, $iniciativa);
+        }
+        return $iniciativas;
     }
 }
