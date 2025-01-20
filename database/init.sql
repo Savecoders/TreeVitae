@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `usuarios_iniciativas_roles` (
   `iniciativa_id` bigint(20) NOT NULL,
   `rol_id` bigint(20) NOT NULL,
   `fecha_asignacion` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`usuario_id`, `iniciativa_id`),
+  PRIMARY KEY (`usuario_id`, `iniciativa_id`, `rol_id`),
   FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`ID`) ON DELETE CASCADE,
   FOREIGN KEY (`iniciativa_id`) REFERENCES `iniciativas` (`ID`) ON DELETE CASCADE,
   FOREIGN KEY (`rol_id`) REFERENCES `roles` (`ID`) ON DELETE CASCADE
