@@ -1,6 +1,7 @@
 <?php
 require_once 'core/DB.php';
 require_once 'models/repository/IRepository.php';
+require_once 'models/dto/Contacto.php';
 
 class ContactRepository implements IRepository
 {
@@ -111,7 +112,7 @@ class ContactRepository implements IRepository
             return $res;
         } catch (PDOEXception $er) {
             error_log("Error en getById de IniciativaRepository " . $er->getMessage());
-            return false;//Error
+            return false;
         }
     }
 

@@ -62,7 +62,7 @@ class Contacto{
     }
 
     function setIdUsuario($idUsuario){
-        $this->idUsuario=$idUsurio;
+        $this->idUsuario=$idUsuario;
     }
 
     function setNombres($nombres){
