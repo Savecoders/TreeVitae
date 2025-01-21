@@ -329,7 +329,7 @@
         </div>
 
         <!-- Elaborado por Abraham Farfan -->
-        <h1 class="title__principal">Contactanos</h1>
+        <h1 class="title__principal">Crea tu contacto para la iniciativa</h1>
         <article class="container__principal">
             <form class="container__form" id="formulario" method="POST" enctype="multipart/form-data" action="contact.php?action=add">
                 <section class="container__first">
