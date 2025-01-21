@@ -79,8 +79,30 @@ class ContactRepository
 
             $res = $stmt->execute();
             return $res;
-        } catch (PDOEXception $er) {
-            error_log("Error en add de IniciativaRepository " . $er->getMessage());
+        } catch (PDOEXception $e) {
+            error_log("Error en add de IniciativaRepository " . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function update($id){
+        try{
+            $sql = "UPDATE contacto_iniciativa SET nombres = :nombres, apellidos = :apellidos, email = :email, telefono = :telefono, prioridad = :prioridad, asunto = :asunto, imagen = :imagen WHERE id = :id";
+
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(':nombres', $id->getNombre(), PDO::PARAM_STR);
+            $stmt->bindParam(':apellidos', $id->getApellidos(), PDO::PARAM_STR);
+            $stmt->bindParam(':email', $id->getEmail(), PDO::PARAM_STR);
+            $stmt->bindParam(':telefono', $id->getTelefono(), PDO::PARAM_STR);
+            $stmt->bindParam(':prioridad', $id->getPrioridad(), PDO::PARAM_STR);
+            $stmt->bindParam(':asunto', $id->getAsunto(), PDO::PARAM_STR);
+            $stmt->bindParam(':imagen', $id->getImagen(), PDO::PARAM_LOB);
+            $stmt->bindParam(':id', $entity->getId(), PDO::PARAM_INT);
+
+            $res = $stmt->execute();
+            return $res;
+        }catch(PDOEXception $e){
+            error_log("Error en update de IniciativaRepository " . $e->getMessage());
             return [];
         }
     }

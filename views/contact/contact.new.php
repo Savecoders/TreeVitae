@@ -2,9 +2,9 @@
 <!--Autor: Farfan Sanchez Abraham-->
 <style>
     .title__principal {
-        font-size: 4ch;
+        font-size: 34px;
         font-weight: 600;
-        color: var(--text-900);
+        color: var(--primary-500);
         font-family: 'Raleway', sans-serif;
         text-align: center;
     }
@@ -107,36 +107,25 @@
     .submit__button {
         width: 100%;
         padding: 10px;
-        background-color: var(--primary-400);
-        color: var(--background-base);
-        border: none;
-        border-radius: 6px;
+        background-color: black;
+        color: white;
+        border: 2px solid green; 
+        border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
         text-transform: uppercase;
         font-weight: 500;
-        transition: all 0.1s ease-in-out;
     }
 
     .submit__button__enviar{
-        background-color: var(--secondary-400);
-        color: var(--background-50);
-        margin: 10px;
+        background-color: black;
+        color: white;
+        border: 2px solid green; 
         font-size: 16px;
         font-weight: 600;
         padding: 12px 20px;
-        border: none;
         border-radius: 6px;
         text-transform: uppercase;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .submit__button__enviar:hover {
-        background-color: var(--secondary-500);
-    }
-
-    .submit__button:hover {
-        background-color: var(--primary-500);
     }
 
     .input__container select {
@@ -329,7 +318,7 @@
             <a href="#">Contacto</a>
         </div>
 
-        <h1 class="title__principal">Crea tu contacto para la iniciativa</h1>
+        <h1 class="title__principal">Registra tu contacto para la iniciativa</h1>
         <article class="container__principal">
             <form class="container__form" id="formulario" method="POST" enctype="multipart/form-data" action="contact.php?action=new">
                 <section class="container__first">
