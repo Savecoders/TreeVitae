@@ -1,4 +1,5 @@
 <?php require_once HEADER; ?>
+<!--Autor: Farfan Sanchez Abraham-->
 <style>
     .title__principal {
         font-size: 4ch;
@@ -328,10 +329,9 @@
             <a href="#">Contacto</a>
         </div>
 
-        <!-- Elaborado por Abraham Farfan -->
         <h1 class="title__principal">Crea tu contacto para la iniciativa</h1>
         <article class="container__principal">
-            <form class="container__form" id="formulario" method="POST" enctype="multipart/form-data" action="contact.php?action=add">
+            <form class="container__form" id="formulario" method="POST" enctype="multipart/form-data" action="contact.php?action=new">
                 <section class="container__first">
                     <fieldset id="container__second">
                         <legend id="label__form">Datos Personales</legend>

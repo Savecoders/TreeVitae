@@ -1,5 +1,5 @@
 <?php
-
+//Autor:Farfan Sanchez Abraham
 class Contacto{
 
     private $id, $idIniciativa, $idUsuario, $nombres, $apellidos, $email, $telefono, $prioridad, $asunto, $mensaje, $imagen;
