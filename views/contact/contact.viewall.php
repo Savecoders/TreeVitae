@@ -1,11 +1,12 @@
 <?php require_once HEADER; ?>
 <!--Autor: Farfan Sanchez Abraham-->
 <style>
-    #titulo {
+    .title__principal{
         color: var(--primary-500);
         text-align: center;
-        margin-bottom: 20px;
-        font-size: 28px;
+        font-weight: 600;
+        font-family: 'Raleway', sans-serif;
+        font-size: 34px;
     }
 
     table {
@@ -81,7 +82,7 @@
     }
 
     #buscador, .btn-view,
-    .btn-delete {
+    .btn-delete,.btn-edit {
         padding: 8px 15px;
         background-color: black;
         border: 2px solid green;
@@ -92,18 +93,6 @@
         text-decoration: none; 
     }
 
-    .btn-view:hover{
-        background-color: green;
-        border: 5px solid green;
-        color: black;
-    }
-
-    .btn-delete:hover{
-        background-color: red;
-        border: 5px solid red;
-        color: black;
-    }
-
     .no-results {
         text-align: center;
         color: var(--danger-500);
@@ -111,13 +100,19 @@
         margin-top: 20px;
     }
 
-    form {
+    .formulario {
         display: flex;
         align-items: center;
         gap: 10px;
         flex-wrap: wrap; 
         justify-content: center;
         margin-bottom: 20px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: flex-end; 
+        margin-bottom: 10px; 
     }
 
     @media (max-width: 768px) {
@@ -133,9 +128,9 @@
 </style>
 <body>
     <main class="main__container__content">
-    <h1 id="titulo">Lista de Contactos</h1>
+    <h1 class="title__principal">Lista de Contactos</h1>
 
-        <form method="GET" action="index.php?c=contact&f=search" style="margin-bottom: 20px;">
+        <form class="formulario" method="GET" action="index.php?c=contact&f=search" style="margin-bottom: 20px;">
             <input type="hidden" name="c" value="contact">
             <input type="hidden" name="f" value="search">
             <input id="buscador" name="asunto" placeholder="Buscar por asunto..." value="<?= htmlspecialchars($_GET['asunto'] ?? '') ?>">
@@ -143,50 +138,48 @@
                 <img src="public/assets/icons/search.svg" alt="search icon" />
                 Buscar
             </button>
-            <a href="index.php?c=contact&f=new" class="btn-add">Crear contacto</a>
         </form>
-        
-        <?php if (isset($_SESSION['message'])): ?>
-            <p class="message"><?= $_SESSION['message']; unset($_SESSION['message']); ?></p>
-        <?php endif; ?>
-        <?php if (!empty($contactos)): ?>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Prioridad</th>
-                        <th>Asunto</th>
-                        <th>Mensaje</th>
-                        <th>Imagen</th>
-                        <th>Ver Contacto</th>
-                        <th>Eliminar</th>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Prioridad</th>
+                    <th>Asunto</th>
+                    <th>Mensaje</th>
+                    <th>Imagen</th>
+                    <th>Ver información</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($contactos as $contacto): ?>
+                    <tr data-id="<?= htmlspecialchars($contacto['ID']);?>">
+                        <td><?= htmlspecialchars($contacto['ID']); ?></td>
+                        <td><?= htmlspecialchars($contacto['prioridad']); ?></td>
+                        <td><?= htmlspecialchars($contacto['asunto']); ?></td>
+                        <td><?= htmlspecialchars($contacto['mensaje']); ?></td>
+                        <td>
+                            <?php if (!empty($contacto['imagen'])): ?>
+                                <img id="foto" src="data:image;base64,<?php echo base64_encode($contacto['imagen']); ?>" />
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <a href="index.php?c=contact&f=view&id=<?=$contacto['ID'];?>" class="btn-view">Ver</a>
+                        </td>
+                        <td>
+                            <a href="index.php?c=contact&f=new_update&id=<?=$contacto['ID'];?>" class="btn-edit">Editar</a>
+                        </td>
+                        <td>
+                            <a href="index.php?c=contact&f=delete&id=<?=$contacto['ID'];?>" class="btn-delete">Eliminar</a>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($contactos as $contacto): ?>
-                        <tr data-id="<?= htmlspecialchars($contacto['ID']);?>">
-                            <td><?= htmlspecialchars($contacto['ID']); ?></td>
-                            <td><?= htmlspecialchars($contacto['prioridad']); ?></td>
-                            <td><?= htmlspecialchars($contacto['asunto']); ?></td>
-                            <td><?= htmlspecialchars($contacto['mensaje']); ?></td>
-                            <td>
-                                <?php if (!empty($contacto['imagen'])): ?>
-                                    <img id="foto" src="data:image;base64,<?php echo base64_encode($contacto['imagen']); ?>" />
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <a href="index.php?c=contact&f=view&id=<?=$contacto['ID'];?>" class="btn-view">Ver</a>
-                            </td>
-                            <td>
-                                <a href="index.php?c=contact&f=delete&id=<?=$contacto['ID'];?>" class="btn-delete">Eliminar</a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php else: ?>
-            <p class="no-results">No existe ese Asunto que está buscando.</p>
-        <?php endif; ?>
+                    <div class="button-container">
+                        <a href="index.php?c=contact&f=new_view&id=<?=$contacto['iniciativa_id']; ?>" class="btn-add">Crear contacto</a>
+                    </div>
+                <?php endforeach; ?>
+            </tbody>
+         </table>
     </main>
 </body>
 <?php require_once FOOTER; ?>
