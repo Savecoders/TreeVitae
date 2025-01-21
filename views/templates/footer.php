@@ -51,7 +51,28 @@
 </footer>
 </div>
 
+<?php if (isset($_SESSION['mensaje'])) { ?>
+    <div class="notify-messages">
+        <?php if ($_SESSION['type'] == 'success') { ?>
+            <div class="message success" role="alert">
+                <?php echo $_SESSION['mensaje']; ?>
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+        <?php } else { ?>
+            <div class="message danger" role="alert">
+                <?php echo $_SESSION['mensaje']; ?>
+                <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+        <?php } ?>
+    </div>
+
+<?php
+    unset($_SESSION['mensaje']);
+    unset($_SESSION['type']);
+} ?>
+
 <script type="module" src="public/js/components/navbar.js"></script>
+<script type="module" src="public/js/components/message.js"></script>
 
 </body>
 

@@ -5,11 +5,8 @@ const title = document.querySelector('#name');
 const description = document.querySelector('#description');
 const cover = document.querySelector('#cover');
 const logo = document.querySelector('#logo');
-const gallery = document.querySelector('#gallery');
 const tagsLabel = document.querySelector('#tags__label');
-const dropZone = document.querySelector('.drop__zone');
 const tags = document.querySelector('.tags');
-const galleryImages = document.querySelector('.gallery__images');
 
 // mensajes de error
 const errorMessages = {
@@ -28,9 +25,6 @@ const errorMessages = {
   },
   logo: {
     empty: 'El logo es requerido y no puede estar vacio',
-  },
-  gallery: {
-    empty: 'La galeria es requerida debe tener al menos 2 imagenes',
   },
   tags: {
     empty: 'De de seleccionar al menos 1 tag como limpieza, etc',
@@ -59,9 +53,6 @@ const showError = (element, message) => {
   } else if (element.id === 'logo') {
     const logoError = document.querySelector('#logo-error');
     logoError.textContent = message;
-  } else if (element.id === 'gallery') {
-    const galleryError = document.querySelector('#gallery-error');
-    galleryError.textContent = message;
   } else {
     element.nextElementSibling.textContent = message;
   }
@@ -74,9 +65,6 @@ const cleanError = element => {
   } else if (element.id === 'logo') {
     const logoError = document.querySelector('#logo-error');
     logoError.textContent = '';
-  } else if (element.id === 'gallery') {
-    const galleryError = document.querySelector('#gallery-error');
-    galleryError.textContent = '';
   } else {
     element.nextElementSibling.textContent = '';
   }
@@ -107,45 +95,12 @@ const validateLogo = () => {
   }
 };
 
-const validateGallery = () => {
-  if (galleryImages.childNodes.length < 2) {
-    return errorMessages.gallery.empty;
-  }
-};
-
 const validateTags = () => {
   const tagsSelected = document.querySelectorAll('.tag--clicked');
   if (tagsSelected.length === 0) {
     return errorMessages.tags.empty;
   }
 };
-
-const addImageToGallery = file => {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => {
-    const img = document.createElement('img');
-    img.src = reader.result;
-    galleryImages.appendChild(img);
-  };
-};
-
-gallery.addEventListener('change', e => {
-  const files = [...e.target.files];
-
-  files.forEach(file => {
-    addImageToGallery(file);
-  });
-});
-
-dropZone.addEventListener('drop', e => {
-  console.log('drop');
-  e.preventDefault();
-  const files = [...e.dataTransfer.files];
-  files.forEach(file => {
-    addImageToGallery(file);
-  });
-});
 
 cover.addEventListener('change', e => {
   const file = e.target.files[0];
@@ -160,12 +115,11 @@ cover.addEventListener('change', e => {
 });
 
 const validateForm = () => {
-  const [titleError, descriptionError, coverError, logoError, galleryError, tagsError] = [
+  const [titleError, descriptionError, coverError, logoError, tagsError] = [
     validateTitle(),
     validateDescription(),
     validateCover(),
     validateLogo(),
-    validateGallery(),
     validateTags(),
   ];
 
@@ -192,18 +146,13 @@ const validateForm = () => {
     cleanError(logo);
   }
 
-  if (galleryError) {
-    showError(gallery, galleryError);
-  } else {
-    cleanError(gallery);
-  }
   if (tagsError) {
     showError(tagsLabel, tagsError);
   } else {
     cleanError(tagsLabel);
   }
 
-  return !titleError && !descriptionError && !coverError && !galleryError && !tagsError;
+  return !titleError && !descriptionError && !coverError && !tagsError;
 };
 
 form.addEventListener('submit', event => {
@@ -255,4 +204,38 @@ logo.addEventListener('change', e => {
     preview.src = reader.result;
     preview.classList.remove('logo-preview');
   };
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const coverInput = document.getElementById('cover');
+  const coverPreview = document.getElementById('preview');
+
+  const logoInput = document.getElementById('logo');
+  const logoPreview = document.getElementById('logo-preview');
+
+  coverPreview.style.display = 'block';
+  logoPreview.style.display = 'block';
+
+  // Update the preview when a new file is selected
+  coverInput.addEventListener('change', function () {
+    const file = coverInput.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        coverPreview.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  logoInput.addEventListener('change', function () {
+    const file = logoInput.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        logoPreview.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
 });
