@@ -1,22 +1,66 @@
 <?php
-class PostController
+if (!isset($_SESSION)) {
+    session_start();
+}
+require_once 'models/repository/Contact.repository.php';
+require_once 'models/dto/Iniciativa.php';
+require_once 'utils/redirectWithMessage.php';
+require_once 'utils/cleanser.php';
+
+class ContactController
 {
-    private $model;
+    private ContactRepository $model;
 
     public function __construct()
     {
-        // $this->model = new IniciativaRepository();
+        $this->model = new ContactRepository();
     }
 
     public function viewall()
     {
-        // $iniciativas = $this->model->getAll();
-        require_once 'views/post/contact.viewall.php';
-    }
+        try{
+            $parametro = htmlentities($_GET['id']??"");
+            $contactos = $this->model->getByIniciativaId($parametro);
 
+            require_once VCONTACT . 'viewall.php';
+        }catch(PDOException $e){
+            error_log('Error en ContactController@viewall: ' . $e->getMessage());
+        }
+    }
+    
     public function view()
     {
-        // $iniciativas = $this->model->getAll();
-        require_once 'views/post/contact.view.php';
+        try{
+            $parametro = htmlentities($_GET['id']??"");
+            $contacto = $this->model->getById($parametro);
+
+            require_once VCONTACT . 'view.php';
+        }catch(PDOExceptrion $e){
+            error_log('Error en ContactController@view: ' . $e->getMessage());
+        }
+    }
+
+    public function search()
+    {
+        try {
+            $asunto = htmlentities($_GET['asunto'] ?? '');
+            $contactos = !empty($asunto) ? $this->model->searchByAsunto('%' . $asunto . '%') : $this->model->getByIniciativaId(0);
+    
+            require_once VCONTACT . 'viewall.php';
+        } catch (PDOException $e) {
+            error_log('Error en ContactController@search: ' . $e->getMessage());
+        }
+    }
+
+    public function delete()
+    {
+        try{
+            $parametro = htmlentities($_GET['id']??"");
+            $contacto = $this->model->deleteId($parametro);
+
+            require_once VCONTACT . 'viewall.php';
+        }catch(PDOException $e){
+            error_log('Error en ContactController@delete: ' . $e->getMessage());
+        }
     }
 }
