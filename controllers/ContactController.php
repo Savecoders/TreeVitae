@@ -1,4 +1,5 @@
 <?php
+//Autor:Farfan Sanchez Abraham
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -52,6 +53,34 @@ class ContactController
         }
     }
 
+    public function new(){
+        try{
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $contacto = new Contacto();
+    
+                $contacto->setIdIniciativa(new Iniciativa($_GET['id'] ?? 0));
+                $contacto->setIdUsuario(new Usuario($_SESSION['user_id'] ?? 0)); 
+    
+                $contacto->setNombres(filter_input(INPUT_POST, 'nombres'));
+                $contacto->setApellidos(filter_input(INPUT_POST, 'apellidos'));
+                $contacto->setEmail(filter_input(INPUT_POST, 'email'));
+                $contacto->setTelefono(filter_input(INPUT_POST, 'telefono'));
+                $contacto->setPrioridad(filter_input(INPUT_POST, 'prioridad'));
+                $contacto->setAsunto(filter_input(INPUT_POST, 'asunto'));
+                $contacto->setMensaje(filter_input(INPUT_POST, 'mensaje'));
+    
+                if ($_FILES['imagen']['size'] > 0) {
+                    $contacto->setImagen(file_get_contents($_FILES['imagen']['tmp_name']));
+                }
+    
+                $resultado = $this->model->add($contacto);
+            }
+        }catch(PDOException $e){
+            error_log('Error en ContactController@add: ' . $e->getMessage());
+        }
+    }
+
     public function delete()
     {
         try{
@@ -60,7 +89,7 @@ class ContactController
 
             require_once VCONTACT . 'viewall.php';
         }catch(PDOException $e){
-            error_log('Error en ContactController@delete: ' . $e->getMessage());
+            error_log('Error en ContactController@deleteId: ' . $e->getMessage());
         }
     }
 }

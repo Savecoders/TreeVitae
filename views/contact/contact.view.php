@@ -1,12 +1,5 @@
-<?php require_once HEADER; 
-    $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : null;
-
-    // Validar si el ID está presente
-    if ($id === null) {
-        echo "<p>Error: No se ha proporcionado un ID válido.</p>";
-        exit;
-    }
-?>
+<?php require_once HEADER; ?>
+<!--Autor: Farfan Sanchez Abraham-->
 <style>
     .contact-details {
         max-width: 600px;

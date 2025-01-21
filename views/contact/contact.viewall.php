@@ -1,4 +1,5 @@
 <?php require_once HEADER; ?>
+<!--Autor: Farfan Sanchez Abraham-->
 <style>
     #titulo {
         color: var(--primary-500);
@@ -35,15 +36,7 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    #buscador {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 20px;
-        gap: 10px;
-    }
-
-    #buscador input[type="text"] {
+    #buscador{
         padding: 8px;
         width: 300px;
         border: 1px solid var(--primary-500);
@@ -51,6 +44,25 @@
         box-sizing: border-box;
         height: 40px; 
         font-size: 16px;
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .btn-add{
+        display: inline-flex; 
+        justify-content: center; 
+        align-items: center; 
+        padding: 8px 15px; 
+        height: 40px; 
+        font-size: 16px; 
+        color: white; 
+        background-color: black; 
+        border: 2px solid green; 
+        border-radius: 5px; 
+        text-decoration: none; 
+        cursor: pointer; 
+        transition: all 0.3s ease; 
+        white-space: nowrap;
     }
 
     .btn-search {
@@ -77,8 +89,8 @@
         border-radius: 5px;
         cursor: pointer;
         transition: all 0.3s ease;
+        text-decoration: none; 
     }
-
 
     .btn-view:hover{
         background-color: green;
@@ -99,6 +111,15 @@
         margin-top: 20px;
     }
 
+    form {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap; 
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
     @media (max-width: 768px) {
         table {
             font-size: 14px;
@@ -117,11 +138,12 @@
         <form method="GET" action="index.php?c=contact&f=search" style="margin-bottom: 20px;">
             <input type="hidden" name="c" value="contact">
             <input type="hidden" name="f" value="search">
-            <input type="text" name="asunto" placeholder="Buscar por asunto..." value="<?= htmlspecialchars($_GET['asunto'] ?? '') ?>">
+            <input id="buscador" name="asunto" placeholder="Buscar por asunto..." value="<?= htmlspecialchars($_GET['asunto'] ?? '') ?>">
             <button class="btn-search" type="submit">
                 <img src="public/assets/icons/search.svg" alt="search icon" />
                 Buscar
             </button>
+            <a href="index.php?c=contact&f=new" class="btn-add">Crear contacto</a>
         </form>
         
         <?php if (isset($_SESSION['message'])): ?>
@@ -132,25 +154,18 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nombres</th>
-                        <th>Apellidos</th>
-                        <th>Email</th>
-                        <th>Teléfono</th>
                         <th>Prioridad</th>
                         <th>Asunto</th>
                         <th>Mensaje</th>
                         <th>Imagen</th>
-                        <th>Acciones</th>
+                        <th>Ver Contacto</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($contactos as $contacto): ?>
                         <tr data-id="<?= htmlspecialchars($contacto['ID']);?>">
                             <td><?= htmlspecialchars($contacto['ID']); ?></td>
-                            <td><?= htmlspecialchars($contacto['nombres']); ?></td>
-                            <td><?= htmlspecialchars($contacto['apellidos']); ?></td>
-                            <td><?= htmlspecialchars($contacto['email']); ?></td>
-                            <td><?= htmlspecialchars($contacto['telefono']); ?></td>
                             <td><?= htmlspecialchars($contacto['prioridad']); ?></td>
                             <td><?= htmlspecialchars($contacto['asunto']); ?></td>
                             <td><?= htmlspecialchars($contacto['mensaje']); ?></td>
@@ -160,8 +175,10 @@
                                 <?php endif; ?>
                             </td>
                             <td>
-                                <button class="btn-view" onclick="window.location.href='index.php?c=contact&f=view&id=<?=$contacto['ID'];?>'">Ver</button>
-                                <button type="button" class="btn-delete" onclick="window.location.href='index.php?c=contact&f=delete&id=<?=$contacto['ID'];?>'">Eliminar</button>
+                                <a href="index.php?c=contact&f=view&id=<?=$contacto['ID'];?>" class="btn-view">Ver</a>
+                            </td>
+                            <td>
+                                <a href="index.php?c=contact&f=delete&id=<?=$contacto['ID'];?>" class="btn-delete">Eliminar</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
