@@ -50,6 +50,7 @@
         color: var(--text-900);
         border: 1px solid var(--primary-400);
         border-radius: 5px;
+        font-size: 18px;
     }
 
     .container__personal {
@@ -320,10 +321,10 @@
 
         <h1 class="title__principal">Registra tu contacto para la iniciativa</h1>
         <article class="container__principal">
-            <form class="container__form" id="formulario" method="POST" enctype="multipart/form-data" action="contact.php?action=new">
+            <form class="container__form" id="formulario" method="POST" action="index.php?c=contact&f=new&id=<?php echo $parametro; ?>">
                 <section class="container__first">
                     <fieldset id="container__second">
-                        <legend id="label__form">Datos Personales</legend>
+                        <legend id="label__form">Datos del Contacto</legend>
                         <section class="container__personal">
                             <div class="container__component">
                                 <label class="label__name" for="nombres">Nombres: </label>
@@ -388,7 +389,7 @@
                             </div>
                         </div>
 
-                        <div class="container__component">
+                        <!--<div class="container__component">
                             <label class="label__name">Foto de la iniciativa: </label>
                             <div class="input__container">
                                 <span class="error__message"></span>
@@ -396,24 +397,13 @@
                                 <label for="foto" class="submit__button__enviar">Cargar Foto</label>
                             </div>  
                             <div id="vistaPrevia" class="container__component"></div>
-                        </div>
+                        </div>-->
 
-                        <div class="container__component">
-                            <button type="submit" class="submit__button">Enviar mensaje</button>
-                        </div>
                     </fieldset>
-
-                    <div id="modalExito" class="modal">
-                        <div class="modal__content">
-                            <span class="modal__close">&times;</span>
-                            <p class="modal__message">Su mensaje fue enviado exitosamente.</p>
-                        </div>
-                    </div>
                 </section>
+                <button type="submit">Enviar</button>
             </form>
         </article>
     </main>
 </body>
-
-<script type="module" src="public/js/initiatives/contact.js"></script>
 <?php require_once FOOTER; ?>

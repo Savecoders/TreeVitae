@@ -318,16 +318,17 @@
         </div>
 
         <h1 class="title__principal">Edita tu contacto</h1>
+
         <article class="container__principal">
-            <form class="container__form" id="formulario" method="POST" enctype="multipart/form-data" action="contact.php?action=new">
+            <form class="container__form" id="formulario" method="POST" action="index.php?c=contact&f=edit&id=<?php echo $contacto["iniciativa_id"]?>">
+            <input type="hidden" name="id" id="id" value="<?php echo $contacto["ID"]?>"/>
                 <section class="container__first">
                     <fieldset id="container__second">
-                        <legend id="label__form">Datos Personales</legend>
                         <section class="container__personal">
                             <div class="container__component">
                                 <label class="label__name" for="nombres">Nombres: </label>
                                 <div class="input__container">
-                                    <input type="text" id="nombres" name="nombres" />
+                                    <input type="text" id="nombres" name="nombres" value="<?php echo $contacto["nombres"]?>"/>
                                     <span class="error__message"></span>
                                 </div>
                             </div>
@@ -335,7 +336,7 @@
                             <div class="container__component">
                                 <label class="label__name" for="apellidos">Apellidos: </label>
                                 <div class="input__container">
-                                    <input type="text" id="apellidos" name="apellidos" />
+                                    <input type="text" id="apellidos" name="apellidos" value="<?php echo $contacto["apellidos"]?>"/>
                                     <span class="error__message"></span>
                                 </div>
                             </div>
@@ -345,7 +346,7 @@
                             <div class="container__component">
                                 <label class="label__name" for="correoElectronico">Email: </label>
                                 <div class="input__container">
-                                    <input type="email" id="correoElectronico" name="correoElectronico" />
+                                    <input type="email" id="correoElectronico" name="correoElectronico" value="<?php echo $contacto["email"]?>"/>
                                     <span class="error__message"></span>
                                 </div>
                             </div>
@@ -353,7 +354,7 @@
                             <div class="container__component">
                                 <label class="label__name" for="telefono">Telefóno: </label>
                                 <div class="input__container">
-                                    <input type="text" id="telefono" name="telefono" />
+                                    <input type="text" id="telefono" name="telefono" value="<?php echo $contacto["telefono"]?>"/>
                                     <span class="error__message"></span>
                                 </div>
                             </div>
@@ -364,9 +365,9 @@
                             <div class="input__container">
                                 <select name="prioridad" id="prioridad">
                                     <option value="" disabled selected>Selecciona la prioridad</option>
-                                    <option value="alta">Alta</option>
-                                    <option value="media">Media</option>
-                                    <option value="baja">Bajo</option>
+                                    <option value="alta" <?= $contacto['prioridad'] === 'alta' ? 'selected' : '' ?>>Alta</option>
+                                    <option value="media" <?= $contacto['prioridad'] === 'media' ? 'selected' : '' ?>>Media</option>
+                                    <option value="baja" <?= $contacto['prioridad'] === 'baja' ? 'selected' : '' ?>>Baja</option>
                                 </select>
                             </div>
                         </div>
@@ -375,7 +376,7 @@
                             <label class="label_name" for="asunto">Asunto: </label>
                             <div class="input__container">
                                 <span class="error__message"></span>
-                                <textarea class="textarea__comment" id="asunto" name="asunto"></textarea>
+                                <textarea class="textarea__comment" id="asunto" name="asunto"><?php echo $contacto["asunto"]?></textarea>
                             </div>
                         </div>
 
@@ -383,36 +384,29 @@
                             <label class="label__name" for="mensaje">Mensaje: </label>
                             <div class="input__container">
                                 <span class="error__message"></span>
-                                <textarea class="textarea__comment" id="mensaje" name="mensaje"></textarea>
+                                <textarea class="textarea__comment" id="mensaje" name="mensaje"><?php echo $contacto["mensaje"]?></textarea>
                             </div>
                         </div>
 
                         <div class="container__component">
-                            <label class="label__name">Foto de la iniciativa: </label>
+                            <label class="label__name" for="imagen">Subir Imagen: </label>
                             <div class="input__container">
+                                <input type="file" id="imagen" name="imagen" accept="image/*" />
+                                <img id="foto" 
+                                    src="<?php echo !empty($contacto['imagen']) ? 'data:image;base64,' . base64_encode($contacto['imagen']) : '#' ?>" alt="Vista previa de la imagen" 
+                                    style="max-width: 150px; max-height: 150px; <?php echo empty($contacto['imagen']) ? 'display: none;' : ''; ?>" />
                                 <span class="error__message"></span>
-                                <input type="file" id="foto" name="Cargar foto" accept="image/*" style="display: none;" />
-                                <label for="foto" class="submit__button__enviar">Cargar Foto</label>
-                            </div>  
-                            <div id="vistaPrevia" class="container__component"></div>
+                            </div>
                         </div>
 
                         <div class="container__component">
-                            <button type="submit" class="submit__button">Enviar mensaje</button>
+                            <button type="submit" class="submit__button">Modificar</button>      
                         </div>
                     </fieldset>
-
-                    <div id="modalExito" class="modal">
-                        <div class="modal__content">
-                            <span class="modal__close">&times;</span>
-                            <p class="modal__message">Su mensaje fue enviado exitosamente.</p>
-                        </div>
-                    </div>
                 </section>
             </form>
         </article>
     </main>
 </body>
-
-<script type="module" src="public/js/initiatives/contact.js"></script>
+<script type="module" src="public/js/contact/contact.js"></script>
 <?php require_once FOOTER; ?>
