@@ -50,7 +50,7 @@
     }
 
     .btn-add{
-        display: inline-flex; 
+        display: flex; 
         justify-content: center; 
         align-items: center; 
         padding: 8px 15px; 
@@ -62,15 +62,14 @@
         border-radius: 5px; 
         text-decoration: none; 
         cursor: pointer; 
-        transition: all 0.3s ease; 
         white-space: nowrap;
     }
 
-    .btn-search {
+    .btn-search{
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 0 15px; 
+        padding: 8px 15px; 
         height: 40px; 
         background-color: black;
         border: 2px solid green;
@@ -78,7 +77,6 @@
         border-radius: 5px;
         font-size: 16px;
         cursor: pointer;
-        transition: all 0.3s ease;
     }
 
     #buscador, .btn-view,
@@ -109,12 +107,6 @@
         margin-bottom: 20px;
     }
 
-    .button-container {
-        display: flex;
-        justify-content: flex-end; 
-        margin-bottom: 10px; 
-    }
-
     @media (max-width: 768px) {
         table {
             font-size: 14px;
@@ -130,14 +122,18 @@
     <main class="main__container__content">
     <h1 class="title__principal">Lista de Contactos</h1>
 
-        <form class="formulario" method="GET" action="index.php?c=contact&f=search" style="margin-bottom: 20px;">
+        <form class="formulario" method="GET" action="index.php?c=contact&f=search">
             <input type="hidden" name="c" value="contact">
             <input type="hidden" name="f" value="search">
             <input id="buscador" name="asunto" placeholder="Buscar por asunto..." value="<?= htmlspecialchars($_GET['asunto'] ?? '') ?>">
             <button class="btn-search" type="submit">
-                <img src="public/assets/icons/search.svg" alt="search icon" />
-                Buscar
+                <img src="public/assets/icons/search.svg" alt="search icon" /> Buscar
             </button>
+            <?php if (isset($isUserAdmin) && !$isUserAdmin) { ?>
+                <div>
+                    <a href="index.php?c=contact&f=new_view&id=<?php echo $parametro;?>" class="btn-add">Crear contacto</a>
+                </div>
+            <?php } ?>
         </form>
         <table border="1">
             <thead>
@@ -171,12 +167,10 @@
                             <a href="index.php?c=contact&f=new_update&id=<?=$contacto['ID'];?>" class="btn-edit">Editar</a>
                         </td>
                         <td>
-                            <a href="index.php?c=contact&f=delete&id=<?=$contacto['ID'];?>" class="btn-delete">Eliminar</a>
+                            <a href="index.php?c=contact&f=delete&id=<?=$contacto['ID'];?>&i=<?=$contacto['iniciativa_id'];?>" class="btn-delete">Eliminar</a>
                         </td>
                     </tr>
-                    <div class="button-container">
-                        <a href="index.php?c=contact&f=new_view&id=<?=$contacto['iniciativa_id']; ?>" class="btn-add">Crear contacto</a>
-                    </div>
+                    
                 <?php endforeach; ?>
             </tbody>
          </table>

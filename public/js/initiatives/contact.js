@@ -1,27 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('formulario');
-  const modal = document.getElementById('modalExito');
-  const closeModal = document.querySelector('.modal__close');
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
     if (validarFormulario()) {
-      modal.style.display = 'block';
       form.reset();
-    }
-    if (vistaPrevia) {
-      vistaPrevia.innerHTML = '';
-    }
-  });
-
-  closeModal.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
-
-  window.addEventListener('click', event => {
-    if (event.target === modal) {
-      modal.style.display = 'none';
     }
   });
 
@@ -90,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return esValido;
   }
 
+  // Metodos para los campos vacios
   function validarCampo(campo, mensajeVacio, mensajeCorto, regex) {
     if (campo.value === '') {
       presentarMensaje(mensajeVacio, campo);
@@ -106,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  //Metodo para validar un telefono
   function validarTelefono(campo) {
     if (campo.value === '') {
       presentarMensaje('Falta su telefono.', campo);
@@ -160,32 +146,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     });
-  }
-
-  function mostrarVistaPrevia(event) {
-    const vistaPrevia = document.getElementById('vistaPrevia');
-    if (vistaPrevia) {
-      vistaPrevia.innerHTML = '';
-
-      const archivo = event.target.files[0];
-      if (archivo) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const img = document.createElement('img');
-          img.src = e.target.result;
-          img.alt = 'Vista previa de la imagen';
-          img.style.maxWidth = '100%';
-          img.style.height = 'auto';
-          vistaPrevia.appendChild(img);
-        };
-        reader.readAsDataURL(archivo);
-      } else {
-        vistaPrevia.textContent = 'No se seleccionó ninguna imagen.';
-      }
-    }
-  }
-
-  if (foto) {
-    foto.addEventListener('change', mostrarVistaPrevia);
   }
 });
