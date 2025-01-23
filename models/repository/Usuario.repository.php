@@ -87,16 +87,17 @@ class UsuarioRepository implements IRepository
     public function add($entity): bool
     {
         try {
-            $sql = "INSERT INTO usuarios (nombre_usuario, password, email, fecha_nacimiento, foto_perfil, genero) VALUES (:nombre, :password, :email, :fecha_nacimiento, :foto_perfil, :genero)";
+            $sql = "INSERT INTO usuarios (nombre_usuario, email, password, fecha_nacimiento, genero, foto_perfil, estado) VALUES (:nombre_usuario, :email, :password, :fecha_nacimiento, :genero, :foto_perfil, :estado)";
 
             $stmt = $this->con->prepare($sql);
 
-            $stmt->bindParam(':nombre', $entity->getNombre());
-            $stmt->bindParam(':password', $entity->getPassword());
+            $stmt->bindParam(':nombre_usuario', $entity->getNombre());
             $stmt->bindParam(':email', $entity->getEmail());
+            $stmt->bindParam(':password', $entity->getPassword());
             $stmt->bindParam(':fecha_nacimiento', $entity->getFechaNacimiento());
-            $stmt->bindParam(':foto_perfil', $entity->getFotoPerfil());
             $stmt->bindParam(':genero', $entity->getGenero());
+            $stmt->bindParam(':foto_perfil', $entity->getFotoPerfil(), PDO::PARAM_LOB);
+            $stmt->bindParam(':estado', 1);
 
             $res = $stmt->execute();
             return $res;
@@ -117,7 +118,7 @@ class UsuarioRepository implements IRepository
             $stmt->bindParam(':password', $entity->getPassword());
             $stmt->bindParam(':email', $entity->getEmail());
             $stmt->bindParam(':fecha_nacimiento', $entity->getFechaNacimiento());
-            $stmt->bindParam(':foto_perfil', $entity->getFotoPerfil());
+            $stmt->bindParam(':foto_perfil', $entity->getFotoPerfil(), PDO::PARAM_LOB);
             $stmt->bindParam(':genero', $entity->getGenero());
             $stmt->bindParam(':id', $entity->getId());
 

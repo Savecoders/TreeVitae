@@ -420,7 +420,7 @@ if (!isset($_SESSION)) {
                         <a href="index.php?c=index&f=index&p=preguntas">Preguntas</a>
                     </li>
                     <li class="nav__item">
-                        
+
                         <a href="index.php?c=contact&f=viewall">About</a>
                     </li>
 
@@ -442,7 +442,7 @@ if (!isset($_SESSION)) {
 
                             <ul class="nav__inner">
                                 <li class="nav__dropdown">
-                                    <a href="{{ url_for('user.profile') }}" class="nav__link"><i class="ti ti-user"></i> Perfil</a>
+                                    <a href="index.php?c=user&f=profile_view" class="nav__link"><i class="ti ti-user"></i> Perfil</a>
                                 </li>
 
                                 <li class="nav__dropdown">
