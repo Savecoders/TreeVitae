@@ -94,7 +94,6 @@ class ContactController
         $contacto->setPrioridad($contactoNuevo['prioridad']);
         $contacto->setAsunto($contactoNuevo['asunto']);
         $contacto->setMensaje($contactoNuevo['mensaje']);
-        //$contacto->setImagen(htmlentities($contactoNuevo['foto'] ?? ''));
         return $contacto;
     }
 

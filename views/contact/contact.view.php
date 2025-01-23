@@ -70,10 +70,6 @@
     <main>
         <div class="contact-details">
             <h1 class="title__principal">Detalles del Contacto</h1>
-            <?php if (!empty($contacto['imagen'])):?>
-                <img src="data:image;base64,<?php echo base64_encode($contacto['imagen']);?>" alt="Foto del Contacto" id="contactImage">
-            <?php endif;?>
-
             <table>
                 <tr>
                     <th>ID</th>

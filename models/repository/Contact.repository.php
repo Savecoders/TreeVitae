@@ -75,7 +75,6 @@ class ContactRepository
             $stmt->bindParam(':prioridad', $contacto->getPrioridad(), PDO::PARAM_STR);
             $stmt->bindParam(':asunto', $contacto->getAsunto(), PDO::PARAM_STR);
             $stmt->bindParam(':mensaje', $contacto->getMensaje(), PDO::PARAM_STR);
-            //$stmt->bindParam(':imagen', $contacto->getImagen(), PDO::PARAM_LOB);
             $res = $stmt->execute();
             return $res;
         } catch (PDOEXception $e) {
@@ -86,7 +85,7 @@ class ContactRepository
 
     public function update($contacto){
         try{
-            $sql = "UPDATE contacto_iniciativa SET nombres = :nombres, apellidos = :apellidos, email = :email, telefono = :telefono, prioridad = :prioridad, asunto = :asunto WHERE id = :id";
+            $sql = "UPDATE contacto_iniciativa SET nombres = :nombres, apellidos = :apellidos, email = :email, telefono = :telefono, prioridad = :prioridad, asunto = :asunto, mensaje =:mensaje WHERE id = :id";
 
             $stmt = $this->con->prepare($sql);
             $stmt->bindParam(':nombres', $contacto->getNombres(), PDO::PARAM_STR);
@@ -95,7 +94,7 @@ class ContactRepository
             $stmt->bindParam(':telefono', $contacto->getTelefono(), PDO::PARAM_STR);
             $stmt->bindParam(':prioridad', $contacto->getPrioridad(), PDO::PARAM_STR);
             $stmt->bindParam(':asunto', $contacto->getAsunto(), PDO::PARAM_STR);
-            //$stmt->bindParam(':imagen', $contacto->getImagen());
+            $stmt->bindParam(':mensaje', $contacto->getMensaje(), PDO::PARAM_STR);
             $stmt->bindParam(':id', $contacto->getId(), PDO::PARAM_INT);
 
             $res = $stmt->execute();

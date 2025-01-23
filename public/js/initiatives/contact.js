@@ -13,10 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const apellidos = document.getElementById('apellidos');
   const correoElectronico = document.getElementById('correoElectronico');
   const telefono = document.getElementById('telefono');
-  const prioridad = document.getElementById('prioridad');
   const asunto = document.getElementById('asunto');
   const mensaje = document.getElementById('mensaje');
-  const foto = document.getElementById('foto');
+  //const foto = document.getElementById('imagen');
 
   function validarFormulario() {
     eliminarMensajes();
@@ -66,10 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Validaciones para la foto
-    if (foto && !foto.files.length) {
+    /*if (foto && !foto.files.length) {
       presentarMensaje('Debe subir una foto.', foto);
       esValido = false;
-    }
+    }*/
 
     return esValido;
   }

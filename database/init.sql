@@ -223,7 +223,6 @@ CREATE TABLE `contacto_iniciativa` (
   `prioridad` ENUM('Baja', 'Media', 'Alta') NOT NULL,
   `asunto` text NOT NULL,
   `mensaje` text NOT NULL,
-  `imagen` LONGBLOB DEFAULT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`ID`),
   KEY `iniciativa_id` (`iniciativa_id`),
