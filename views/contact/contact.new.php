@@ -1,3 +1,4 @@
+
 <?php require_once HEADER; ?>
 <!--Autor: Farfan Sanchez Abraham-->
 <style>
@@ -105,7 +106,7 @@
         border-color: var(--primary-base);
     }
 
-    .submit__button {
+    .btn-add {
         width: 100%;
         padding: 10px;
         background-color: black;
@@ -144,34 +145,10 @@
         transition: all 0.3s ease; 
     }
 
-    .input__container select:focus {
-        border-color: var(--primary-500);
-    }
-
     .input__container select option {
-        color: var(--text-900); 
-        background-color: var(--background-100); 
+        color: white; 
+        background-color: black; 
         padding: 12px;
-    }
-
-    .input__container select option:hover {
-        background-color: var(--primary-400);
-        color: var(--background-50);
-    }
-
-    #vistaPrevia {
-        display: flex;
-        justify-content: center; 
-        align-items: center; 
-        margin-top: 10px; 
-        max-width: 100%; 
-        text-align: center; 
-    }
-
-    #vistaPrevia img {
-        max-width: 100%;
-        height: auto;
-        display: block; 
     }
 
     .info__container {
@@ -230,49 +207,6 @@
     .input__container .error .error__message {
         opacity: 1;
         visibility: visible;
-    }
-
-    .modal {
-        display: none; 
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.5); 
-    }
-
-    .modal__content {
-        background-color: #fff;
-        color: black;
-        margin: 15% auto; 
-        padding: 20px;
-        border: 1px solid #888;
-        border-radius: 5px;
-        width: 80%; 
-        max-width: 400px; 
-        text-align: center;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .modal__close {
-        color: #aaa;
-        float: right;
-        font-size: 20px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    .modal__close:hover, .modal__close:focus {
-        color: black;
-        text-decoration: none;
-    }
-
-    .container__component .label__name {
-        margin-bottom: 10px; 
-        display: block; 
     }
 
     @media (max-width: 800px) {
@@ -362,10 +296,9 @@
                         </section>
 
                         <div class="container__component">
-                            <label class="label__name" for="prioridad">Prioridad: </label>
+                            <label class="label__name" for="prioridad">Seleccione la Prioridad: </label>
                             <div class="input__container">
                                 <select name="prioridad" id="prioridad">
-                                    <option value="" disabled selected>Selecciona la prioridad</option>
                                     <option value="alta">Alta</option>
                                     <option value="media">Media</option>
                                     <option value="baja">Bajo</option>
@@ -389,21 +322,14 @@
                             </div>
                         </div>
 
-                        <!--<div class="container__component">
-                            <label class="label__name">Foto de la iniciativa: </label>
-                            <div class="input__container">
-                                <span class="error__message"></span>
-                                <input type="file" id="foto" name="Cargar foto" accept="image/*" style="display: none;" />
-                                <label for="foto" class="submit__button__enviar">Cargar Foto</label>
-                            </div>  
-                            <div id="vistaPrevia" class="container__component"></div>
-                        </div>-->
-
+                        <div class="container__component">
+                            <button type="submit" class="btn-add">Registrar</button>
+                        </div>
                     </fieldset>
                 </section>
-                <button type="submit">Enviar</button>
             </form>
         </article>
     </main>
 </body>
+<!--<script type="module" src="public/js/initiatives/contact.js"></script>-->
 <?php require_once FOOTER; ?>

@@ -122,7 +122,7 @@
     <main class="main__container__content">
     <h1 class="title__principal">Lista de Contactos</h1>
 
-        <form class="formulario" method="GET" action="index.php?c=contact&f=search">
+    <form class="formulario" method="GET" action="index.php?c=contact&f=search">
             <input type="hidden" name="c" value="contact">
             <input type="hidden" name="f" value="search">
             <input id="buscador" name="asunto" placeholder="Buscar por asunto..." value="<?= htmlspecialchars($_GET['asunto'] ?? '') ?>">
@@ -142,10 +142,15 @@
                     <th>Prioridad</th>
                     <th>Asunto</th>
                     <th>Mensaje</th>
-                    <th>Imagen</th>
-                    <th>Ver información</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <?php if (isset($isUserAdmin) && $isUserAdmin) { ?>
+                        <th>Ver información</th>
+                    <?php } ?>
+                    <?php if (isset($isUserAdmin) && !$isUserAdmin) { ?>
+                        <th>Editar</th>
+                    <?php } ?>
+                    <?php if (isset($isUserAdmin) && $isUserAdmin) { ?>
+                        <th>Eliminar</th>
+                    <?php } ?>
                 </tr>
             </thead>
             <tbody>
@@ -155,22 +160,22 @@
                         <td><?= htmlspecialchars($contacto['prioridad']); ?></td>
                         <td><?= htmlspecialchars($contacto['asunto']); ?></td>
                         <td><?= htmlspecialchars($contacto['mensaje']); ?></td>
-                        <td>
-                            <?php if (!empty($contacto['imagen'])): ?>
-                                <img id="foto" src="data:image;base64,<?php echo base64_encode($contacto['imagen']); ?>" />
-                            <?php endif; ?>
-                        </td>
-                        <td>
-                            <a href="index.php?c=contact&f=view&id=<?=$contacto['ID'];?>" class="btn-view">Ver</a>
-                        </td>
-                        <td>
-                            <a href="index.php?c=contact&f=new_update&id=<?=$contacto['ID'];?>" class="btn-edit">Editar</a>
-                        </td>
-                        <td>
-                            <a href="index.php?c=contact&f=delete&id=<?=$contacto['ID'];?>&i=<?=$contacto['iniciativa_id'];?>" class="btn-delete">Eliminar</a>
-                        </td>
+                        <?php if (isset($isUserAdmin) && $isUserAdmin) { ?>
+                            <td>
+                                <a href="index.php?c=contact&f=view&id=<?=$contacto['ID'];?>" class="btn-view">Ver</a>
+                            </td>
+                        <?php } ?>
+                        <?php if (isset($isUserAdmin) && !$isUserAdmin) { ?>
+                            <td>
+                                <a href="index.php?c=contact&f=new_update&id=<?=$contacto['ID'];?>" class="btn-edit">Editar</a>
+                            </td>
+                        <?php } ?>
+                        <?php if (isset($isUserAdmin) && $isUserAdmin) { ?>
+                            <td>
+                                <a href="index.php?c=contact&f=delete&id=<?=$contacto['ID'];?>&i=<?=$contacto['iniciativa_id'];?>" class="btn-delete">Eliminar</a>
+                            </td>
+                        <?php } ?>
                     </tr>
-                    
                 <?php endforeach; ?>
             </tbody>
          </table>
