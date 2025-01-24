@@ -45,13 +45,14 @@ class ContactRepository
         }
     }
 
-    public function searchByAsunto($asunto)
+    public function searchByAsunto($asunto, $parametro)
     {
         try {
-            $sql = "SELECT * FROM contacto_iniciativa WHERE asunto LIKE :asunto";
+            $sql = "SELECT * FROM contacto_iniciativa WHERE asunto LIKE :asunto AND iniciativa_id = :id";
 
             $stmt = $this->con->prepare($sql);
             $stmt->bindParam(':asunto', $asunto, PDO::PARAM_STR);
+            $stmt->bindParam(':id', $parametro, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
@@ -75,6 +76,7 @@ class ContactRepository
             $stmt->bindParam(':prioridad', $contacto->getPrioridad(), PDO::PARAM_STR);
             $stmt->bindParam(':asunto', $contacto->getAsunto(), PDO::PARAM_STR);
             $stmt->bindParam(':mensaje', $contacto->getMensaje(), PDO::PARAM_STR);
+
             $res = $stmt->execute();
             return $res;
         } catch (PDOEXception $e) {
@@ -95,6 +97,7 @@ class ContactRepository
             $stmt->bindParam(':prioridad', $contacto->getPrioridad(), PDO::PARAM_STR);
             $stmt->bindParam(':asunto', $contacto->getAsunto(), PDO::PARAM_STR);
             $stmt->bindParam(':mensaje', $contacto->getMensaje(), PDO::PARAM_STR);
+
             $stmt->bindParam(':id', $contacto->getId(), PDO::PARAM_INT);
 
             $res = $stmt->execute();

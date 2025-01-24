@@ -22,11 +22,6 @@ class ContactController
         try{
             $parametro = htmlentities($_GET['id']?? 0);
             $contactos = $this->model->getByIniciativaId($parametro);
-
-            if (!isset($_GET['id'])) {
-                redirectWithMessage(false, '', 'Error en los contactos de esta iniciativa :(', 'index.php?c=contact&f=viewall');
-                return;
-            }
             $session_id = $_SESSION['user']['ID'] ?? 0;
             
             $isUserAdmin = $this->model->isUserAdmin($parametro, $session_id);
@@ -52,15 +47,16 @@ class ContactController
     public function search()
     {
         try {
-            $asunto = htmlentities($_GET['asunto'] ?? '');
-            $contactos = !empty($asunto) ? $this->model->searchByAsunto('%' . $asunto . '%') : $this->model->getByIniciativaId(0);
-    
-            require_once VCONTACT . 'viewall.php';
+            $asunto = htmlentities($_GET['b'] ?? '');
+            $iniciativa = htmlentities($_GET['id'] ?? '');
+            $contactos = $this->model->searchByAsunto('%' . $asunto . '%', $iniciativa);
+            
+            echo json_encode($contactos);
         } catch (PDOException $e) {
             error_log('Error en ContactController@search: ' . $e->getMessage());
         }
     }
-
+    
     public function new_view(){
         try{
             $parametro = htmlentities($_GET['id'] ?? '');

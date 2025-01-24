@@ -1,6 +1,12 @@
 <?php require_once HEADER; ?>
 <!--Autor: Farfan Sanchez Abraham-->
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
     .title__principal{
         color: var(--primary-500);
         text-align: center;
@@ -29,14 +35,6 @@
         text-align: center; 
     }
 
-    #foto {
-        max-width: 120px;
-        max-height: 120px;
-        border-radius: 10px;
-        object-fit: cover;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
     #buscador{
         padding: 8px;
         width: 300px;
@@ -63,20 +61,6 @@
         text-decoration: none; 
         cursor: pointer; 
         white-space: nowrap;
-    }
-
-    .btn-search{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 8px 15px; 
-        height: 40px; 
-        background-color: black;
-        border: 2px solid green;
-        color: white;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
     }
 
     #buscador, .btn-view,
@@ -118,17 +102,13 @@
         }
     }
 </style>
+</head>
 <body>
-    <main class="main__container__content">
+<main class="main__container__content">
     <h1 class="title__principal">Lista de Contactos</h1>
 
-    <form class="formulario" method="GET" action="index.php?c=contact&f=search">
-            <input type="hidden" name="c" value="contact">
-            <input type="hidden" name="f" value="search">
+    <form class="formulario" >
             <input id="buscador" name="asunto" placeholder="Buscar por asunto..." value="<?= htmlspecialchars($_GET['asunto'] ?? '') ?>">
-            <button class="btn-search" type="submit">
-                <img src="public/assets/icons/search.svg" alt="search icon" /> Buscar
-            </button>
             <?php if (isset($isUserAdmin) && !$isUserAdmin) { ?>
                 <div>
                     <a href="index.php?c=contact&f=new_view&id=<?php echo $parametro;?>" class="btn-add">Crear contacto</a>
@@ -153,7 +133,7 @@
                     <?php } ?>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tablaContacto">
                 <?php foreach ($contactos as $contacto): ?>
                     <tr data-id="<?= htmlspecialchars($contacto['ID']);?>">
                         <td><?= htmlspecialchars($contacto['ID']); ?></td>
@@ -180,5 +160,53 @@
             </tbody>
          </table>
     </main>
+    <script>
+        const txtBuscar = document.getElementById("buscador");
+        txtBuscar.addEventListener("keyup", cargar);
+        function cargar(){
+            const url = `index.php?c=contact&f=search&b=${txtBuscar.value}&id=<?php echo $parametro ?>`;
+            const xmlh = new XMLHttpRequest();
+            xmlh.open("GET", url, true); 
+            xmlh.send();
+            xmlh.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    const respuesta = this.responseText; 
+                    actualizar(respuesta);
+                }
+            };
+        }
+
+        function actualizar(respuesta) {
+            const tbody = document.getElementById("tablaContacto");
+            let contactos = JSON.parse(respuesta); 
+            let resul = "";
+
+            contactos.forEach(contacto => {
+                resul += `<tr>
+                <td>${contacto.ID}</td>
+                <td>${contacto.prioridad}</td>
+                <td>${contacto.asunto}</td>
+                <td>${contacto.mensaje}</td>
+                        <?php if (isset($isUserAdmin) && $isUserAdmin) { ?>
+                            <td>
+                                <a href="index.php?c=contact&f=view&i=${contacto.id}" class="btn-view">Ver</a>
+                            </td>
+                        <?php } ?>
+                        <?php if (isset($isUserAdmin) && !$isUserAdmin) { ?>
+                            <td>
+                                <a href="index.php?c=contact&f=new_update&i=${contacto.id}" class="btn-edit">Modificar</a>
+                            </td>
+                        <?php } ?>
+                        <?php if (isset($isUserAdmin) && $isUserAdmin) { ?>
+                            <td>
+                                <a href="index.php?c=contact&f=delete&i=${contacto.id}&id=${contacto.iniciativa_id}" class="btn-delete">Eliminar</a>
+                            </td>
+                        <?php } ?>       
+                </tr>`;
+            });
+            tablaContacto.innerHTML = resul; 
+        }
+    </script>
 </body>
+</html>
 <?php require_once FOOTER; ?>

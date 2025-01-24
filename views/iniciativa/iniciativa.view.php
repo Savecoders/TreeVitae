@@ -246,10 +246,12 @@ require_once 'utils/dateFormatter.php';
                     Revisar Actividades
                 </a>
 
-                <hr class="separetor__horizontal" />
-                <a href="index.php?c=contact&f=viewall&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn outerline btn-animation">
-                    Contactarte con la iniciativa?
-                </a>
+                <?php if((isset($isUserAdmin) && $isUserAdmin) || $isUserFollowers) {?>
+                    <hr class="separetor__horizontal" />
+                    <a href="index.php?c=contact&f=viewall&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn outerline btn-animation">
+                        Contactarte con la iniciativa?
+                    </a>
+                <?php } ?>
             </aside>
 
             <article class="about-initiative">
