@@ -156,6 +156,8 @@ CREATE TABLE `iniciativa_tags` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Estructura de tabla para la tabla `usuarios_iniciativas_roles`
+-- Drop existing table
+-- Recreate with new PRIMARY KEY including rol_id
 DROP TABLE IF EXISTS `usuarios_iniciativas_roles`;
 CREATE TABLE IF NOT EXISTS `usuarios_iniciativas_roles` (
   `usuario_id` bigint(20) NOT NULL,
@@ -167,7 +169,6 @@ CREATE TABLE IF NOT EXISTS `usuarios_iniciativas_roles` (
   FOREIGN KEY (`iniciativa_id`) REFERENCES `iniciativas` (`ID`) ON DELETE CASCADE,
   FOREIGN KEY (`rol_id`) REFERENCES `roles` (`ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- Estructura de tabla para la tabla Galeria de fotos de la iniciativa
 DROP TABLE IF EXISTS `galeria_iniciativa`;
 CREATE TABLE `galeria_iniciativa` (
