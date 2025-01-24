@@ -84,6 +84,15 @@ class Usuario
     {
         $this->genero = $genero;
     }
+    function getEstado()
+    {
+        return $this->genero;
+    }
+
+    function setEstado($genero)
+    {
+        $this->genero = $genero;
+    }
 
     // Methods get y set parametrizados
     public function __set($nombre, $valor)
