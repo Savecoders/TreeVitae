@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Validación al enviar el formulario
   form.addEventListener('submit', event => {
+    event.preventDefault();
     let isValid = true;
 
     formGroups.forEach(group => {
@@ -50,9 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!validatePasswordsMatch()) {
       isValid = false;
     }
-
-    if (!isValid) {
-      event.preventDefault();
+    event.target.submit();
+    /*if (!isValid) {
     } else {
       // Limpiar campos y mensajes de error
       form.reset(); // Resetear los campos del formulario
@@ -64,7 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
       previewImage.style.display = 'none'; // Ocultar la imagen previa
-    }
+      
+    }*/
   });
 
   // Validar un campo específico

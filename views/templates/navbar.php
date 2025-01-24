@@ -419,8 +419,8 @@ if (!isset($_SESSION)) {
                     <li class="nav__item">
                         <a href="index.php?c=index&f=index&p=preguntas">Preguntas</a>
                     </li>
-                    <li class="nav__item">
-                        <a href="index.php?c=index&f=index&p=contact">About</a>
+                    <li class="nav__item"
+                        <a href="index.php?c=contact&f=new">About</a>
                     </li>
 
                     <?php if (isset($_SESSION['user'])) { ?>
@@ -441,7 +441,7 @@ if (!isset($_SESSION)) {
 
                             <ul class="nav__inner">
                                 <li class="nav__dropdown">
-                                    <a href="{{ url_for('user.profile') }}" class="nav__link"><i class="ti ti-user"></i> Perfil</a>
+                                    <a href="index.php?c=user&f=profile_view" class="nav__link"><i class="ti ti-user"></i> Perfil</a>
                                 </li>
 
                                 <li class="nav__dropdown">
