@@ -254,11 +254,18 @@ require_once 'utils/dateFormatter.php';
                 </button>
 
 
-                <hr class="separetor__horizontal" />
-                <p>Actividades</p>
-                <a href="#" class="btn primary__with-icon btn btn-animation">
+
+                
+                <?php if ((isset($isUserAdmin) && $isUserAdmin) || $isUserFollower) { ?>
+                    <hr class="separetor__horizontal" />
+                    <p>Actividades</p>
+                    <a href="index.php?c=actividad&f=viewall&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn primary__with-icon btn btn-animation">
                     Revisar Actividades
                 </a>
+                <?php } ?>
+
+
+                
 
                 <?php if ((isset($isUserAdmin) && $isUserAdmin) || $isUserFollowers) { ?>
                     <hr class="separetor__horizontal" />
