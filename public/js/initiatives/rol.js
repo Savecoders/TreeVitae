@@ -29,11 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
           const text = isFollowing ? 'Seguir' : 'Dejar de seguir';
           this.innerHTML = `<i class="fa-${icon} fa-heart"></i> ${text}`;
         }
-
-        alert(data.message);
       } catch (error) {
         console.error('Error:', error);
-        alert('Error al procesar la solicitud');
       }
     });
   }
@@ -64,11 +61,8 @@ document.addEventListener('DOMContentLoaded', function () {
           const text = isMember ? 'Únete a la Iniciativa' : 'Abandonar Iniciativa';
           this.textContent = text;
         }
-
-        alert(data.message);
       } catch (error) {
         console.error('Error:', error);
-        alert('Error al procesar la solicitud');
       }
     });
   }
