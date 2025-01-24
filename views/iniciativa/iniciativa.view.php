@@ -174,6 +174,11 @@ require_once 'utils/dateFormatter.php';
         color: white;
     }
 
+    .member {
+        background-color: var(--accent-600);
+        color: white;
+    }
+
     @media (max-width: 1100px) {
 
         .heading-initiative {
@@ -356,7 +361,7 @@ require_once 'utils/dateFormatter.php';
 
     <?php } ?>
 </main>
-<script type="module" src="public/js/initiatives/view.js"></script>
+<!-- <script type="module" src="public/js/initiatives/view.js"></script> -->
 <script type="module" src="public/js/initiatives/rol.js"></script>
 
 <?php require_once FOOTER; ?>
