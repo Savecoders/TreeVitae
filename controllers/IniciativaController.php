@@ -223,7 +223,6 @@ class IniciativaController
             echo json_encode($response);
             return;
         }
-
         $iniciativa_id = (int) $_GET['id'];
         $user_id = (int) $_SESSION['user']['ID'];
 
@@ -266,11 +265,13 @@ class IniciativaController
         $user_id = (int) $_SESSION['user']['ID'];
 
         try {
-            $isMember = $this->model->assignUserMember($iniciativa_id, $user_id);
+            $isMember = $this->model->assignUserMember($user_id, $iniciativa_id);
 
             if ($isMember) {
                 $response['success'] = true;
                 $response['message'] = 'Ahora eres miembro de esta iniciativa';
+            } else {
+                $response['message'] = 'No se pudo unir a la iniciativa';
             }
         } catch (Exception $e) {
             $response['message'] = 'Error al unirte a la iniciativa';
