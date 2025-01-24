@@ -56,7 +56,7 @@ class IniciativaController
             $session_id = $_SESSION['user']['ID'] ?? 0;
 
             $isUserAdmin = $this->model->isUserAdmin($iniciativa_id, $session_id);
-
+            $isUserFollowers = $this->model->isUserFollower($iniciativa_id, $session_id);
             $iniciativa = $this->getIniciative([$iniciativasResult]);
 
             $title = 'Iniciativa';

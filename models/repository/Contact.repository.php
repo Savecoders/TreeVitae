@@ -24,7 +24,7 @@ class ContactRepository
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $res;
         } catch (PDOException $e) {
-            error_log("Error en getByIniciativaId de ContactRepository " . $e->getMessage());
+            error_log("Error en getByIniciativaId de ContactRepository" . $e->getMessage());
             return [];
         }
     }
@@ -40,22 +40,23 @@ class ContactRepository
             $res = $stmt->fetch(PDO::FETCH_ASSOC);
             return $res;
         } catch (PDOEXception $e) {
-            error_log("Error en getById de IniciativaRepository " . $e->getMessage());
+            error_log("Error en getById de IniciativaRepository" . $e->getMessage());
             return [];
         }
     }
 
-    public function searchByAsunto($asunto)
+    public function searchByAsunto($asunto, $parametro)
     {
         try {
-            $sql = "SELECT * FROM contacto_iniciativa WHERE asunto LIKE :asunto";
+            $sql = "SELECT * FROM contacto_iniciativa WHERE asunto LIKE :asunto AND iniciativa_id = :id";
 
             $stmt = $this->con->prepare($sql);
             $stmt->bindParam(':asunto', $asunto, PDO::PARAM_STR);
+            $stmt->bindParam(':id', $parametro, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            error_log("Error en searchByAsunto de ContactRepository " . $e->getMessage());
+            error_log("Error en searchByAsunto de ContactRepository" . $e->getMessage());
             return [];
         }
     }
@@ -63,7 +64,7 @@ class ContactRepository
     public function add($contacto){
         try {
 
-            $sql = "INSERT INTO contacto_iniciativa (iniciativa_id, user_id, nombres, apellidos, email, telefono, prioridad, asunto, mensaje, imagen) VALUES (:iniciativa_id, :user_id, :nombres, :apellidos, :email, :telefono, :prioridad, :asunto, :mensaje, :imagen)";
+            $sql = "INSERT INTO contacto_iniciativa (iniciativa_id, user_id, nombres, apellidos, email, telefono, prioridad, asunto, mensaje) VALUES (:iniciativa_id, :user_id, :nombres, :apellidos, :email, :telefono, :prioridad, :asunto, :mensaje)";
 
             $stmt = $this->con->prepare($sql);
             $stmt->bindParam(':iniciativa_id', $contacto->getIdIniciativa(), PDO::PARAM_INT);
@@ -75,13 +76,35 @@ class ContactRepository
             $stmt->bindParam(':prioridad', $contacto->getPrioridad(), PDO::PARAM_STR);
             $stmt->bindParam(':asunto', $contacto->getAsunto(), PDO::PARAM_STR);
             $stmt->bindParam(':mensaje', $contacto->getMensaje(), PDO::PARAM_STR);
-            $stmt->bindParam(':imagen', $contacto->getImagen(), PDO::PARAM_LOB);
 
             $res = $stmt->execute();
             return $res;
-        } catch (PDOEXception $er) {
-            error_log("Error en add de IniciativaRepository " . $er->getMessage());
-            return [];
+        } catch (PDOEXception $e) {
+            error_log("Error en add de ContactRepository " . $e->getMessage());
+            return 0;
+        }
+    }
+
+    public function update($contacto){
+        try{
+            $sql = "UPDATE contacto_iniciativa SET nombres = :nombres, apellidos = :apellidos, email = :email, telefono = :telefono, prioridad = :prioridad, asunto = :asunto, mensaje =:mensaje WHERE id = :id";
+
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(':nombres', $contacto->getNombres(), PDO::PARAM_STR);
+            $stmt->bindParam(':apellidos', $contacto->getApellidos(), PDO::PARAM_STR);
+            $stmt->bindParam(':email', $contacto->getEmail(), PDO::PARAM_STR);
+            $stmt->bindParam(':telefono', $contacto->getTelefono(), PDO::PARAM_STR);
+            $stmt->bindParam(':prioridad', $contacto->getPrioridad(), PDO::PARAM_STR);
+            $stmt->bindParam(':asunto', $contacto->getAsunto(), PDO::PARAM_STR);
+            $stmt->bindParam(':mensaje', $contacto->getMensaje(), PDO::PARAM_STR);
+
+            $stmt->bindParam(':id', $contacto->getId(), PDO::PARAM_INT);
+
+            $res = $stmt->execute();
+            return $res;
+        }catch(PDOEXception $e){
+            error_log("Error en update de ContactaRepository " . $e->getMessage());
+            return 0;
         }
     }
 
@@ -92,10 +115,29 @@ class ContactRepository
 
             $stmt = $this->con->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            
             $res = $stmt->execute();
             return $res;
         } catch (PDOException $e) {
-            error_log("Error en delete de IniciativaRepository " . $e->getMessage());
+            error_log("Error en delete de ContactRepository " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function isUserAdmin($iniciativa_id, $usuario_id)
+    {
+        try {
+            $sql = "SELECT * FROM usuarios_iniciativas_roles WHERE iniciativa_id = :iniciativa_id AND usuario_id = :usuario_id AND rol_id = 1";
+
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(':iniciativa_id', $iniciativa_id);
+            $stmt->bindParam(':usuario_id', $usuario_id);
+
+            $stmt->execute();
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return count($res) > 0;
+        } catch (PDOEXception $er) {
+            error_log("Error en isUserAdmin de IniciativaRepository " . $er->getMessage());
             return false;
         }
     }
