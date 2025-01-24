@@ -18,7 +18,7 @@ define("VPOST", "views/post/post.");
 define("VUSER", "views/user/user.");
 
 // ruta de vistas modulo de actividad
-define("VACTIVIDAD", "views/activity/activity.");
+define("VACTIVIDAD", "views/actividad/actividad.");
 
 // ruta de vistas modulo de Contact
 define("VCONTACT", "views/contact/contact.");

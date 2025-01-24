@@ -240,11 +240,18 @@ require_once 'utils/dateFormatter.php';
                     Únete a la Iniciativa
                 </a>
 
-                <hr class="separetor__horizontal" />
-                <p>Actividades</p>
-                <a href="#" class="btn primary__with-icon btn btn-animation">
+
+                
+                <?php if ((isset($isUserAdmin) && $isUserAdmin) || $isUserFollower) { ?>
+                    <hr class="separetor__horizontal" />
+                    <p>Actividades</p>
+                    <a href="index.php?c=actividad&f=viewall&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn primary__with-icon btn btn-animation">
                     Revisar Actividades
                 </a>
+                <?php } ?>
+
+
+                
 
                 <hr class="separetor__horizontal" />
                 <a href="#" class="btn outerline btn-animation">
