@@ -1,4 +1,3 @@
-
 <?php require_once HEADER; ?>
 <!--Autor: Farfan Sanchez Abraham-->
 <style>
@@ -112,11 +111,10 @@
         background-color: black;
         color: white;
         border: 2px solid green; 
-        border-radius: 5px;
+        border-radius: 6px;
         cursor: pointer;
         font-size: 16px;
         text-transform: uppercase;
-        font-weight: 500;
     }
 
     .submit__button__enviar{
