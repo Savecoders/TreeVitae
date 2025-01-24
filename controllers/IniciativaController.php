@@ -57,6 +57,9 @@ class IniciativaController
 
             $isUserAdmin = $this->model->isUserAdmin($iniciativa_id, $session_id);
             $isUserFollowers = $this->model->isUserFollower($iniciativa_id, $session_id);
+            $isUserMenber = $this->model->isUserMember($iniciativa_id, $session_id);
+
+
             $iniciativa = $this->getIniciative([$iniciativasResult]);
 
             $title = 'Iniciativa';
@@ -200,6 +203,160 @@ class IniciativaController
         $tags = $tagsRepository->getAll();
         require_once  VINICIATIVA . 'update.php';
     }
+
+    public function assignFollower()
+    {
+        $response = array(
+            'success' => false,
+            'message' => '',
+            'data' => null
+        );
+
+        if (!isset($_SESSION['user'])) {
+            $response['message'] = 'Usuario no autenticado';
+            echo json_encode($response);
+            return;
+        }
+
+        if (!isset($_GET['id'])) {
+            $response['message'] = 'ID de iniciativa no proporcionado';
+            echo json_encode($response);
+            return;
+        }
+        $iniciativa_id = (int) $_GET['id'];
+        $user_id = (int) $_SESSION['user']['ID'];
+
+        try {
+            $isFollower = $this->model->assignUserFollower($iniciativa_id, $user_id);
+
+            if ($isFollower) {
+                $response['success'] = true;
+                $response['message'] = 'Ahora sigues esta iniciativa';
+            }
+        } catch (Exception $e) {
+            $response['message'] = 'Error al seguir la iniciativa';
+            error_log('Error en assignFollower: ' . $e->getMessage());
+        }
+
+        echo json_encode($response);
+    }
+
+    public function assignMember()
+    {
+        $response = array(
+            'success' => false,
+            'message' => '',
+            'data' => null
+        );
+
+        if (!isset($_SESSION['user'])) {
+            $response['message'] = 'Usuario no autenticado';
+            echo json_encode($response);
+            return;
+        }
+
+        if (!isset($_GET['id'])) {
+            $response['message'] = 'ID de iniciativa no proporcionado';
+            echo json_encode($response);
+            return;
+        }
+
+        $iniciativa_id = (int) $_GET['id'];
+        $user_id = (int) $_SESSION['user']['ID'];
+
+        try {
+            $isMember = $this->model->assignUserMember($user_id, $iniciativa_id);
+
+            if ($isMember) {
+                $response['success'] = true;
+                $response['message'] = 'Ahora eres miembro de esta iniciativa';
+            } else {
+                $response['message'] = 'No se pudo unir a la iniciativa';
+            }
+        } catch (Exception $e) {
+            $response['message'] = 'Error al unirte a la iniciativa';
+            error_log('Error en assignMember: ' . $e->getMessage());
+        }
+
+        echo json_encode($response);
+    }
+    public function removeFollower()
+    {
+        $response = array(
+            'success' => false,
+            'message' => '',
+            'data' => null
+        );
+
+        if (!isset($_SESSION['user'])) {
+            $response['message'] = 'Usuario no autenticado';
+            echo json_encode($response);
+            return;
+        }
+
+        if (!isset($_GET['id'])) {
+            $response['message'] = 'ID de iniciativa no proporcionado';
+            echo json_encode($response);
+            return;
+        }
+
+        try {
+            $iniciativa_id = (int) $_GET['id'];
+            $user_id = (int) $_SESSION['user']['ID'];
+
+            $isRemoved = $this->model->removeUserFollowIniciative($user_id, $iniciativa_id);
+
+            if ($isRemoved) {
+                $response['success'] = true;
+                $response['message'] = 'Has dejado de seguir esta iniciativa';
+            }
+        } catch (Exception $e) {
+            $response['message'] = 'Error al dejar de seguir la iniciativa';
+            error_log('Error en removeFollower: ' . $e->getMessage());
+        }
+
+        echo json_encode($response);
+    }
+
+    public function removeMember()
+    {
+        $response = array(
+            'success' => false,
+            'message' => '',
+            'data' => null
+        );
+
+        if (!isset($_SESSION['user'])) {
+            $response['message'] = 'Usuario no autenticado';
+            echo json_encode($response);
+            return;
+        }
+
+        if (!isset($_GET['id'])) {
+            $response['message'] = 'ID de iniciativa no proporcionado';
+            echo json_encode($response);
+            return;
+        }
+
+        try {
+            $iniciativa_id = (int) $_GET['id'];
+            $user_id = (int) $_SESSION['user']['ID'];
+
+            $isRemoved = $this->model->removeUserMemberIniciative($user_id, $iniciativa_id);
+
+            if ($isRemoved) {
+                $response['success'] = true;
+                $response['message'] = 'Has abandonado esta iniciativa';
+            }
+        } catch (Exception $e) {
+            $response['message'] = 'Error al abandonar la iniciativa';
+            error_log('Error en removeMember: ' . $e->getMessage());
+        }
+
+        echo json_encode($response);
+    }
+
+
 
     public function update()
     {
