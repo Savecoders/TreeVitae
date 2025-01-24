@@ -1,12 +1,5 @@
-<?php require_once HEADER; 
-    $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : null;
-
-    // Validar si el ID está presente
-    if ($id === null) {
-        echo "<p>Error: No se ha proporcionado un ID válido.</p>";
-        exit;
-    }
-?>
+<?php require_once HEADER; ?>
+<!--Autor: Farfan Sanchez Abraham-->
 <style>
     .contact-details {
         max-width: 600px;
@@ -20,9 +13,12 @@
         font-size: 18px
     }
 
-    .titulo{
+    .title__principal{
         text-align: center;
-        margin-bottom: 20px;
+        color: var(--primary-500);
+        font-weight: 600;
+        font-family: 'Raleway', sans-serif;
+        font-size: 34px;
     }
 
     .contact-details{
@@ -73,11 +69,7 @@
 <body>
     <main>
         <div class="contact-details">
-            <h1 id="titulo">Detalles del Contacto</h1>
-            <?php if (!empty($contacto['imagen'])):?>
-                <img src="data:image;base64,<?php echo base64_encode($contacto['imagen']);?>" alt="Foto del Contacto" id="contactImage">
-            <?php endif;?>
-
+            <h1 class="title__principal">Detalles del Contacto</h1>
             <table>
                 <tr>
                     <th>ID</th>
