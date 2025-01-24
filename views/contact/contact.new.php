@@ -1,9 +1,11 @@
+
 <?php require_once HEADER; ?>
+<!--Autor: Farfan Sanchez Abraham-->
 <style>
     .title__principal {
-        font-size: 4ch;
+        font-size: 34px;
         font-weight: 600;
-        color: var(--text-900);
+        color: var(--primary-500);
         font-family: 'Raleway', sans-serif;
         text-align: center;
     }
@@ -49,6 +51,7 @@
         color: var(--text-900);
         border: 1px solid var(--primary-400);
         border-radius: 5px;
+        font-size: 18px;
     }
 
     .container__personal {
@@ -103,39 +106,28 @@
         border-color: var(--primary-base);
     }
 
-    .submit__button {
+    .btn-add {
         width: 100%;
         padding: 10px;
-        background-color: var(--primary-400);
-        color: var(--background-base);
-        border: none;
-        border-radius: 6px;
+        background-color: black;
+        color: white;
+        border: 2px solid green; 
+        border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
         text-transform: uppercase;
         font-weight: 500;
-        transition: all 0.1s ease-in-out;
     }
 
     .submit__button__enviar{
-        background-color: var(--secondary-400);
-        color: var(--background-50);
-        margin: 10px;
+        background-color: black;
+        color: white;
+        border: 2px solid green; 
         font-size: 16px;
         font-weight: 600;
         padding: 12px 20px;
-        border: none;
         border-radius: 6px;
         text-transform: uppercase;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .submit__button__enviar:hover {
-        background-color: var(--secondary-500);
-    }
-
-    .submit__button:hover {
-        background-color: var(--primary-500);
     }
 
     .input__container select {
@@ -153,34 +145,10 @@
         transition: all 0.3s ease; 
     }
 
-    .input__container select:focus {
-        border-color: var(--primary-500);
-    }
-
     .input__container select option {
-        color: var(--text-900); 
-        background-color: var(--background-100); 
+        color: white; 
+        background-color: black; 
         padding: 12px;
-    }
-
-    .input__container select option:hover {
-        background-color: var(--primary-400);
-        color: var(--background-50);
-    }
-
-    #vistaPrevia {
-        display: flex;
-        justify-content: center; 
-        align-items: center; 
-        margin-top: 10px; 
-        max-width: 100%; 
-        text-align: center; 
-    }
-
-    #vistaPrevia img {
-        max-width: 100%;
-        height: auto;
-        display: block; 
     }
 
     .info__container {
@@ -241,49 +209,6 @@
         visibility: visible;
     }
 
-    .modal {
-        display: none; 
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.5); 
-    }
-
-    .modal__content {
-        background-color: #fff;
-        color: black;
-        margin: 15% auto; 
-        padding: 20px;
-        border: 1px solid #888;
-        border-radius: 5px;
-        width: 80%; 
-        max-width: 400px; 
-        text-align: center;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .modal__close {
-        color: #aaa;
-        float: right;
-        font-size: 20px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    .modal__close:hover, .modal__close:focus {
-        color: black;
-        text-decoration: none;
-    }
-
-    .container__component .label__name {
-        margin-bottom: 10px; 
-        display: block; 
-    }
-
     @media (max-width: 800px) {
         .container__form {
           width: 100%;
@@ -328,13 +253,12 @@
             <a href="#">Contacto</a>
         </div>
 
-        <!-- Elaborado por Abraham Farfan -->
-        <h1 class="title__principal">Contactanos</h1>
+        <h1 class="title__principal">Registra tu contacto para la iniciativa</h1>
         <article class="container__principal">
-            <form class="container__form" id="formulario" method="POST" enctype="multipart/form-data" action="contact.php?action=add">
+            <form class="container__form" id="formulario" method="POST" action="index.php?c=contact&f=new&id=<?php echo $parametro; ?>">
                 <section class="container__first">
                     <fieldset id="container__second">
-                        <legend id="label__form">Datos Personales</legend>
+                        <legend id="label__form">Datos del Contacto</legend>
                         <section class="container__personal">
                             <div class="container__component">
                                 <label class="label__name" for="nombres">Nombres: </label>
@@ -372,10 +296,9 @@
                         </section>
 
                         <div class="container__component">
-                            <label class="label__name" for="prioridad">Prioridad: </label>
+                            <label class="label__name" for="prioridad">Seleccione la Prioridad: </label>
                             <div class="input__container">
                                 <select name="prioridad" id="prioridad">
-                                    <option value="" disabled selected>Selecciona la prioridad</option>
                                     <option value="alta">Alta</option>
                                     <option value="media">Media</option>
                                     <option value="baja">Bajo</option>
@@ -400,31 +323,13 @@
                         </div>
 
                         <div class="container__component">
-                            <label class="label__name">Foto de la iniciativa: </label>
-                            <div class="input__container">
-                                <span class="error__message"></span>
-                                <input type="file" id="foto" name="Cargar foto" accept="image/*" style="display: none;" />
-                                <label for="foto" class="submit__button__enviar">Cargar Foto</label>
-                            </div>  
-                            <div id="vistaPrevia" class="container__component"></div>
-                        </div>
-
-                        <div class="container__component">
-                            <button type="submit" class="submit__button">Enviar mensaje</button>
+                            <button type="submit" class="btn-add">Registrar</button>
                         </div>
                     </fieldset>
-
-                    <div id="modalExito" class="modal">
-                        <div class="modal__content">
-                            <span class="modal__close">&times;</span>
-                            <p class="modal__message">Su mensaje fue enviado exitosamente.</p>
-                        </div>
-                    </div>
                 </section>
             </form>
         </article>
     </main>
 </body>
-
-<script type="module" src="public/js/initiatives/contact.js"></script>
+<!--<script type="module" src="public/js/initiatives/contact.js"></script>-->
 <?php require_once FOOTER; ?>

@@ -1,4 +1,5 @@
 <?php
+//Autor:Farfan Sanchez Abraham
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -19,8 +20,11 @@ class ContactController
     public function viewall()
     {
         try{
-            $parametro = htmlentities($_GET['id']??"");
+            $parametro = htmlentities($_GET['id']?? 0);
             $contactos = $this->model->getByIniciativaId($parametro);
+            $session_id = $_SESSION['user']['ID'] ?? 0;
+            
+            $isUserAdmin = $this->model->isUserAdmin($parametro, $session_id);
 
             require_once VCONTACT . 'viewall.php';
         }catch(PDOException $e){
@@ -28,72 +32,111 @@ class ContactController
         }
     }
     
-    public function view($id)
+    public function view()
     {
-        $contacto = $this->model->getById(limpiar($id));
-        if (!$contacto) {
-            redirectWithMessage(false, "", "El contacto no existe.", 'index.php?c=contacto');
-            return;
+        try{
+            $parametro = htmlentities($_GET['id']??"");
+            $contacto = $this->model->getById($parametro);
+
+            require_once VCONTACT . 'view.php';
+        }catch(PDOExceptrion $e){
+            error_log('Error en ContactController@view: ' . $e->getMessage());
         }
-        $title = 'Contacto';
-        require_once VCONTACT . 'view.php';
     }
 
-    public function new()
+    public function search()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            try {
-                $contacto = new Contact();
-                $contacto->setNombre(limpiar($_POST['nombres'] ?? ''));
-                $contacto->setApellidos(limpiar($_POST['apellidos'] ?? ''));
-                $contacto->setEmail(limpiar($_POST['correoElectronico'] ?? ''));
-                $contacto->setTelefono(limpiar($_POST['telefono'] ?? ''));
-                $contacto->setPrioridad(limpiar($_POST['prioridad'] ?? ''));
-                $contacto->setAsunto(limpiar($_POST['asunto'] ?? ''));
-                $contacto->setMensaje(limpiar($_POST['mensaje'] ?? ''));
-
-                if (!empty($_FILES['foto']['size'])) {
-                    $imagen = $this->uploadFile($_FILES['foto']);
-                    if ($imagen) {
-                        $contacto->setImagen($imagen);
-                    } else {
-                        redirectWithMessage(false, "", "Error al cargar la imagen.", 'index.php?c=contacto');
-                        return;
-                    }
-                }
-
-                $result = $this->model->add($contacto);
-                redirectWithMessage($result, "Contacto agregado correctamente.", "No se pudo agregar el contacto.", 'index.php?c=contacto');
-            } catch (Exception $e) {
-                error_log("Error en ContactController::new - " . $e->getMessage());
-                redirectWithMessage(false, "", "Ocurrió un error inesperado.", 'index.php?c=contacto');
-            }
-        } else {
-            require_once VACTIVIDAD . 'new.php';
+        try {
+            $asunto = htmlentities($_GET['b'] ?? '');
+            $iniciativa = htmlentities($_GET['id'] ?? '');
+            $contactos = $this->model->searchByAsunto('%' . $asunto . '%', $iniciativa);
+            
+            echo json_encode($contactos);
+        } catch (PDOException $e) {
+            error_log('Error en ContactController@search: ' . $e->getMessage());
         }
+    }
+    
+    public function new_view(){
+        try{
+            $parametro = htmlentities($_GET['id'] ?? '');
+            require_once VCONTACT . 'new.php';
+        }catch(PDOException $e){
+            error_log('Error en ContactController@add: ' . $e->getMessage());
+        }
+    }
+
+    public function new(){
+        try{
+            $parametro = htmlentities($_GET['id'] ?? '');
+            $contactoNuevo = $_POST;
+            $cot = $this->populateAdd($contactoNuevo);  
+            $cot->setIdIniciativa($parametro);
+            $cot->setIdUsuario($_SESSION['user']['ID']);
+            $cont=$this->model->add($cot);
+            
+            header("Location: index.php?c=contact&f=viewall&id=$parametro");
+        }catch(PDOException $e){
+            error_log('Error en ContactController@add: ' . $e->getMessage());
+        }
+    }
+
+    public function populateAdd($contactoNuevo){
+        $contacto = new Contacto();
+        $contacto->setNombres($contactoNuevo['nombres']);
+        $contacto->setApellidos($contactoNuevo['apellidos']);
+        $contacto->setEmail($contactoNuevo['correoElectronico']);
+        $contacto->setTelefono($contactoNuevo['telefono']);
+        $contacto->setPrioridad($contactoNuevo['prioridad']);
+        $contacto->setAsunto($contactoNuevo['asunto']);
+        $contacto->setMensaje($contactoNuevo['mensaje']);
+        return $contacto;
+    }
+
+    public function new_update(){
+        try{
+            $parametro = htmlentities($_GET['id']);
+            $contacto = $this->model->getById($parametro);
+            require_once VCONTACT . 'update.php';
+        }catch(PDOException $e){
+            error_log('Error en ContactController@update: ' . $e->getMessage());
+        }
+    }
+
+    public function edit(){
+        try{
+            $parametro = htmlentities($_GET['id']);
+            $contacto = $this->populate();
+            $exito = $this->model->update($contacto);
+            header("Location: index.php?c=contact&f=viewall&id=$parametro");
+        }catch(PDOException $e){
+            error_log('Error en ContactController@update: ' . $e->getMessage());
+        }
+    }
+
+    public function populate(){
+        $contacto = new Contacto();
+        $contacto->setId($_POST['id']);
+        $contacto->setNombres($_POST['nombres']);
+        $contacto->setApellidos($_POST['apellidos']);
+        $contacto->setEmail($_POST['correoElectronico']);
+        $contacto->setTelefono($_POST['telefono']);
+        $contacto->setPrioridad($_POST['prioridad']);
+        $contacto->setAsunto($_POST['asunto']);
+        $contacto->setMensaje($_POST['mensaje']);
+        return $contacto;
     }
 
     public function delete()
     {
-        $id = limpiar($_REQUEST['id'] ?? "");
-        if (!$id) {
-            redirectWithMessage(false, "", "ID inválido.", 'index.php?c=contacto&f=viewall');
-            return;
+        try{
+            $parametro = htmlentities($_GET['id']);
+            $parametro2 = htmlentities($_GET['i']);
+            $contacto = $this->model->deleteId($parametro);
+            
+            header("Location: index.php?c=contact&f=viewall&id=$parametro2");
+        }catch(PDOException $e){
+            error_log('Error en ContactController@deleteId: ' . $e->getMessage());
         }
-
-        $exito = $this->model->delete($id);
-        redirectWithMessage($exito, "Contacto eliminado correctamente.", "No se pudo eliminar el contacto.", 'index.php?c=contacto&f=viewall');
-    }
-
-    private function uploadFile($file)
-    {
-        $uploadDir = 'uploads/';
-        $fileName = basename($file['name']);
-        $targetFile = $uploadDir . $fileName;
-
-        if (move_uploaded_file($file['tmp_name'], $targetFile)) {
-            return $targetFile;
-        }
-        return false;
     }
 }

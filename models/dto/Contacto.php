@@ -1,8 +1,8 @@
 <?php
-
+//Autor:Farfan Sanchez Abraham
 class Contacto{
 
-    private $id, $idIniciativa, $idUsuario, $nombres, $apellidos, $email, $telefono, $prioridad, $asunto, $mensaje, $imagen;
+    private $id, $idIniciativa, $idUsuario, $nombres, $apellidos, $email, $telefono, $prioridad, $asunto, $mensaje;
 
     function __construct() {}
 
@@ -48,10 +48,6 @@ class Contacto{
         return $this->mensaje;
     }
 
-    function getImagen(){
-        return $this->imagen;
-    }
-
     //setters
     function setId($id){
         $this->id=$id;
@@ -91,9 +87,5 @@ class Contacto{
 
     function setMensaje($mensaje){
         $this->mensaje=$mensaje;
-    }
-    
-    function setImagen($imagen){
-        $this->imagen=$imagen;
     }
 }

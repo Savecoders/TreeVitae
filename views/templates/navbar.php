@@ -419,9 +419,8 @@ if (!isset($_SESSION)) {
                     <li class="nav__item">
                         <a href="index.php?c=index&f=index&p=preguntas">Preguntas</a>
                     </li>
-                    <li class="nav__item">
-
-                        <a href="index.php?c=contact&f=viewall">About</a>
+                    <li class="nav__item"
+                        <a href="index.php?c=contact&f=new">About</a>
                     </li>
 
                     <?php if (isset($_SESSION['user'])) { ?>
