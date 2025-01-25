@@ -8,14 +8,8 @@ services:
     ports:
       - '80:80'
     volumes:
-      - ./:/var/www/html
-      - ./apache.conf:/etc/apache2/sites-available/000-default.conf
+      - ./:/var/www/html:rw
     environment:
       - PHP_ENV=production
       - APACHE_DOCUMENT_ROOT=/var/www/html
     restart: always
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
