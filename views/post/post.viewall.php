@@ -1,4 +1,5 @@
 <?php require_once HEADER; ?>
+<!-- Autor: Vivanco Garcia Angel Enrique -->
 <style>    
     #buscador {
         padding: 8px;
@@ -71,16 +72,16 @@
 </style>
 
 <main class="main__container__content">
-    <h1 class="title__principal">Lista de Posts</h1>
+    <h1 class="title__principal">Posts</h1>
 
-    <form class="formulario" >
+    <!-- <form class="formulario" >
         <input id="buscador" name="asunto" placeholder="Buscar por asunto..." value="<?= htmlspecialchars($_GET['asunto'] ?? '') ?>">
         <?php if (isset($isUserAdmin) && !$isUserAdmin) { ?>
             <div>
                 <a href="index.php?c=contact&f=new_view&id=<?php echo $parametro;?>" class="btn-add">Crear contacto</a>
             </div>
         <?php } ?>
-    </form>
+    </form> -->
 
     <div class="container_post_list">
         <?php foreach ($post as $postt): ?>

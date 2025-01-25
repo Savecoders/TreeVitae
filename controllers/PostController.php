@@ -18,7 +18,6 @@ class PostController
         $this->model = new PostRepository();
     }
 
-    // Método para mostrar la vista del formulario de creación de un nuevo post
     public function new_view()
     {
         try {
@@ -29,26 +28,21 @@ class PostController
         }
     }
 
-    // Método para procesar la creación de un nuevo post
     public function new()
     {
         try {
             $parametro = htmlentities($_GET['id'] ?? '');
-            $postData = $_POST; // Datos enviados desde el formulario
-            $newPost = $this->populateAdd($postData); // Llenar los datos en el objeto DTO
-            $newPost->setIniciativaId($parametro); // Asocia el post a la iniciativa (u otro contexto)
-            $newPost->setAutorId($_SESSION['user']['ID'] ?? 0); // Asigna el usuario que crea el post
-
-            $this->model->add($newPost); // Llama al método para agregar el post en la base de datos
-
-            // Redirige a la vista de todos los posts
+            $postData = $_POST; 
+            $newPost = $this->populateAdd($postData); 
+            $newPost->setIniciativaId($parametro); 
+            $newPost->setAutorId($_SESSION['user']['ID'] ?? 0); 
+            $this->model->add($newPost); 
             header("Location: index.php?c=iniciativa&f=view&id=$parametro");
         } catch (PDOException $e) {
             error_log('Error en PostController@new: ' . $e->getMessage());
         }
     }
 
-    // Método para mapear los datos del formulario al objeto DTO
     private function populateAdd(array $postData): Post
     {
         $post = new Post();
@@ -63,28 +57,22 @@ class PostController
     public function search()
     {
         try {
-            $asunto = htmlentities($_GET['b'] ?? '');
-            $iniciativa = htmlentities($_GET['id'] ?? '');
-            $contactos = $this->model->searchByAsunto('%' . $asunto . '%', $iniciativa);
-            
-            echo json_encode($contactos);
+            $titulo = htmlentities($_GET['t'] ?? ''); 
+            $posts = $this->model->searchByTitle('%' . $titulo . '%'); 
+    
+            echo json_encode($posts); 
         } catch (PDOException $e) {
-            error_log('Error en ContactController@search: ' . $e->getMessage());
+            error_log('Error en PostController@search: ' . $e->getMessage());
         }
     }
-
+    
     public function viewall()
     {
         try {
-            // Obtener el parámetro de la iniciativa desde la URL
             $parametro = htmlentities($_GET['id'] ?? 0);   
-            // Obtener todos los posts relacionados con la iniciativa
             $post = $this->model->getByIniciativaId($parametro);    
-            // Obtener el ID del usuario actual desde la sesión
             $session_id = $_SESSION['user']['ID'] ?? 0;   
-            // Verificar si el usuario es autor de la iniciativa
             $isAutor = $this->model->isUserAutor($parametro, $session_id);  
-            // Incluir la vista para mostrar los posts
             require_once VPOST . 'viewall.php';
         } catch (PDOException $e) {
             error_log('Error en PostController@viewall: ' . $e->getMessage());
@@ -95,7 +83,6 @@ class PostController
     {
         try {
             $post= $this->model->obtenerPosts();   
-            // Incluir la vista para mostrar los posts
             require_once VPOST . 'viewall.php';
         } catch (PDOException $e) {
             error_log('Error en PostController@viewall: ' . $e->getMessage());
@@ -112,39 +99,37 @@ class PostController
         try {
             $parametro = htmlentities($_GET['id']);
             $post = $this->model->getById($parametro);
-            require_once VPOST . 'update.php';
+            require_once VPOST . 'update.php'; 
         } catch (PDOException $e) {
             error_log('Error en PostController@new_update: ' . $e->getMessage());
         }
     }
 
-    public function edit(){
-        try{
+    public function edit() {
+        try {
             $parametro = htmlentities($_GET['id']);
-            $parametro2 = htmlentities($_GET['i']);
-            $datos = $_POST;
-            $post = $this->populate($datos);
-            $post -> setId($parametro);
-            $post -> setIniciativaId($parametro2);
+            $post = $this->populate();
             $exito = $this->model->update($post);
-            echo $parametro2? "Hola":"Chao";
-            var_dump($post);
-        }catch(PDOException $e){
-            error_log('Error en ContactController@update: ' . $e->getMessage());
+            if ($exito) {
+                header("Location: index.php?c=post&f=viewall&id=$parametro");
+            } else {
+                header("Location: index.php?c=post&f=new_update&id=$parametro&error=1");
+            }
+        } catch (PDOException $e) {
+            error_log('Error en PostController@edit: ' . $e->getMessage());
         }
     }
 
-    public function populate($data) {
+    public function populate() {
         $post = new Post();
-        $post->setAutorId($_SESSION['user']['ID']);  
-        $post->setTitulo($data['titulo']);
-        $post->setSubtitulo($data['subtitulo']);
-        $post->setContenido($data['contenido']);
-        $post->setPermiteComentarios($data['permite_comentarios']); 
-        
+        $post->setId($_POST['id']);
+        $post->setTitulo($_POST['titulo']);
+        $post->setSubtitulo($_POST['subtitulo']);
+        $post->setContenido($_POST['contenido']);
+        $post->setPermiteComentarios($_POST['permite_comentarios']);
+        $post->setFechaPublicacion(date('Y-m-d H:i:s')); 
         return $post;
     }
-    
 
     public function delete()
     {

@@ -25,7 +25,7 @@ class DB
         $DB_HOST = 'localhost';
 
       
-        $DB_PORT = '3308'; //no olvidarme de cambiar el puerto cuando tenga todo 
+        $DB_PORT = '3306'; //no olvidarme de cambiar el puerto cuando tenga todo 
 
 
         try {
