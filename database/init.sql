@@ -65,6 +65,7 @@ CREATE TABLE `iniciativas` (
   `logo` LONGBLOB DEFAULT NULL,
   `cover` LONGBLOB DEFAULT NULL,
   `creador_id` bigint(20) DEFAULT NULL,
+  `estado` ENUM('Activa', 'Inactiva') NOT NULL DEFAULT 'Activa',
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`ID`),
   KEY `creador_id` (`creador_id`),

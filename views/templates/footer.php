@@ -7,10 +7,13 @@
     <div class="footer__container">
         <section class="footer__section">
             <h2>Acerca de nosotros</h2>
-            <a href="#" class="btn primary__with-icon">
-                <img src="public/assets/icons/user.svg" alt="User icon" />
-                Login
-            </a>
+            <a class="link" href="index.php?c=index&f=index&p=preguntas">Quienes somos</a>
+            <?php if (!isset($_SESSION['user'])) { ?>
+                <a href="index.php?c=user&f=login_view" class="btn primary__with-icon">
+                    <img src="public/assets/icons/user.svg" alt="User icon" />
+                    Login
+                </a>
+            <?php } ?>
         </section>
 
         <section class="footer__section">
