@@ -34,6 +34,7 @@ CREATE TABLE `usuarios` (
   `foto_perfil` LONGBLOB DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
   `genero` ENUM('M', 'F', 'O') DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT 1,
   `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`ID`),
   UNIQUE KEY `email` (`email`),
