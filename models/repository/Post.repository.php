@@ -143,24 +143,16 @@ class PostRepository
     public function update($post)
     {
         try {
-            $sql = "UPDATE posts 
-                    SET 
-                        titulo = :titulo, 
-                        subtitulo = :subtitulo, 
-                        contenido = :contenido, 
-                        permite_comentarios = :permite_comentarios,
-                        fecha_publicacion = :fecha_publicacion
-                    WHERE 
-                        id = :id";   
+            $sql = "update posts set (iniciativa_id,titulo,subtitulo,contenido,permite_comentarios) values (:iniciativa_id, :titulo, :subtitulo, :contenido, :permite_comentarios) where ID = :id"; 
             $stmt = $this->con->prepare($sql);        
             // Vincula los parámetros de la consulta con los valores del objeto Post
+            $stmt->bindParam(':iniciativa_id', $post->getIniciativaId(), PDO::PARAM_INT);
             $stmt->bindParam(':titulo', $post->getTitulo(), PDO::PARAM_STR);
             $stmt->bindParam(':subtitulo', $post->getSubtitulo(), PDO::PARAM_STR);
             $stmt->bindParam(':contenido', $post->getContenido(), PDO::PARAM_STR);
-            $stmt->bindParam(':permite_comentarios', $post->getPermiteComentarios(), PDO::PARAM_INT);
-            $stmt->bindParam(':fecha_publicacion', $post->getFechaPublicacion(), PDO::PARAM_STR);
+            $stmt->bindParam(':permite_comentarios', $post->getPermiteComentarios(), PDO::PARAM_BOOL);
             $stmt->bindParam(':id', $post->getId(), PDO::PARAM_INT);
-    
+
             // Ejecuta la consulta
             $res = $stmt->execute();
     

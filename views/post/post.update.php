@@ -88,7 +88,7 @@
 
         <h1 class="title__principal">Editar Post</h1>
         <article class="container__principal">
-            <form class="container__form" id="formulario" method="POST" action="index.php?c=post&f=edit&id=<?php echo $post["ID"]; ?>">
+            <form class="container__form" id="formulario" method="POST" action="index.php?c=post&f=edit&id=<?php echo $post["ID"]; ?>&i=<?php echo $post["iniciativa_id"]; ?>">
                 <section id="container__second">
                     <legend id="label__form">Datos del Post</legend>
 
