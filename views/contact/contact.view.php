@@ -19,6 +19,7 @@
         font-weight: 600;
         font-family: 'Raleway', sans-serif;
         font-size: 34px;
+        margin: 20px;
     }
 
     .contact-details{

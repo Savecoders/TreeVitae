@@ -23,7 +23,8 @@ class DB
         $DB_USER = 'root';
         $DB_PASSWORD = '';
         $DB_HOST = 'localhost';
-        $DB_PORT = '3306'; //Cambiar el 6 por el 8 al subir
+      
+        $DB_PORT = '3306'; //no olvidarme de cambiar el puerto cuando tenga todo 
 
         try {
             loadEnv($dir);

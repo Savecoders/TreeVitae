@@ -106,22 +106,23 @@ CREATE TABLE `comentarios` (
 -- Rest of dependent tables in order...
 
 -- Estructura de tabla para la tabla `actividades`
-DROP TABLE IF EXISTS actividades;
-CREATE TABLE actividades (
-  ID bigint(20) NOT NULL AUTO_INCREMENT,
-  iniciativa_id bigint(20) DEFAULT NULL,
-  nombre text NOT NULL,
-  descripcion text DEFAULT NULL,
-  fecha_inicio date NOT NULL,
-  fecha_fin date NOT NULL,
-  direccion text NOT NULL,
-  otorga_certificado tinyint(1) NOT NULL DEFAULT 0,
-  fecha_registro timestamp NOT NULL DEFAULT current_timestamp(),
-  estado tinyint(1) DEFAULT 1,
-  PRIMARY KEY (ID),
-  KEY iniciativa_id (iniciativa_id),
-  CONSTRAINT actividades_ibfk_1 FOREIGN KEY (iniciativa_id) REFERENCES iniciativas (ID)
+DROP TABLE IF EXISTS `actividades`;
+CREATE TABLE `actividades` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `iniciativa_id` bigint(20) DEFAULT NULL,
+  `nombre` text NOT NULL,
+  `descripcion` text DEFAULT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_fin` date NOT NULL,
+  `direccion` text NOT NULL,
+  `otorga_certificado` tinyint(1) NOT NULL DEFAULT 0,
+  `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp(),
+  `estado` tinyint(1) DEFAULT 1
+  PRIMARY KEY (`ID`),
+  KEY `iniciativa_id` (`iniciativa_id`),
+  CONSTRAINT `actividades_ibfk_1` FOREIGN KEY (`iniciativa_id`) REFERENCES `iniciativas` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- Estructura de tabla para la tabla `fotos`
 DROP TABLE IF EXISTS `fotos`;
@@ -157,6 +158,8 @@ CREATE TABLE `iniciativa_tags` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Estructura de tabla para la tabla `usuarios_iniciativas_roles`
+-- Drop existing table
+-- Recreate with new PRIMARY KEY including rol_id
 DROP TABLE IF EXISTS `usuarios_iniciativas_roles`;
 CREATE TABLE IF NOT EXISTS `usuarios_iniciativas_roles` (
   `usuario_id` bigint(20) NOT NULL,
@@ -168,7 +171,6 @@ CREATE TABLE IF NOT EXISTS `usuarios_iniciativas_roles` (
   FOREIGN KEY (`iniciativa_id`) REFERENCES `iniciativas` (`ID`) ON DELETE CASCADE,
   FOREIGN KEY (`rol_id`) REFERENCES `roles` (`ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- Estructura de tabla para la tabla Galeria de fotos de la iniciativa
 DROP TABLE IF EXISTS `galeria_iniciativa`;
 CREATE TABLE `galeria_iniciativa` (
