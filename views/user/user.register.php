@@ -83,6 +83,7 @@ if (!isset($_SESSION)) {
             border-radius: 8px;
             font-size: 2.2ch;
             cursor: pointer;
+            margin-top: 10px;
             margin-bottom: 10px;
         }
 
@@ -124,7 +125,6 @@ if (!isset($_SESSION)) {
             font-weight: 500;
             text-align: center;
             text-decoration: none;
-
         }
 
         @media (max-width: 600px) {
@@ -213,30 +213,29 @@ if (!isset($_SESSION)) {
                     </div>
                     <span class="error-message">Por favor selecciona tu género</span>
                 </div>
-
-                <button class="submit-btn">Registrarse</button>
                 <a class="link_outerline" href="index.php?c=user&f=login_view">Ya tienes una cuenta? Inicia Sesion</a>
+                <button class="submit-btn">Registrarse</button>
+                <a class="link_outerline" href="index.php?c=iniciativa&f=viewall">Pagina principal</a>
             </form>
-            <?php if (isset($_SESSION['mensaje'])) { ?>
-                <div class="notify-messages">
-                    <?php if ($_SESSION['type'] == 'success') { ?>
-                        <div class="message success" role="alert">
-                            <?php echo $_SESSION['mensaje']; ?>
-                            <i class="fa-solid fa-circle-check"></i>
-                        </div>
-                    <?php } else { ?>
-                        <div class="message error" role="alert">
-                            <?php echo $_SESSION['mensaje']; ?>
-                            <i class="fa-solid fa-circle-exclamation"></i>
-                        </div>
-                    <?php } ?>
-                </div>
-
-            <?php
-                unset($_SESSION['mensaje']);
-                unset($_SESSION['type']);
-            } ?>
         </div>
+        <?php if (isset($_SESSION['mensaje'])) { ?>
+            <div class="notify-messages">
+                <?php if ($_SESSION['type'] == 'success') { ?>
+                    <div class="message success" role="alert">
+                        <?php echo $_SESSION['mensaje']; ?>
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                <?php } else { ?>
+                    <div class="message error" role="alert">
+                        <?php echo $_SESSION['mensaje']; ?>
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                    </div>
+                <?php } ?>
+            </div>
+        <?php
+            unset($_SESSION['mensaje']);
+            unset($_SESSION['type']);
+        } ?>
     </main>
     <script type="module" src="public/js/components/message.js"></script>
     <script type="module" src="public/js/user/registro.js"></script>

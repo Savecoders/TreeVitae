@@ -68,6 +68,14 @@
             font-size: 40px;
         }
 
+        .link_outerline {
+            color: var(--primary-800);
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+
+        }
+
         /* Estilos responsivos */
         @media (max-width: 768px) {
             .update-container {
@@ -158,6 +166,7 @@
             <form action="index.php?c=user&f=delete" method="POST">
                 <input type="hidden" name="id" value="<?php echo $userData['ID']; ?>">
                 <button type="submit" class="delete-btn">Eliminar Cuenta</button>
+                <a class="link_outerline" href="index.php?c=user&f=profile_view">Atras</a>
             </form>
         </div>
     </main>

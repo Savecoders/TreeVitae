@@ -1,4 +1,5 @@
 <?php
+//autor:Alex Vera Lopez
 if (!isset($_SESSION)) {
     session_start();
 }

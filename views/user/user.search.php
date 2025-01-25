@@ -28,7 +28,7 @@ if (!isset($_SESSION)) {
         .search-form input {
             width: 100%;
             padding: 10px;
-            border: 1px solid var(--border-color);
+
             border-radius: 4px;
         }
 
@@ -39,6 +39,7 @@ if (!isset($_SESSION)) {
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            font-size: 15px;
         }
 
         .table-container {
@@ -71,6 +72,10 @@ if (!isset($_SESSION)) {
             text-decoration: underline;
         }
 
+        h1 {
+            margin-bottom: x;
+        }
+
         .error-message {
             color: var(--error-color);
             font-size: 1.2em;
@@ -81,7 +86,7 @@ if (!isset($_SESSION)) {
 
 <body>
     <main class="main-container">
-        <h1>Búsqueda de Usuarios</h1>
+        <h1>Búsqueda de Usuarios con Iniciativas</h1>
         <form class="search-form" action="index.php" method="GET">
             <input type="hidden" name="c" value="user">
             <input type="hidden" name="f" value="search_view">
@@ -127,25 +132,8 @@ if (!isset($_SESSION)) {
                 <p class="error-message">No se encontraron usuarios con iniciativas que coincidan con el término de búsqueda.</p>
             <?php } ?>
         </div>
-        <?php if (isset($_SESSION['mensaje'])) { ?>
-            <div class="notify-messages">
-                <?php if ($_SESSION['type'] == 'success') { ?>
-                    <div class="message success" role="alert">
-                        <?php echo $_SESSION['mensaje']; ?>
-                        <i class="fa-solid fa-circle-check"></i>
-                    </div>
-                <?php } else { ?>
-                    <div class="message error" role="alert">
-                        <?php echo $_SESSION['mensaje']; ?>
-                        <i class="fa-solid fa-circle-exclamation"></i>
-                    </div>
-                <?php } ?>
-            </div>
-        <?php
-            unset($_SESSION['mensaje']);
-            unset($_SESSION['type']);
-        } ?>
     </main>
+    <script type="module" src="public/js/components/message.js"></script>
 </body>
 
 </html>
