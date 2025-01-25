@@ -117,6 +117,21 @@
         text-transform: uppercase;
     }
 
+    .btn-cancel{
+        display: inline-block;
+        padding: 10px;
+        background-color: black; 
+        color: white;
+        font-size: 16px;
+        text-decoration: none;
+        text-align: center;
+        border-radius: 6px;
+        border: 2px solid green; 
+        margin-top: 20px;
+        width: 100%;
+        text-transform: uppercase;
+    }
+
     .submit__button__enviar{
         background-color: black;
         color: white;
@@ -322,6 +337,10 @@
 
                         <div class="container__component">
                             <button type="submit" class="btn-add">Registrar</button>
+                        </div>
+
+                        <div class="container__component">
+                            <a href="index.php?c=contact&f=viewall&id=<?php echo limpiar($parametro); ?>" class="btn-cancel">Cancelar</a>
                         </div>
                     </fieldset>
                 </section>
