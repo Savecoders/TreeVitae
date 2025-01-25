@@ -1,6 +1,6 @@
 <?php require_once HEADER; ?>
 <!-- Autor: Vivanco Garcia Angel Enrique -->
-<style>    
+<style>
     #buscador {
         padding: 8px;
         width: 300px;
@@ -12,6 +12,7 @@
         flex: 1;
         min-width: 200px;
     }
+
     .formulario {
         display: flex;
         align-items: center;
@@ -20,6 +21,7 @@
         justify-content: center;
         margin-bottom: 20px;
     }
+
     .post-card {
         display: flex;
         justify-content: space-between;
@@ -27,7 +29,7 @@
         border: 1px solid #ccc;
         border-radius: 10px;
         margin-bottom: 20px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .post-content {
@@ -51,19 +53,8 @@
         justify-content: space-between;
     }
 
-    .btn {
-        padding: 10px;
-        margin: 5px 0;
-        background-color: #00ffcc;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        text-align: center;
-        cursor: pointer;
-    }
-
     .btn.delete {
-        background-color: #ff6464;
+        background-color: var(--danger-base);
     }
 
     .btn:hover {
@@ -78,7 +69,7 @@
         <input id="buscador" name="asunto" placeholder="Buscar por asunto..." value="<?= htmlspecialchars($_GET['asunto'] ?? '') ?>">
         <?php if (isset($isUserAdmin) && !$isUserAdmin) { ?>
             <div>
-                <a href="index.php?c=contact&f=new_view&id=<?php echo $parametro;?>" class="btn-add">Crear contacto</a>
+                <a href="index.php?c=contact&f=new_view&id=<?php echo $parametro; ?>" class="btn-add">Crear contacto</a>
             </div>
         <?php } ?>
     </form> -->
@@ -99,53 +90,5 @@
         <?php endforeach; ?>
     </div>
 </main>
-
-<script>
-    const txtBuscar = document.getElementById("buscador");
-    txtBuscar.addEventListener("keyup", cargar);
-    function cargar(){
-        const url = `index.php?c=contact&f=search&b=${txtBuscar.value}&id=<?php echo $parametro ?>`;
-        const xmlh = new XMLHttpRequest();
-        xmlh.open("GET", url, true); 
-        xmlh.send();
-        xmlh.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                const respuesta = this.responseText; 
-                actualizar(respuesta);
-            }
-        };
-    }
-
-    function actualizar(respuesta) {
-        const tbody = document.getElementById("tablaContacto");
-        let contactos = JSON.parse(respuesta); 
-        let resul = "";
-
-        contactos.forEach(contacto => {
-            resul += `<tr>
-            <td>${contacto.ID}</td>
-            <td>${contacto.prioridad}</td>
-            <td>${contacto.asunto}</td>
-                <td>${contacto.mensaje}</td>
-                        <?php if (isset($isUserAdmin) && $isUserAdmin) { ?>
-                            <td>
-                                <a href="index.php?c=contact&f=view&i=${contacto.id}" class="btn-view">Ver</a>
-                            </td>
-                        <?php } ?>
-                        <?php if (isset($isUserAdmin) && !$isUserAdmin) { ?>
-                            <td>
-                                <a href="index.php?c=contact&f=new_update&i=${contacto.id}" class="btn-edit">Modificar</a>
-                            </td>
-                        <?php } ?>
-                        <?php if (isset($isUserAdmin) && $isUserAdmin) { ?>
-                            <td>
-                                <a href="index.php?c=contact&f=delete&i=${contacto.id}&id=${contacto.iniciativa_id}" class="btn-delete">Eliminar</a>
-                            </td>
-                        <?php } ?>       
-                </tr>`;
-            });
-            tablaContacto.innerHTML = resul; 
-        }
-    </script>
 
 <?php require_once FOOTER; ?>
