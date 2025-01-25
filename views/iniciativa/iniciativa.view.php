@@ -273,6 +273,20 @@ require_once 'utils/dateFormatter.php';
                         Contactarte con la iniciativa?
                     </a>
                 <?php } ?>
+
+                <?php if((isset($isUserAdmin) && $isUserAdmin) || (isset($isUserJoin) && $isUserJoin)) { ?>
+                    <hr class="separetor__horizontal" />
+                    <a href="index.php?c=post&f=new_view&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn outerline btn-animation">
+                        Crear post
+                    </a>
+                <?php } ?>
+
+                <?php if((isset($isUserAdmin) && $isUserAdmin) || (isset($isUserJoin) && $isUserJoin)) { ?>
+                    <hr class="separetor__horizontal" />
+                    <a href="index.php?c=post&f=viewall&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn outerline btn-animation">
+                        Revisar post
+                    </a>
+                <?php } ?>
             </aside>
 
             <article class="about-initiative">
