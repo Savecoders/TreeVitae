@@ -1,4 +1,5 @@
 <?php
+//autor:Alex Vera Lopez
 //DTO de usuario
 class Usuario
 {

@@ -1,8 +1,4 @@
-<?php
-if (!isset($_SESSION)) {
-    session_start();
-}
-?>
+<!--autor:Alex Vera Lopez-->
 <!DOCTYPE html>
 <html>
 
