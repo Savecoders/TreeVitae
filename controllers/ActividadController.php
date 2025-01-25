@@ -1,5 +1,5 @@
 <?php
-
+//Autor:Agurto Pincay Jose
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -83,14 +83,14 @@ class ActividadController
         if (empty($datos['fecha_inicio'])) {
             $errores['fecha_inicio'] = "La fecha de inicio es requerida.";
         } elseif ($datos['fecha_inicio'] < $fecha_hoy) {
-            $errores['fecha_inicio'] = "La fecha de inicio no puede ser anterior a hoy.";
+            $errores['fecha_inicio'] = "La fecha de inicio no puede ser anterior o igual a hoy.";
         }
         $form_data['fecha_inicio'] = limpiar($datos['fecha_inicio']) ?? "";
 
         if (empty($datos['fecha_cierre'])) {
             $errores['fecha_cierre'] = "La fecha de cierre es requerida.";
-        } elseif (!empty($datos['fecha_inicio']) && $datos['fecha_cierre'] < $datos['fecha_inicio']) {
-            $errores['fecha_cierre'] = "La fecha de cierre no puede ser anterior a la fecha de inicio.";
+        } elseif (!empty($datos['fecha_inicio']) && $datos['fecha_cierre'] <= $datos['fecha_inicio']) {
+            $errores['fecha_cierre'] = "La fecha de cierre no puede ser anterior o igual a la fecha de inicio.";
         }
         $form_data['fecha_cierre'] = limpiar($datos['fecha_cierre']) ?? "";
 

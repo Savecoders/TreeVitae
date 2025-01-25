@@ -1,5 +1,5 @@
 <?php
-
+//Autor:Agurto Pincay Jose
 class Actividad {
 
     private $id, $iniciativaID, $nombre, $descripcion, $fechaInicio, $fechaFin, 

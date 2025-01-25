@@ -65,6 +65,7 @@ CREATE TABLE `iniciativas` (
   `logo` LONGBLOB DEFAULT NULL,
   `cover` LONGBLOB DEFAULT NULL,
   `creador_id` bigint(20) DEFAULT NULL,
+  `estado` ENUM('Activa', 'Inactiva') NOT NULL DEFAULT 'Activa',
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`ID`),
   KEY `creador_id` (`creador_id`),
@@ -117,7 +118,7 @@ CREATE TABLE `actividades` (
   `direccion` text NOT NULL,
   `otorga_certificado` tinyint(1) NOT NULL DEFAULT 0,
   `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp(),
-  `estado` tinyint(1) DEFAULT 1
+  `estado` tinyint(1) DEFAULT 1,
   PRIMARY KEY (`ID`),
   KEY `iniciativa_id` (`iniciativa_id`),
   CONSTRAINT `actividades_ibfk_1` FOREIGN KEY (`iniciativa_id`) REFERENCES `iniciativas` (`ID`)

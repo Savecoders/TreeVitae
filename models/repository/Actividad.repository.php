@@ -1,5 +1,5 @@
 <?php
-
+//Autor:Agurto Pincay Jose
 require_once 'core/DB.php';
 require_once 'models/repository/IRepository.php';
 require_once 'models/dto/Actividad.php';
@@ -48,7 +48,7 @@ class ActividadRepository {
             $stmt->execute();
             $res= $stmt->fetch(PDO::FETCH_ASSOC);
             return $res;
-        }catch(PDOEXception $er){
+        }catch(PDOException $er){
             error_log("Error en selectOneActivity de ActividadesDAO ". $er->getMessage());
             return null;
         }
@@ -69,7 +69,7 @@ class ActividadRepository {
 
             $res= $stmt->execute(); 
             return $res;
-        }catch(PDOEXception $e){
+        }catch(PDOException $e){
             error_log("Error en insert de Actividad Repository ". $e->getMessage());
             return false;
         }
@@ -106,7 +106,7 @@ class ActividadRepository {
 
             $res= $stmt->execute();
             return $res;
-        }catch(PDOEXception $e){
+        }catch(PDOException $e){
             error_log("Error en logicalDelete de ActividadesDAO ". $e->getMessage());
             return false;
         }
@@ -123,7 +123,7 @@ class ActividadRepository {
             $stmt->execute();
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return count($res) > 0;
-        } catch (PDOEXception $er) {
+        } catch (PDOException $er) {
             error_log("Error en isUserAdmin de IniciativaRepository " . $er->getMessage());
             return false;
         }

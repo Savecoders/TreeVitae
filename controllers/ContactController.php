@@ -20,14 +20,14 @@ class ContactController
     public function viewall()
     {
         try{
-            $parametro = htmlentities($_GET['id']?? 0);
+            $parametro = limpiar($_GET['id']?? 0);
             $contactos = $this->model->getByIniciativaId($parametro);
             $session_id = $_SESSION['user']['ID'] ?? 0;
             
             $isUserAdmin = $this->model->isUserAdmin($parametro, $session_id);
 
             require_once VCONTACT . 'viewall.php';
-        }catch(PDOException $e){
+        }catch(Exception $e){
             error_log('Error en ContactController@viewall: ' . $e->getMessage());
         }
     }
@@ -35,11 +35,11 @@ class ContactController
     public function view()
     {
         try{
-            $parametro = htmlentities($_GET['id']??"");
+            $parametro = limpiar($_GET['id']??"");
             $contacto = $this->model->getById($parametro);
 
             require_once VCONTACT . 'view.php';
-        }catch(PDOException $e){
+        }catch(Exception $e){
             error_log('Error en ContactController@view: ' . $e->getMessage());
         }
     }
@@ -47,28 +47,28 @@ class ContactController
     public function search()
     {
         try {
-            $asunto = htmlentities($_GET['b'] ?? '');
-            $iniciativa = htmlentities($_GET['id'] ?? '');
+            $asunto = limpiar($_GET['b'] ?? '');
+            $iniciativa = limpiar($_GET['id'] ?? '');
             $contactos = $this->model->searchByAsunto('%' . $asunto . '%', $iniciativa);
             
             echo json_encode($contactos);
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             error_log('Error en ContactController@search: ' . $e->getMessage());
         }
     }
     
     public function new_view(){
         try{
-            $parametro = htmlentities($_GET['id'] ?? '');
+            $parametro = limpiar($_GET['id'] ?? '');
             require_once VCONTACT . 'new.php';
-        }catch(PDOException $e){
+        }catch(Exception $e){
             error_log('Error en ContactController@add: ' . $e->getMessage());
         }
     }
 
     public function new(){
         try{
-            $parametro = htmlentities($_GET['id'] ?? '');
+            $parametro = limpiar($_GET['id'] ?? '');
             $contactoNuevo = $_POST;
             $cot = $this->populateAdd($contactoNuevo);  
             $cot->setIdIniciativa($parametro);
@@ -80,7 +80,7 @@ class ContactController
             }
             
             header("Location: index.php?c=contact&f=viewall&id=$parametro");
-        }catch(PDOException $e){
+        }catch(Exception $e){
             error_log('Error en ContactController@add: ' . $e->getMessage());
         }
     }
@@ -99,24 +99,24 @@ class ContactController
 
     public function new_update(){
         try{
-            $parametro = htmlentities($_GET['id']);
+            $parametro = limpiar($_GET['id']);
             $contacto = $this->model->getById($parametro);
             require_once VCONTACT . 'update.php';
-        }catch(PDOException $e){
+        }catch(Exception $e){
             error_log('Error en ContactController@update: ' . $e->getMessage());
         }
     }
 
     public function edit(){
         try{
-            $parametro = htmlentities($_GET['id']);
+            $parametro = limpiar($_GET['id']);
             $contacto = $this->populate();
             $exito = $this->model->update($contacto);
             if($exito){
                 redirectWithMessage(true, 'Contacto editado exitosamente.', '', 'index.php?c=contact&f=viewall'.$parametro);
             }
             header("Location: index.php?c=contact&f=viewall&id=$parametro");
-        }catch(PDOException $e){
+        }catch(Exception $e){
             error_log('Error en ContactController@update: ' . $e->getMessage());
         }
     }
@@ -137,14 +137,14 @@ class ContactController
     public function delete()
     {
         try{
-            $parametro = htmlentities($_GET['id']);
-            $parametro2 = htmlentities($_GET['i']);
+            $parametro = limpiar($_GET['id']);
+            $parametro2 = limpiar($_GET['i']);
             $contacto = $this->model->deleteId($parametro);
             if($contacto){
                 redirectWithMessage(true, 'Contacto eliminado exitosamente.', '', 'index.php?c=contact&f=viewall'.$parametro);
             }
             header("Location: index.php?c=contact&f=viewall&id=$parametro2");
-        }catch(PDOException $e){
+        }catch(Exception $e){
             error_log('Error en ContactController@deleteId: ' . $e->getMessage());
         }
     }

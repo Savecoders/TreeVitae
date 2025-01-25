@@ -175,12 +175,12 @@
                 <td>${contacto.mensaje}</td>
                         <?php if (isset($isUserAdmin) && $isUserAdmin) { ?>
                             <td>
-                                <a href="index.php?c=contact&f=view&i=${contacto.id}" class="btn-view">Ver</a>
+                                <a href="index.php?c=contact&f=view&id=${contacto.ID}" class="btn-view">Ver</a>
                             </td>
                         <?php } ?>
                         <?php if (isset($isUserAdmin) && !$isUserAdmin) { ?>
                             <td>
-                                <a href="index.php?c=contact&f=new_update&i=${contacto.id}" class="btn-edit">Modificar</a>
+                                <a href="index.php?c=contact&f=new_update&id=${contacto.ID}" class="btn-edit">Modificar</a>
                             </td>
                         <?php } ?>
                         <?php if (isset($isUserAdmin) && $isUserAdmin) { ?>

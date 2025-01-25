@@ -198,6 +198,16 @@ require_once 'utils/dateFormatter.php';
     .breadcrumbs {
         width: fit-content;
     }
+
+    .btn-danger {
+        background-color: var(--danger-base);
+        color: white;
+        border-radius: 8px;
+    }
+
+    .btn-danger:hover {
+        background-color: var(--danger-400);
+    }
 </style>
 <main class="main__container__content">
 
@@ -218,6 +228,9 @@ require_once 'utils/dateFormatter.php';
         <?php if (isset($isUserAdmin) && $isUserAdmin) { ?>
             <a href="index.php?c=iniciativa&f=update_view&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn primary__with-icon btn-animation">
                 Editar Iniciativa
+            </a>
+            <a href="index.php?c=iniciativa&f=delete&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn btn-danger btn-animation">
+                Cerrar Iniciativa
             </a>
         <?php } ?>
 
@@ -256,7 +269,7 @@ require_once 'utils/dateFormatter.php';
 
 
                 
-                <?php if ((isset($isUserAdmin) && $isUserAdmin) || $isUserFollower) { ?>
+                <?php if ((isset($isUserAdmin) && $isUserAdmin) || $isUserFollowers) { ?>
                     <hr class="separetor__horizontal" />
                     <p>Actividades</p>
                     <a href="index.php?c=actividad&f=viewall&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn primary__with-icon btn btn-animation">
@@ -264,10 +277,7 @@ require_once 'utils/dateFormatter.php';
                 </a>
                 <?php } ?>
 
-
-                
-
-                <?php if ((isset($isUserAdmin) && $isUserAdmin) || $isUserFollowers) { ?>
+                <?php if ((isset($isUserAdmin) && $isUserAdmin) || (isset($isUserFollowers) && !$isUserFollowers)) { ?>
                     <hr class="separetor__horizontal" />
                     <a href="index.php?c=contact&f=viewall&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn outerline btn-animation">
                         Contactarte con la iniciativa?
