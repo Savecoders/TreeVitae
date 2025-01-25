@@ -8,8 +8,7 @@ services:
     ports:
       - '80:80'
     volumes:
-      - ./:/var/www/html:rw
+      - .:/var/www/html:rw
     environment:
-      - PHP_ENV=production
       - APACHE_DOCUMENT_ROOT=/var/www/html
     restart: always

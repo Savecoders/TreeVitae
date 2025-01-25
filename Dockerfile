@@ -15,10 +15,13 @@ RUN apt-get update && apt-get install -y \
 # Apache configuration
 RUN echo "DirectoryIndex index.php index.html" >> /etc/apache2/apache2.conf
 RUN echo '<Directory /var/www/html/>\n\
-    Options Indexes FollowSymLinks\n\
+    Options Indexes FollowSymLinks MultiViews\n\
     AllowOverride All\n\
     Require all granted\n\
 </Directory>' >> /etc/apache2/apache2.conf
+
+# Configure Apache DocumentRoot
+RUN sed -i 's|/var/www/html|/var/www/html|g' /etc/apache2/sites-available/000-default.conf
 
 # Production PHP settings
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
