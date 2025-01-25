@@ -111,6 +111,18 @@
         background-color: var(--background-100);
     }
 
+    .no-results,
+    .error {
+        text-align: center;
+        padding: 2rem;
+        color: var(--text-600);
+        grid-column: 1 / -1;
+    }
+
+    .error {
+        color: var(--error-500);
+    }
+
     /* Media Queries */
     @media (max-width: 700px) {
         .card {
@@ -141,7 +153,7 @@
 
     <form class="form__search" method="dialog">
         <div class="search__container">
-            <input id="searchInput" type="text" placeholder="Buscar" required />
+            <input id="searchInput" type="text" placeholder="Buscar iniciativa..." />
             <button id="btnSearch" class="btn outerline">
                 <img src="public/assets/icons/search.svg" alt="search icon" />
                 Search
