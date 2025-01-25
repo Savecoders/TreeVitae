@@ -182,7 +182,7 @@
                             
                             <div class="botonesTabla">
                                 <a href="index.php?c=actividad&f=update_view&i=<?php echo $actividad["ID"]?>&id=<?php echo $actividad["iniciativa_id"]?>" id="btnEditar">Editar</a>
-                                <a onclick="if(!confirm('Está seguro de eliminar el producto?'))return false;" href="index.php?c=actividad&f=delete&i=<?php echo $actividad["ID"]?>&id=<?php echo $actividad["iniciativa_id"]?>" id="btnEliminar">Eliminar</a>
+                                <a onclick="if(!confirm('Está seguro de eliminar esta actividad?'))return false;" href="index.php?c=actividad&f=delete&i=<?php echo $actividad["ID"]?>&id=<?php echo $actividad["iniciativa_id"]?>" id="btnEliminar">Eliminar</a>
                             </div>
                             <?php } ?>   
                         </td>
@@ -229,7 +229,7 @@
                         <div class="botonesTabla">
                             <a href="index.php?c=actividad&f=update_view&i=${actividad.ID}&id=${actividad.iniciativa_id}" id="btnEditar">Editar</a>
                             <a href="index.php?c=actividad&f=delete&i=${actividad.ID}&id=${actividad.iniciativa_id}" id="btnEliminar" 
-                            onclick="if(!confirm('Está seguro de eliminar el producto?')) return false;">Eliminar</a>  
+                            onclick="if(!confirm('Está seguro de eliminar esta actividad?')) return false;">Eliminar</a>  
                         </div>
                     <?php } ?>   
                 </td>

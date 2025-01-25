@@ -277,10 +277,7 @@ require_once 'utils/dateFormatter.php';
                 </a>
                 <?php } ?>
 
-
-                
-
-                <?php if ((isset($isUserAdmin) && $isUserAdmin) || $isUserFollowers) { ?>
+                <?php if ((isset($isUserAdmin) && $isUserAdmin) || (isset($isUserFollowers) && !$isUserFollowers)) { ?>
                     <hr class="separetor__horizontal" />
                     <a href="index.php?c=contact&f=viewall&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn outerline btn-animation">
                         Contactarte con la iniciativa?
