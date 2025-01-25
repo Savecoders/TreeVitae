@@ -66,11 +66,18 @@ class IniciativaRespository implements IRepository
     public function assignTags($id, $tags): bool
     {
         try {
-            for ($i = 0; $i < count($tags); $i++) {
+            // First delete existing tags
+            $sqlDelete = "DELETE FROM iniciativa_tags WHERE iniciativa_id = :iniciativa_id";
+            $stmtDelete = $this->con->prepare($sqlDelete);
+            $stmtDelete->bindParam(':iniciativa_id', $id);
+            $stmtDelete->execute();
+
+            // Then insert new tags
+            foreach ($tags as $tag) {
                 $sql = "INSERT INTO iniciativa_tags (iniciativa_id, tag_id) VALUES (:iniciativa_id, :tag_id)";
                 $stmt = $this->con->prepare($sql);
 
-                $tagId = $tags[$i]->getID();
+                $tagId = $tag->getID();
                 $stmt->bindParam(':iniciativa_id', $id);
                 $stmt->bindParam(':tag_id', $tagId);
 
@@ -115,7 +122,7 @@ class IniciativaRespository implements IRepository
     public function delete($id): bool
     {
         try {
-            $sql = "DELETE FROM iniciativas WHERE id = :id";
+            $sql = "UPDATE iniciativas SET estado = 'Inactiva' WHERE ID = :id";
 
             $stmt = $this->con->prepare($sql);
 
@@ -132,7 +139,7 @@ class IniciativaRespository implements IRepository
     public function getAll(): array
     {
         try {
-            $sql = "SELECT * FROM iniciativas";
+            $sql = "SELECT * FROM iniciativas WHERE estado = 'Activa'";
 
             $stmt = $this->con->prepare($sql);
 
@@ -149,7 +156,7 @@ class IniciativaRespository implements IRepository
     public function getById($id): array | bool
     {
         try {
-            $sql = "SELECT * FROM iniciativas WHERE ID = :id";
+            $sql = "SELECT * FROM iniciativas WHERE ID = :id AND estado = 'Activa'";
 
             $stmt = $this->con->prepare($sql);
 
@@ -168,10 +175,11 @@ class IniciativaRespository implements IRepository
     public function filterBy($criteria): array
     {
         try {
-            $sql = "SELECT * FROM iniciativas WHERE nombre LIKE :nombre";
+            $sql = "SELECT * FROM iniciativas WHERE nombre LIKE :nombre AND estado = 'Activa'";
 
             $stmt = $this->con->prepare($sql);
 
+            $criteria = $criteria . '%';
             $stmt->bindParam(':nombre', $criteria);
 
             $stmt->execute();
@@ -264,21 +272,33 @@ class IniciativaRespository implements IRepository
         }
     }
 
-    public function assignUserFollower($user_id, $iniciativa_id): bool
+    public function assignUserFollower($iniciativa_id, $user_id): bool
     {
         try {
-            $sql = "INSERT INTO usuarios_iniciativas_roles (usuario_id, iniciativa_id, rol_id) VALUES (:usuario_id, :iniciativa_id, 2)";
+            // Check if both user and initiative exist
+            $checkExists = "SELECT u.ID as user_exists, i.ID as initiative_exists 
+                       FROM usuarios u, iniciativas i 
+                       WHERE u.ID = :user_id AND i.ID = :iniciativa_id";
+            $stmt = $this->con->prepare($checkExists);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->bindParam(':iniciativa_id', $iniciativa_id);
+            $stmt->execute();
+
+            if ($stmt->rowCount() === 0) {
+                error_log("User ID $user_id or Initiative ID $iniciativa_id does not exist");
+                return false;
+            }
+
+            $sql = "INSERT INTO usuarios_iniciativas_roles (usuario_id, iniciativa_id, rol_id) 
+                VALUES (:usuario_id, :iniciativa_id, 2)";
 
             $stmt = $this->con->prepare($sql);
-
             $stmt->bindParam(':usuario_id', $user_id);
             $stmt->bindParam(':iniciativa_id', $iniciativa_id);
 
-            $stmt->execute();
-
-            return true;
-        } catch (PDOEXception $er) {
-            error_log("Error en assignUserFlower de IniciativaRepository " . $er->getMessage());
+            return $stmt->execute();
+        } catch (PDOException $er) {
+            error_log("Error en assignUserFollower: " . $er->getMessage());
             return false;
         }
     }
@@ -286,18 +306,27 @@ class IniciativaRespository implements IRepository
     public function assignUserMember($user_id, $iniciativa_id): bool
     {
         try {
-            $sql = "INSERT INTO usuarios_iniciativas_roles (usuario_id, iniciativa_id, rol_id) VALUES (:usuario_id, :iniciativa_id, 3)";
+            // First check if user exists
+            $checkUser = "SELECT ID FROM usuarios WHERE ID = :user_id";
+            $stmt = $this->con->prepare($checkUser);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->execute();
+
+            if ($stmt->rowCount() === 0) {
+                error_log("User ID $user_id does not exist");
+                return false;
+            }
+
+            $sql = "INSERT INTO usuarios_iniciativas_roles (usuario_id, iniciativa_id, rol_id) 
+                VALUES (:usuario_id, :iniciativa_id, 3)";
 
             $stmt = $this->con->prepare($sql);
-
             $stmt->bindParam(':usuario_id', $user_id);
             $stmt->bindParam(':iniciativa_id', $iniciativa_id);
 
-            $stmt->execute();
-
-            return true;
-        } catch (PDOEXception $er) {
-            error_log("Error en assignUserMember de IniciativaRepository " . $er->getMessage());
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error en assignUserMember: " . $e->getMessage());
             return false;
         }
     }
@@ -340,4 +369,5 @@ class IniciativaRespository implements IRepository
             return false;
         }
     }
+
 }

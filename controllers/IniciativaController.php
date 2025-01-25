@@ -27,11 +27,65 @@ class IniciativaController
             $iniciativas = $this->getIniciative($iniciativasResult);
             $tagsRepository = new TagsRepository();
             $tags = $tagsRepository->getAll();
-            $title = 'Iniciativas';
             require_once  VINICIATIVA . 'viewall.php';
         } catch (Exception $e) {
             error_log('Error en IniciativaController@viewall: ' . $e->getMessage());
             redirectWithMessage(false, '', 'No podemos mostrar las iniciativas en estos momentos', 'index.php?c=iniciativa&f=viewall');
+        }
+    }
+
+    public function getAllFilterByName()
+    {
+        try {
+            $response = array(
+                'success' => false,
+                'message' => '',
+                'data' => null
+            );
+
+            if (!isset($_GET['name'])) {
+                $response['message'] = 'No se ha proporcionado un nombre';
+                return json_encode($response);
+            }
+
+            $name = $_GET['name'];
+            $iniciativasResult = $this->model->filterBy($name);
+            $iniciativas_encontradas = $this->getIniciative($iniciativasResult);
+
+            if (
+                !$iniciativas_encontradas || count($iniciativas_encontradas) === 0
+                || !is_array($iniciativas_encontradas) || !$iniciativas_encontradas
+            ) {
+                $response['message'] = 'No se encontraron iniciativas';
+
+                echo json_encode($response);
+                return;
+            }
+
+            $iniciativas_array = array_map(function ($iniciativa) {
+                return [
+                    'id' => $iniciativa->getId(),
+                    'nombre' => $iniciativa->getNombre(),
+                    'descripcion' => $iniciativa->getDescripcion(),
+                    'cover' => base64_encode($iniciativa->getCover()),
+                    'tags' => array_map(function ($tag) {
+                        return [
+                            'id' => $tag->getID(),
+                            'nombre' => $tag->getNombre()
+                        ];
+                    }, $iniciativa->getTags())
+                ];
+            }, $iniciativas_encontradas);
+
+            $response['success'] = true;
+            $response['message'] = 'Iniciativas encontradas';
+            $response['data'] = $iniciativas_array;
+            echo json_encode($response);
+        } catch (Exception $e) {
+            error_log('Error en IniciativaController@getAllFilterByName: ' . $e->getMessage());
+            $response['message'] = 'No podemos mostrar las iniciativas en estos momentos';
+
+            echo json_encode($response);
         }
     }
 
@@ -56,7 +110,14 @@ class IniciativaController
             $session_id = $_SESSION['user']['ID'] ?? 0;
 
             $isUserAdmin = $this->model->isUserAdmin($iniciativa_id, $session_id);
+
+            
+
             $isUserFollowers = $this->model->isUserFollower($iniciativa_id, $session_id);
+            $isUserMenber = $this->model->isUserMember($iniciativa_id, $session_id);
+
+
+
             $iniciativa = $this->getIniciative([$iniciativasResult]);
 
             $title = 'Iniciativa';
@@ -201,6 +262,160 @@ class IniciativaController
         require_once  VINICIATIVA . 'update.php';
     }
 
+    public function assignFollower()
+    {
+        $response = array(
+            'success' => false,
+            'message' => '',
+            'data' => null
+        );
+
+        if (!isset($_SESSION['user'])) {
+            $response['message'] = 'Usuario no autenticado';
+            echo json_encode($response);
+            return;
+        }
+
+        if (!isset($_GET['id'])) {
+            $response['message'] = 'ID de iniciativa no proporcionado';
+            echo json_encode($response);
+            return;
+        }
+        $iniciativa_id = (int) $_GET['id'];
+        $user_id = (int) $_SESSION['user']['ID'];
+
+        try {
+            $isFollower = $this->model->assignUserFollower($iniciativa_id, $user_id);
+
+            if ($isFollower) {
+                $response['success'] = true;
+                $response['message'] = 'Ahora sigues esta iniciativa';
+            }
+        } catch (Exception $e) {
+            $response['message'] = 'Error al seguir la iniciativa';
+            error_log('Error en assignFollower: ' . $e->getMessage());
+        }
+
+        echo json_encode($response);
+    }
+
+    public function assignMember()
+    {
+        $response = array(
+            'success' => false,
+            'message' => '',
+            'data' => null
+        );
+
+        if (!isset($_SESSION['user'])) {
+            $response['message'] = 'Usuario no autenticado';
+            echo json_encode($response);
+            return;
+        }
+
+        if (!isset($_GET['id'])) {
+            $response['message'] = 'ID de iniciativa no proporcionado';
+            echo json_encode($response);
+            return;
+        }
+
+        $iniciativa_id = (int) $_GET['id'];
+        $user_id = (int) $_SESSION['user']['ID'];
+
+        try {
+            $isMember = $this->model->assignUserMember($user_id, $iniciativa_id);
+
+            if ($isMember) {
+                $response['success'] = true;
+                $response['message'] = 'Ahora eres miembro de esta iniciativa';
+            } else {
+                $response['message'] = 'No se pudo unir a la iniciativa';
+            }
+        } catch (Exception $e) {
+            $response['message'] = 'Error al unirte a la iniciativa';
+            error_log('Error en assignMember: ' . $e->getMessage());
+        }
+
+        echo json_encode($response);
+    }
+    public function removeFollower()
+    {
+        $response = array(
+            'success' => false,
+            'message' => '',
+            'data' => null
+        );
+
+        if (!isset($_SESSION['user'])) {
+            $response['message'] = 'Usuario no autenticado';
+            echo json_encode($response);
+            return;
+        }
+
+        if (!isset($_GET['id'])) {
+            $response['message'] = 'ID de iniciativa no proporcionado';
+            echo json_encode($response);
+            return;
+        }
+
+        try {
+            $iniciativa_id = (int) $_GET['id'];
+            $user_id = (int) $_SESSION['user']['ID'];
+
+            $isRemoved = $this->model->removeUserFollowIniciative($user_id, $iniciativa_id);
+
+            if ($isRemoved) {
+                $response['success'] = true;
+                $response['message'] = 'Has dejado de seguir esta iniciativa';
+            }
+        } catch (Exception $e) {
+            $response['message'] = 'Error al dejar de seguir la iniciativa';
+            error_log('Error en removeFollower: ' . $e->getMessage());
+        }
+
+        echo json_encode($response);
+    }
+
+    public function removeMember()
+    {
+        $response = array(
+            'success' => false,
+            'message' => '',
+            'data' => null
+        );
+
+        if (!isset($_SESSION['user'])) {
+            $response['message'] = 'Usuario no autenticado';
+            echo json_encode($response);
+            return;
+        }
+
+        if (!isset($_GET['id'])) {
+            $response['message'] = 'ID de iniciativa no proporcionado';
+            echo json_encode($response);
+            return;
+        }
+
+        try {
+            $iniciativa_id = (int) $_GET['id'];
+            $user_id = (int) $_SESSION['user']['ID'];
+
+            $isRemoved = $this->model->removeUserMemberIniciative($user_id, $iniciativa_id);
+
+            if ($isRemoved) {
+                $response['success'] = true;
+                $response['message'] = 'Has abandonado esta iniciativa';
+            }
+        } catch (Exception $e) {
+            $response['message'] = 'Error al abandonar la iniciativa';
+            error_log('Error en removeMember: ' . $e->getMessage());
+        }
+
+        echo json_encode($response);
+    }
+
+
+
     public function update()
     {
 
@@ -274,5 +489,29 @@ class IniciativaController
             array_push($iniciativas, $iniciativa);
         }
         return $iniciativas;
+    }
+
+    public function delete()
+    {
+        if (!isset($_GET['id'])) {
+            redirectWithMessage(false, '', 'La iniciativa que estas buscando, no esta disponible :(', 'index.php?c=iniciativa&f=viewall');
+            return;
+        }
+
+        if (!$this->model->isUserAdmin($_GET['id'], $_SESSION['user']['ID'])) {
+            redirectWithMessage(false, '', 'No tienes permisos para realizar esta acción', 'index.php?c=iniciativa&f=viewall');
+            return;
+        }
+
+        $iniciativa_id = (int) $_GET['id'];
+
+        $isDeleted = $this->model->delete($iniciativa_id);
+
+        if (!$isDeleted) {
+            redirectWithMessage(false, '', 'Error al eliminar la iniciativa', 'index.php?c=iniciativa&f=viewall');
+            return;
+        }
+
+        redirectWithMessage(true, 'Iniciativa Inhabilitada con éxito', 'Iniciativa eliminada con éxito', 'index.php?c=iniciativa&f=viewall');
     }
 }

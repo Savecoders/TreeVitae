@@ -1,4 +1,3 @@
-
 <?php require_once HEADER; ?>
 <!--Autor: Farfan Sanchez Abraham-->
 <style>
@@ -112,11 +111,25 @@
         background-color: black;
         color: white;
         border: 2px solid green; 
-        border-radius: 5px;
+        border-radius: 6px;
         cursor: pointer;
         font-size: 16px;
         text-transform: uppercase;
-        font-weight: 500;
+    }
+
+    .btn-cancel{
+        display: inline-block;
+        padding: 10px;
+        background-color: black; 
+        color: white;
+        font-size: 16px;
+        text-decoration: none;
+        text-align: center;
+        border-radius: 6px;
+        border: 2px solid green; 
+        margin-top: 20px;
+        width: 100%;
+        text-transform: uppercase;
     }
 
     .submit__button__enviar{
@@ -324,6 +337,10 @@
 
                         <div class="container__component">
                             <button type="submit" class="btn-add">Registrar</button>
+                        </div>
+
+                        <div class="container__component">
+                            <a href="index.php?c=contact&f=viewall&id=<?php echo limpiar($parametro); ?>" class="btn-cancel">Cancelar</a>
                         </div>
                     </fieldset>
                 </section>

@@ -103,27 +103,30 @@
         border-color: var(--primary-base);
     }
 
-    .submit__button__enviar{
+    .btn-update{
         width: 100%;
         padding: 10px;
         background-color: black;
         color: white;
         border: 2px solid green; 
-        border-radius: 5px;
+        border-radius: 6px;
         cursor: pointer;
         font-size: 16px;
         text-transform: uppercase;
-        font-weight: 500;
     }
 
-    .btn-update{
-        background-color: black;
+    .btn-cancel{
+        display: inline-block;
+        padding: 10px;
+        background-color: black; 
         color: white;
-        border: 2px solid green; 
         font-size: 16px;
-        font-weight: 600;
-        padding: 12px 20px;
+        text-decoration: none;
+        text-align: center;
         border-radius: 6px;
+        border: 2px solid green; 
+        margin-top: 20px;
+        width: 100%;
         text-transform: uppercase;
     }
 
@@ -139,7 +142,6 @@
         appearance: none; 
         outline: none; 
         cursor: pointer; 
-        transition: all 0.3s ease; 
     }
 
     .input__container select option {
@@ -297,9 +299,9 @@
                             <label class="label__name" for="prioridad">Seleccione la Prioridad: </label>
                             <div class="input__container">
                                 <select name="prioridad" id="prioridad">
-                                    <option value="alta" <?= $contacto['prioridad'] === 'alta' ? 'selected' : '' ?>>Alta</option>
-                                    <option value="media" <?= $contacto['prioridad'] === 'media' ? 'selected' : '' ?>>Media</option>
-                                    <option value="baja" <?= $contacto['prioridad'] === 'baja' ? 'selected' : '' ?>>Baja</option>
+                                    <option value="alta" <?= $contacto['prioridad'] == 'Alta' ? 'selected' : '' ?>>Alta</option>
+                                    <option value="media" <?= $contacto['prioridad'] == 'Media' ? 'selected' : '' ?>>Media</option>
+                                    <option value="baja" <?= $contacto['prioridad'] == 'Baja' ? 'selected' : '' ?>>Baja</option>
                                 </select>
                             </div>
                         </div>
@@ -322,6 +324,10 @@
 
                         <div class="container__component">
                             <button type="submit" class="btn-update">Modificar</button>      
+                        </div>
+
+                        <div class="container__component">
+                            <a href="index.php?c=contact&f=viewall&id=<?php echo limpiar($contacto['iniciativa_id']); ?>" class="btn-cancel">Cancelar</a>
                         </div>
                     </fieldset>
                 </section>

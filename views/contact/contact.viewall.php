@@ -24,7 +24,6 @@
     th, td {
         padding: 10px;
         text-align: left;
-        border: 1px solid #ddd;
         text-align: center; 
         vertical-align: middle; 
     }
@@ -36,15 +35,13 @@
     }
 
     #buscador{
-        padding: 8px;
-        width: 300px;
-        border: 1px solid var(--primary-500);
+        padding: 8px 15px;
+        background-color: black;
+        border: 2px solid green;
         border-radius: 5px;
         box-sizing: border-box;
-        height: 40px; 
         font-size: 16px;
         flex: 1;
-        min-width: 200px;
     }
 
     .btn-add{
@@ -52,34 +49,23 @@
         justify-content: center; 
         align-items: center; 
         padding: 8px 15px; 
-        height: 40px; 
-        font-size: 16px; 
         color: white; 
         background-color: black; 
         border: 2px solid green; 
         border-radius: 5px; 
         text-decoration: none; 
         cursor: pointer; 
-        white-space: nowrap;
     }
 
-    #buscador, .btn-view,
-    .btn-delete,.btn-edit {
+    .btn-view, .btn-delete, .btn-edit {
         padding: 8px 15px;
         background-color: black;
         border: 2px solid green;
         color: white;
         border-radius: 5px;
         cursor: pointer;
-        transition: all 0.3s ease;
+        margin: 10px;
         text-decoration: none; 
-    }
-
-    .no-results {
-        text-align: center;
-        color: var(--danger-500);
-        font-size: 18px;
-        margin-top: 20px;
     }
 
     .formulario {
@@ -96,7 +82,7 @@
             font-size: 14px;
         }
         
-        .btn-view, .btn-delete {
+        .btn-view, .btn-edit, .btn-delete {
             padding: 6px 12px;
             font-size: 12px;
         }
@@ -189,12 +175,12 @@
                 <td>${contacto.mensaje}</td>
                         <?php if (isset($isUserAdmin) && $isUserAdmin) { ?>
                             <td>
-                                <a href="index.php?c=contact&f=view&i=${contacto.id}" class="btn-view">Ver</a>
+                                <a href="index.php?c=contact&f=view&id=${contacto.ID}" class="btn-view">Ver</a>
                             </td>
                         <?php } ?>
                         <?php if (isset($isUserAdmin) && !$isUserAdmin) { ?>
                             <td>
-                                <a href="index.php?c=contact&f=new_update&i=${contacto.id}" class="btn-edit">Modificar</a>
+                                <a href="index.php?c=contact&f=new_update&id=${contacto.ID}" class="btn-edit">Modificar</a>
                             </td>
                         <?php } ?>
                         <?php if (isset($isUserAdmin) && $isUserAdmin) { ?>

@@ -169,6 +169,16 @@ require_once 'utils/dateFormatter.php';
         align-items: center;
     }
 
+    .following {
+        background-color: var(--accent-600);
+        color: white;
+    }
+
+    .member {
+        background-color: var(--accent-600);
+        color: white;
+    }
+
     @media (max-width: 1100px) {
 
         .heading-initiative {
@@ -187,6 +197,16 @@ require_once 'utils/dateFormatter.php';
 
     .breadcrumbs {
         width: fit-content;
+    }
+
+    .btn-danger {
+        background-color: var(--danger-base);
+        color: white;
+        border-radius: 8px;
+    }
+
+    .btn-danger:hover {
+        background-color: var(--danger-400);
     }
 </style>
 <main class="main__container__content">
@@ -208,6 +228,9 @@ require_once 'utils/dateFormatter.php';
         <?php if (isset($isUserAdmin) && $isUserAdmin) { ?>
             <a href="index.php?c=iniciativa&f=update_view&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn primary__with-icon btn-animation">
                 Editar Iniciativa
+            </a>
+            <a href="index.php?c=iniciativa&f=delete&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn btn-danger btn-animation">
+                Cerrar Iniciativa
             </a>
         <?php } ?>
 
@@ -236,20 +259,42 @@ require_once 'utils/dateFormatter.php';
                 </div>
                 <hr class="separetor__horizontal" />
                 <p>Se Parte</p>
-                <a href="#" class="btn primary__with-icon btn btn-animation">
-                    Únete a la Iniciativa
-                </a>
+                <button
+                    id="joinButton"
+                    data-iniciativa-id="<?php echo $iniciativa[0]->getId(); ?>"
+                    class="btn primary__with-icon btn btn-animation <?php echo $isUserMenber ? 'member' : ''; ?>">
+                    <?php echo $isUserMenber ? 'Abandonar Iniciativa' : 'Únete a la Iniciativa'; ?>
+                </button>
 
-                <hr class="separetor__horizontal" />
-                <p>Actividades</p>
-                <a href="#" class="btn primary__with-icon btn btn-animation">
+
+
+                
+                <?php if ((isset($isUserAdmin) && $isUserAdmin) || $isUserFollowers) { ?>
+                    <hr class="separetor__horizontal" />
+                    <p>Actividades</p>
+                    <a href="index.php?c=actividad&f=viewall&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn primary__with-icon btn btn-animation">
                     Revisar Actividades
                 </a>
+                <?php } ?>
 
-                <?php if((isset($isUserAdmin) && $isUserAdmin) || $isUserFollowers) {?>
+                <?php if ((isset($isUserAdmin) && $isUserAdmin) || (isset($isUserFollowers) && !$isUserFollowers)) { ?>
                     <hr class="separetor__horizontal" />
                     <a href="index.php?c=contact&f=viewall&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn outerline btn-animation">
                         Contactarte con la iniciativa?
+                    </a>
+                <?php } ?>
+
+                <?php if((isset($isUserAdmin) && $isUserAdmin) || (isset($isUserJoin) && $isUserJoin)) { ?>
+                    <hr class="separetor__horizontal" />
+                    <a href="index.php?c=post&f=new_view&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn outerline btn-animation">
+                        Crear post
+                    </a>
+                <?php } ?>
+
+                <?php if((isset($isUserAdmin) && $isUserAdmin) || (isset($isUserJoin) && $isUserJoin)) { ?>
+                    <hr class="separetor__horizontal" />
+                    <a href="index.php?c=post&f=viewall&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn outerline btn-animation">
+                        Revisar post
                     </a>
                 <?php } ?>
             </aside>
@@ -257,9 +302,13 @@ require_once 'utils/dateFormatter.php';
             <article class="about-initiative">
                 <header class="heading-initiative">
                     <h2><?php echo $iniciativa[0]->getNombre(); ?></h2>
-                    <button style="height: fit-content;" class="btn outerline btn-animation">
-                        <i class="fa-regular fa-heart"></i>
-                        Seguir
+                    <button
+                        id="followButton"
+                        data-iniciativa-id="<?php echo $iniciativa[0]->getId(); ?>"
+                        style="height: fit-content;"
+                        class="btn outerline btn-animation <?php echo $isUserFollowers ? 'following' : ''; ?>">
+                        <i class="fa-<?php echo $isUserFollowers ? 'solid' : 'regular'; ?> fa-heart"></i>
+                        <?php echo $isUserFollowers ? 'Dejar de seguir' : 'Seguir'; ?>
                     </button>
                 </header>
                 <p>Fecha de Creacion: <?php echo formatDate($iniciativa[0]->getFechaCreacion()); ?></p>
@@ -343,5 +392,7 @@ require_once 'utils/dateFormatter.php';
 
     <?php } ?>
 </main>
-<script type="module" src="public/js/initiatives/view.js"></script>
+<!-- <script type="module" src="public/js/initiatives/view.js"></script> -->
+<script type="module" src="public/js/initiatives/rol.js"></script>
+
 <?php require_once FOOTER; ?>

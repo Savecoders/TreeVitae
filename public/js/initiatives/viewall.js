@@ -1,219 +1,120 @@
-const initiatives = [
-  {
-    title: 'CamioncitosSa',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    image: '../../assets/images/iniciativa-default.png',
-    tags: ['recolección', 'reciclaje', 'limpieza', 'mantenimiento'],
-  },
-  {
-    title: 'CamioncitosBolivar',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    image: '../../assets/images/iniciativa-default.png',
-    tags: ['recolección'],
-  },
-  {
-    title: 'CamioncitosVivanco',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    image: '../../assets/images/iniciativa-default.png',
-    tags: ['recolección', 'reciclaje', 'limpieza'],
-  },
-  {
-    title: 'TreeVitae',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    image: '../../assets/images/iniciativa-default.png',
-    tags: ['limpieza', 'mantenimiento'],
-  },
-  {
-    title: 'TreeVitae',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    image: '../../assets/images/iniciativa-default.png',
-    tags: ['recolección', 'reciclaje', 'limpieza', 'mantenimiento'],
-  },
-  {
-    title: 'TreeVitae',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    image: '../../assets/images/iniciativa-default.png',
-    tags: ['recolección', 'reciclaje'],
-  },
-];
-
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
-
-// tradicional
-// const containerCard = document.querySelector('.container__cards');
-// or
-// const searchInput = document.getElementById('searchInput');
-// const btnSearch = document.getElementById('btnSearch');
 
 const containerCard = $('.container__cards');
 const searchInput = $('#searchInput');
 const btnSearch = $('#btnSearch');
 const btnLoadMore = document.getElementById('loadMore');
 
-// const componentTag = tag => {
-//   const tagNode = document.createElement('div');
-//   tagNode.classList.add('tag__content');
-//   tagNode.textContent = tag;
-//   return tagNode;
-// };
+// Create initiative card component
+const createInitiativeCard = initiative => {
+  const card = document.createElement('aside');
+  card.className = 'card';
+  console.log(initiative);
+  card.innerHTML = `
+        <article class="card__content">
+            <a class="card__title" href="index.php?c=iniciativa&f=view&id=${initiative.id}">
+                ${initiative.nombre}
+            </a>
+            <div class="card__tags__content">
+                ${initiative.tags
+                  .map(
+                    tag => `
+                    <div class="tag__content">${tag.nombre}</div>
+                `,
+                  )
+                  .join('')}
+            </div>
+            <p class="card__description">${initiative.descripcion}</p>
+        </article>
+        <picture class="card__picture">
+            <img src="data:image;base64,${initiative.cover}" alt="${initiative.nombre}">
+        </picture>
+    `;
 
-// const componentDefaultCard = ({ title, description, image, tags }) => {
-//   const asideNode = document.createElement('aside');
-//   asideNode.classList.add('card');
-
-//   const cardArticuleNode = document.createElement('article');
-//   cardArticuleNode.classList.add('card__content');
-
-//   const cardTitleNode = document.createElement('a');
-//   cardTitleNode.classList.add('card__title');
-//   cardTitleNode.href = './view.html';
-//   cardTitleNode.textContent = title;
-
-//   const cardTagsContainer = document.createElement('div');
-//   cardTagsContainer.classList.add('card__tags__content');
-
-//   tags.forEach(tag => {
-//     cardTagsContainer.appendChild(componentTag(tag));
-//   });
-
-//   const cardDescriptionNode = document.createElement('p');
-//   cardDescriptionNode.classList.add('card__description');
-//   cardDescriptionNode.textContent = description;
-
-//   cardArticuleNode.appendChild(cardTitleNode);
-//   cardArticuleNode.appendChild(cardTagsContainer);
-//   cardArticuleNode.appendChild(cardDescriptionNode);
-
-//   const cardPictureNode = document.createElement('picture');
-//   cardPictureNode.classList.add('card__picture');
-
-//   const cardPictureImgNode = document.createElement('img');
-//   cardPictureImgNode.src = image;
-//   cardPictureImgNode.alt = title;
-
-//   cardPictureNode.appendChild(cardPictureImgNode);
-//   asideNode.appendChild(cardArticuleNode);
-//   asideNode.appendChild(cardPictureNode);
-
-//   asideNode.addEventListener('click', () => {
-//     if (asideNode.classList.contains('card--clicked')) {
-//       asideNode.classList.remove('card--clicked');
-//     } else {
-//       asideNode.classList.add('card--clicked');
-//     }
-//   });
-
-//   return asideNode;
-// };
-
-const addCard = card => {
-  containerCard.appendChild(card);
+  return card;
 };
 
-const getRandomCardValue = () => {
-  return Math.floor(Math.random() * initiatives.length);
-};
+// Search initiatives function
+const searchInitiatives = searchTerm => {
+  const xhr = new XMLHttpRequest();
+  const url = `index.php?c=iniciativa&f=getAllFilterByName&name=${encodeURIComponent(searchTerm)}`;
 
-// patron observer
-btnLoadMore.addEventListener('click', () => {
-  const childrens = containerCard.children.length;
-  if (childrens < 25) {
-    for (let i = 0; i < 6; i++) {
-      addCard(componentDefaultCard(initiatives[getRandomCardValue()]));
+  xhr.open('GET', url, true);
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const data = JSON.parse(xhr.responseText);
+
+      removeAllCards();
+
+      if (data.success && data.data) {
+        console.log(data.data);
+        data.data.forEach(initiative => {
+          console.log(initiative);
+          containerCard.appendChild(createInitiativeCard(initiative));
+        });
+      } else {
+        containerCard.innerHTML = `<p class="no-results">No se encontraron iniciativas</p>`;
+      }
+    } else {
+      containerCard.innerHTML = `<p class="error">Error al buscar iniciativas</p>`;
     }
-  } else {
-    alert('no more iniciativas');
-  }
-});
+  };
 
-// const showDefaultCards = () => {
-//   for (let i = 0; i < 6; i++) {
-//     addCard(componentDefaultCard(initiatives[i]));
-//   }
-// };
+  xhr.onerror = function () {
+    console.error('Error al buscar iniciativas:', xhr.statusText);
+    containerCard.innerHTML = `<p class="error">Error al buscar iniciativas</p>`;
+  };
 
+  xhr.send();
+};
+
+// Clean container helper
 const removeAllCards = () => {
   while (containerCard.lastElementChild) {
     containerCard.removeChild(containerCard.lastElementChild);
   }
 };
 
-const filterCardNames = textCriteria => {
-  // convert NodeList to array -> containerCard.children is a NodeList
-  const elementByContainer = [...containerCard.children]; // array elements
-  const getFindsElements = elementByContainer.filter(el => {
-    const title = el.querySelector('.card__title').textContent;
-    return title.includes(textCriteria);
-  });
-
-  removeAllCards();
-
-  // apply filter
-  getFindsElements.forEach(el => {
-    containerCard.appendChild(el);
-  });
-};
-
-const filterCardByTags = textCriteria => {
-  removeAllCards(); // remove all cards
-  showDefaultCards(); // show default cards
-
-  const elementByContainer = [...containerCard.children]; // array elements
-
-  const getFindsElements = elementByContainer.filter(el => {
-    const tags = el.querySelectorAll('.tag__content');
-    const tagsElements = [...tags];
-    const tagsText = tagsElements.map(tag => tag.textContent);
-    return tagsText.includes(textCriteria);
-  });
-
-  removeAllCards();
-
-  // apply filter
-  getFindsElements.forEach(el => {
-    containerCard.appendChild(el);
-  });
-};
-
-btnSearch.addEventListener('click', () => {
-  const textCriteria = searchInput.value;
-  if (textCriteria) {
-    filterCardNames(textCriteria);
-  } else {
-    showDefaultCards();
+// Search event listeners
+btnSearch.addEventListener('click', e => {
+  e.preventDefault();
+  const searchTerm = searchInput.value;
+  if (searchTerm || searchTerm === '') {
+    searchInitiatives(searchTerm);
   }
 });
 
-// tag filter
+searchInput.addEventListener('keypress', e => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    const searchTerm = searchInput.value();
+    if (searchTerm || searchTerm === '') {
+      searchInitiatives(searchTerm);
+    }
+  }
+});
+
+// Tag filtering
 const tagFilter = document.querySelectorAll('.tag');
 tagFilter.forEach(tag => {
   tag.addEventListener('click', () => {
-    // check if tag is clicked
     if (tag.classList.contains('tag--clicked')) {
       tag.classList.remove('tag--clicked');
-      removeAllCards();
-      showDefaultCards();
+      // Reset search
+      searchInput.value = '';
+      searchInitiatives('');
       return;
     }
 
-    // check if other tag is clicked
     const otherTags = document.querySelectorAll('.tag--clicked');
-
     if (otherTags.length > 0) {
       otherTags.forEach(tag => tag.classList.remove('tag--clicked'));
     }
 
-    const tagName = tag.textContent.toLowerCase();
+    const tagName = tag.textContent.trim();
     tag.classList.add('tag--clicked');
-    filterCardByTags(tagName);
+    searchInitiatives(tagName);
   });
 });
-
-// showDefaultCards();
