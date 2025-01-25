@@ -71,7 +71,7 @@ class UserController
                 );
                 redirectWithMessage(
                     true,
-                    'Usuario Encontrado',
+                    'Bienvenido es bueno verte!!',
                     'Usuario o contraseña incorrectos',
                     'index.php'
                 );
@@ -96,7 +96,8 @@ class UserController
 
     public function logout()
     {
-        session_start();
+        // Cerrar la sesión
+        $_SESSION = [];
         session_destroy();
         redirectWithMessage(
             true,
