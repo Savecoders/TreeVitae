@@ -2,13 +2,17 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile
+    image: php:8.0-apache
+    container_name: treevitae_web
     ports:
       - '80:80'
     volumes:
       - ./:/var/www/html
+      - ./apache.conf:/etc/apache2/sites-available/000-default.conf
     environment:
       - PHP_ENV=production
+      - APACHE_DOCUMENT_ROOT=/var/www/html
     restart: always
     deploy:
       resources:
