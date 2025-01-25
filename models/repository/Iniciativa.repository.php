@@ -122,7 +122,7 @@ class IniciativaRespository implements IRepository
     public function delete($id): bool
     {
         try {
-            $sql = "DELETE FROM iniciativas WHERE id = :id";
+            $sql = "UPDATE iniciativas SET estado = 'Inactiva' WHERE ID = :id";
 
             $stmt = $this->con->prepare($sql);
 
@@ -139,7 +139,7 @@ class IniciativaRespository implements IRepository
     public function getAll(): array
     {
         try {
-            $sql = "SELECT * FROM iniciativas";
+            $sql = "SELECT * FROM iniciativas WHERE estado = 'Activa'";
 
             $stmt = $this->con->prepare($sql);
 
@@ -156,7 +156,7 @@ class IniciativaRespository implements IRepository
     public function getById($id): array | bool
     {
         try {
-            $sql = "SELECT * FROM iniciativas WHERE ID = :id";
+            $sql = "SELECT * FROM iniciativas WHERE ID = :id AND estado = 'Activa'";
 
             $stmt = $this->con->prepare($sql);
 
@@ -175,10 +175,11 @@ class IniciativaRespository implements IRepository
     public function filterBy($criteria): array
     {
         try {
-            $sql = "SELECT * FROM iniciativas WHERE nombre LIKE :nombre";
+            $sql = "SELECT * FROM iniciativas WHERE nombre LIKE :nombre AND estado = 'Activa'";
 
             $stmt = $this->con->prepare($sql);
 
+            $criteria = $criteria . '%';
             $stmt->bindParam(':nombre', $criteria);
 
             $stmt->execute();
