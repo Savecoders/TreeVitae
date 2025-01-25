@@ -268,13 +268,13 @@ require_once 'utils/dateFormatter.php';
 
 
 
-                
+
                 <?php if ((isset($isUserAdmin) && $isUserAdmin) || $isUserFollowers) { ?>
                     <hr class="separetor__horizontal" />
                     <p>Actividades</p>
                     <a href="index.php?c=actividad&f=viewall&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn primary__with-icon btn btn-animation">
-                    Revisar Actividades
-                </a>
+                        Revisar Actividades
+                    </a>
                 <?php } ?>
 
                 <?php if ((isset($isUserAdmin) && $isUserAdmin) || (isset($isUserFollowers) && !$isUserFollowers)) { ?>
@@ -284,17 +284,10 @@ require_once 'utils/dateFormatter.php';
                     </a>
                 <?php } ?>
 
-                <?php if((isset($isUserAdmin) && $isUserAdmin) || (isset($isUserJoin) && $isUserJoin)) { ?>
+                <?php if ((isset($isUserAdmin) && $isUserAdmin) || (isset($isUserJoin) && $isUserJoin)) { ?>
                     <hr class="separetor__horizontal" />
                     <a href="index.php?c=post&f=new_view&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn outerline btn-animation">
                         Crear post
-                    </a>
-                <?php } ?>
-
-                <?php if((isset($isUserAdmin) && $isUserAdmin) || (isset($isUserJoin) && $isUserJoin)) { ?>
-                    <hr class="separetor__horizontal" />
-                    <a href="index.php?c=post&f=viewall&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn outerline btn-animation">
-                        Revisar post
                     </a>
                 <?php } ?>
             </aside>
@@ -383,7 +376,7 @@ require_once 'utils/dateFormatter.php';
                 </section>
 
                 <div style="justify-content: center; display: flex">
-                    <a href="#" id="btnMorePost" class="btn primary__with-icon btn-animation">
+                    <a href="index.php?c=post&f=viewall&id=<?php echo $iniciativa[0]->getId(); ?>" id="btnMorePost" class="btn primary__with-icon btn-animation">
                         <img src="public/assets/icons/external-link.svg" alt="External link" />Revisa todos los Post :)
                     </a>
                 </div>
