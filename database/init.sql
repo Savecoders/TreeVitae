@@ -118,7 +118,7 @@ CREATE TABLE `actividades` (
   `direccion` text NOT NULL,
   `otorga_certificado` tinyint(1) NOT NULL DEFAULT 0,
   `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp(),
-  `estado` tinyint(1) DEFAULT 1
+  `estado` tinyint(1) DEFAULT 1,
   PRIMARY KEY (`ID`),
   KEY `iniciativa_id` (`iniciativa_id`),
   CONSTRAINT `actividades_ibfk_1` FOREIGN KEY (`iniciativa_id`) REFERENCES `iniciativas` (`ID`)
