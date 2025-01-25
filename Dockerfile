@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
 
 # Apache configuration
 RUN echo "DirectoryIndex index.php index.html" >> /etc/apache2/apache2.conf
+RUN echo "ServerName treevitae.onrender.com" >> /etc/apache2/apache2.conf
 RUN echo '<Directory /var/www/html/>\n\
     Options Indexes FollowSymLinks MultiViews\n\
     AllowOverride All\n\

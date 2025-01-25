@@ -5,10 +5,12 @@ services:
       dockerfile: Dockerfile
     image: php:8.0-apache
     container_name: treevitae_web
+    hostname: treevitae.onrender.com
     ports:
       - '80:80'
     volumes:
       - .:/var/www/html:rw
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html
+      - APACHE_SERVER_NAME=treevitae.onrender.com
     restart: always
