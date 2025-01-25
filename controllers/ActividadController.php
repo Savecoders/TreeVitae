@@ -1,5 +1,5 @@
 <?php
-
+//Autor:Agurto Pincay Jose
 if (!isset($_SESSION)) {
     session_start();
 }
