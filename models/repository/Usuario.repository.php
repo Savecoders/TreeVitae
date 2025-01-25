@@ -186,4 +186,30 @@ class UsuarioRepository implements IRepository
             return false;
         }
     }
+
+    public function searchUsersWithInitiatives($searchTerm): array
+    {
+        try {
+            $sql = "SELECT u.ID, u.nombre_usuario, u.email, i.id AS iniciativa_id, i.nombre AS iniciativa_nombre
+                    FROM usuarios u
+                    INNER JOIN iniciativas i ON u.ID = i.creador_id";
+
+            if (!empty($searchTerm)) {
+                $sql .= " WHERE u.nombre_usuario LIKE :searchTerm";
+            }
+
+            $stmt = $this->con->prepare($sql);
+
+            if (!empty($searchTerm)) {
+                $searchTerm = "%$searchTerm%";
+                $stmt->bindParam(':searchTerm', $searchTerm, PDO::PARAM_STR);
+            }
+
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error en searchUsersWithInitiatives: " . $e->getMessage());
+            return [];
+        }
+    }
 }

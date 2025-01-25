@@ -1,3 +1,4 @@
+<!--autor:Alex Vera Lopez-->
 <?php require_once HEADER; ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -5,15 +6,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="public/css/styles.css" />
+    <link rel="icon" href="public/assets/icons/logo.svg" type="image/svg+xml" />
     <title>Editar Perfil | TreeVitae</title>
     <style>
         .main-container-update {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            min-height: 25vh;
             background-color: var(--background-base);
             padding: 20px;
+            box-sizing: border-box;
         }
 
         .update-container {
@@ -21,10 +25,17 @@
             padding: 2rem;
             width: 100%;
             max-width: 500px;
+            border-radius: 10px;
         }
 
         .form-group {
             margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
         }
 
         .submit-btn,
@@ -34,25 +45,61 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
         }
 
         .submit-btn {
             background-color: var(--primary-base);
             color: var(--background-base);
+            margin-bottom: 10px;
         }
+
 
         .delete-btn {
             background-color: var(--primary-base);
             color: var(--background-base);
-            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .tittle_edit {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 40px;
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            .update-container {
+                max-width: 90%;
+                padding: 1.5rem;
+            }
+
+            .submit-btn,
+            .delete-btn {
+                font-size: 1rem;
+                padding: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .update-container {
+                max-width: 95%;
+            }
+
+            .submit-btn,
+            .delete-btn {
+                padding: 1rem;
+            }
         }
     </style>
+
 </head>
 
 <body>
     <main class="main-container-update">
         <div class="update-container">
-            <h1 class="text-center mb-4">Editar Perfil</h1>
+            <h1 class="tittle_edit">Editar Perfil</h1>
             <form action="index.php?c=user&f=update" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?php echo $userData['ID']; ?>">
 

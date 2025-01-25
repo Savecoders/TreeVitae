@@ -414,6 +414,9 @@ if (!isset($_SESSION)) {
                         </ul>
                     </li>
                     <li class="nav__item">
+                        <a href="index.php?c=user&f=search_view">Usuarios</a>
+                    </li>
+                    <li class="nav__item">
                         <a href="index.php?c=post&f=viewall">Posts</a>
                     </li>
                     <li class="nav__item">

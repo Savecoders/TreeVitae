@@ -410,4 +410,29 @@ class UserController
             );
         }
     }
+    public function search_view()
+    {
+        $searchTerm = limpiar($_GET['name'] ?? '');
+        $users = $this->model->searchUsersWithInitiatives($searchTerm);
+
+        if (empty($users)) {
+            $_SESSION['mensaje'] = 'No se encontraron usuarios con iniciativas.';
+            $_SESSION['type'] = 'error';
+        }
+
+        require_once VUSER . 'search.php';
+    }
+
+
+
+    public function search()
+    {
+        $searchTerm = limpiar($_GET['name'] ?? '');
+        $usuarioRepository = new UsuarioRepository();
+
+        // Buscar usuarios con iniciativas
+        $users = $usuarioRepository->searchUsersWithInitiatives($searchTerm);
+
+        require_once VUSER . 'search.php';
+    }
 }

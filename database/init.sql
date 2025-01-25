@@ -237,8 +237,8 @@ INSERT INTO `tags` (nombre) VALUES
 
 INSERT INTO `roles` (nombre) VALUES ('Administrador'), ('Seguidor'), ('Join');
 
-INSERT INTO `usuarios` (nombre_usuario, email, password) 
-VALUES ('Savecoders', 'AbramVivancoAgu@ug.edu.ec', '123456');
+INSERT INTO `usuarios` (nombre_usuario, email, password, estado) 
+VALUES ('Savecoders', 'AbramVivancoAgu@ug.edu.ec', '123456', 1);
 
 --
 -- Finalización de la transacción

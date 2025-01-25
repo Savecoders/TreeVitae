@@ -1,3 +1,4 @@
+<!--autor:Alex Vera Lopez-->
 <?php
 if (!isset($_SESSION)) {
     session_start();
@@ -82,7 +83,7 @@ if (!isset($_SESSION)) {
             border-radius: 8px;
             font-size: 2.2ch;
             cursor: pointer;
-            transition: background-color 0.3s;
+            margin-bottom: 10px;
         }
 
         .form-group .file-input-label {
@@ -116,6 +117,14 @@ if (!isset($_SESSION)) {
             cursor: pointer;
             width: 18px;
             height: 18px;
+        }
+
+        .link_outerline {
+            color: var(--primary-800);
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+
         }
 
         @media (max-width: 600px) {
@@ -206,6 +215,7 @@ if (!isset($_SESSION)) {
                 </div>
 
                 <button class="submit-btn">Registrarse</button>
+                <a class="link_outerline" href="index.php?c=user&f=login_view">Ya tienes una cuenta? Inicia Sesion</a>
             </form>
             <?php if (isset($_SESSION['mensaje'])) { ?>
                 <div class="notify-messages">
