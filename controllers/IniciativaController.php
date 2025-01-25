@@ -27,11 +27,65 @@ class IniciativaController
             $iniciativas = $this->getIniciative($iniciativasResult);
             $tagsRepository = new TagsRepository();
             $tags = $tagsRepository->getAll();
-            $title = 'Iniciativas';
             require_once  VINICIATIVA . 'viewall.php';
         } catch (Exception $e) {
             error_log('Error en IniciativaController@viewall: ' . $e->getMessage());
             redirectWithMessage(false, '', 'No podemos mostrar las iniciativas en estos momentos', 'index.php?c=iniciativa&f=viewall');
+        }
+    }
+
+    public function getAllFilterByName()
+    {
+        try {
+            $response = array(
+                'success' => false,
+                'message' => '',
+                'data' => null
+            );
+
+            if (!isset($_GET['name'])) {
+                $response['message'] = 'No se ha proporcionado un nombre';
+                return json_encode($response);
+            }
+
+            $name = $_GET['name'];
+            $iniciativasResult = $this->model->filterBy($name);
+            $iniciativas_encontradas = $this->getIniciative($iniciativasResult);
+
+            if (
+                !$iniciativas_encontradas || count($iniciativas_encontradas) === 0
+                || !is_array($iniciativas_encontradas) || !$iniciativas_encontradas
+            ) {
+                $response['message'] = 'No se encontraron iniciativas';
+
+                echo json_encode($response);
+                return;
+            }
+
+            $iniciativas_array = array_map(function ($iniciativa) {
+                return [
+                    'id' => $iniciativa->getId(),
+                    'nombre' => $iniciativa->getNombre(),
+                    'descripcion' => $iniciativa->getDescripcion(),
+                    'cover' => base64_encode($iniciativa->getCover()),
+                    'tags' => array_map(function ($tag) {
+                        return [
+                            'id' => $tag->getID(),
+                            'nombre' => $tag->getNombre()
+                        ];
+                    }, $iniciativa->getTags())
+                ];
+            }, $iniciativas_encontradas);
+
+            $response['success'] = true;
+            $response['message'] = 'Iniciativas encontradas';
+            $response['data'] = $iniciativas_array;
+            echo json_encode($response);
+        } catch (Exception $e) {
+            error_log('Error en IniciativaController@getAllFilterByName: ' . $e->getMessage());
+            $response['message'] = 'No podemos mostrar las iniciativas en estos momentos';
+
+            echo json_encode($response);
         }
     }
 
@@ -431,5 +485,29 @@ class IniciativaController
             array_push($iniciativas, $iniciativa);
         }
         return $iniciativas;
+    }
+
+    public function delete()
+    {
+        if (!isset($_GET['id'])) {
+            redirectWithMessage(false, '', 'La iniciativa que estas buscando, no esta disponible :(', 'index.php?c=iniciativa&f=viewall');
+            return;
+        }
+
+        if (!$this->model->isUserAdmin($_GET['id'], $_SESSION['user']['ID'])) {
+            redirectWithMessage(false, '', 'No tienes permisos para realizar esta acción', 'index.php?c=iniciativa&f=viewall');
+            return;
+        }
+
+        $iniciativa_id = (int) $_GET['id'];
+
+        $isDeleted = $this->model->delete($iniciativa_id);
+
+        if (!$isDeleted) {
+            redirectWithMessage(false, '', 'Error al eliminar la iniciativa', 'index.php?c=iniciativa&f=viewall');
+            return;
+        }
+
+        redirectWithMessage(true, 'Iniciativa Inhabilitada con éxito', 'Iniciativa eliminada con éxito', 'index.php?c=iniciativa&f=viewall');
     }
 }
