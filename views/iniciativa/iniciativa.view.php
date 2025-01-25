@@ -267,16 +267,34 @@ require_once 'utils/dateFormatter.php';
                 </button>
 
 
-                <hr class="separetor__horizontal" />
-                <p>Actividades</p>
-                <a href="#" class="btn primary__with-icon btn btn-animation">
+
+                
+                <?php if ((isset($isUserAdmin) && $isUserAdmin) || $isUserFollowers) { ?>
+                    <hr class="separetor__horizontal" />
+                    <p>Actividades</p>
+                    <a href="index.php?c=actividad&f=viewall&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn primary__with-icon btn btn-animation">
                     Revisar Actividades
                 </a>
+                <?php } ?>
 
-                <?php if ((isset($isUserAdmin) && $isUserAdmin) || $isUserFollowers) { ?>
+                <?php if ((isset($isUserAdmin) && $isUserAdmin) || (isset($isUserFollowers) && !$isUserFollowers)) { ?>
                     <hr class="separetor__horizontal" />
                     <a href="index.php?c=contact&f=viewall&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn outerline btn-animation">
                         Contactarte con la iniciativa?
+                    </a>
+                <?php } ?>
+
+                <?php if((isset($isUserAdmin) && $isUserAdmin) || (isset($isUserJoin) && $isUserJoin)) { ?>
+                    <hr class="separetor__horizontal" />
+                    <a href="index.php?c=post&f=new_view&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn outerline btn-animation">
+                        Crear post
+                    </a>
+                <?php } ?>
+
+                <?php if((isset($isUserAdmin) && $isUserAdmin) || (isset($isUserJoin) && $isUserJoin)) { ?>
+                    <hr class="separetor__horizontal" />
+                    <a href="index.php?c=post&f=viewall&id=<?php echo $iniciativa[0]->getId(); ?>" class="btn outerline btn-animation">
+                        Revisar post
                     </a>
                 <?php } ?>
             </aside>

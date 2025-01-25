@@ -704,6 +704,7 @@ textarea:focus {
 }
 
 .message {
+  background: var(--danger-base);
   color: var(--background-base);
   border-radius: 5px;
   padding: min(0.8rem, 2vw);

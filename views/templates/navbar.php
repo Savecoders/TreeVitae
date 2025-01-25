@@ -414,13 +414,17 @@ if (!isset($_SESSION)) {
                         </ul>
                     </li>
                     <li class="nav__item">
+                        <a href="index.php?c=user&f=search_view">Usuarios</a>
+                    </li>
+                    <li class="nav__item">
                         <a href="index.php?c=post&f=viewall">Posts</a>
                     </li>
                     <li class="nav__item">
                         <a href="index.php?c=index&f=index&p=preguntas">Preguntas</a>
                     </li>
                     <li class="nav__item"
-                        <a href="index.php?c=contact&f=new">About</a>
+                        <a href="index.php?c=contact&f=viewall">About</a>
+
                     </li>
 
                     <?php if (isset($_SESSION['user'])) { ?>
@@ -445,7 +449,7 @@ if (!isset($_SESSION)) {
                                 </li>
 
                                 <li class="nav__dropdown">
-                                    <a href="{{ url_for('user.update') }}" class="nav__link"><i class="ti ti-settings"></i> Editar Perfil</a>
+                                    <a href="index.php?c=user&f=update_profile" class="nav__link"><i class="ti ti-settings"></i> Editar Perfil</a>
                                 </li>
 
                                 <li class="nav__dropdown">

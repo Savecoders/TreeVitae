@@ -39,7 +39,7 @@ class ContactRepository
             $stmt->execute();
             $res = $stmt->fetch(PDO::FETCH_ASSOC);
             return $res;
-        } catch (PDOEXception $e) {
+        } catch (PDOException $e) {
             error_log("Error en getById de IniciativaRepository" . $e->getMessage());
             return [];
         }

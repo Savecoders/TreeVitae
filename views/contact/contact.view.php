@@ -28,6 +28,21 @@
         color: var(--primary-500);
     }
 
+    .btn-cancel{
+        display: inline-block;
+        padding: 10px;
+        background-color: black; 
+        color: white;
+        font-size: 16px;
+        text-decoration: none;
+        text-align: center;
+        border-radius: 6px;
+        border: 2px solid green; 
+        margin-top: 20px;
+        width: 100%;
+        text-transform: uppercase;
+    }
+    
     .contact-details img {
         border-radius: 50%;
         object-fit: cover;
@@ -105,6 +120,9 @@
                     <td id="contactMessage"><?php echo htmlspecialchars($contacto['mensaje']); ?></td>
                 </tr>
             </table>
+            <div class="container__component">
+                <a href="index.php?c=contact&f=viewall&id=<?php echo limpiar($contacto['iniciativa_id']); ?>" class="btn-cancel">Salir</a>
+            </div>
         </div>
     </main>
 </body>

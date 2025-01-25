@@ -115,6 +115,21 @@
         text-transform: uppercase;
     }
 
+    .btn-cancel{
+        display: inline-block;
+        padding: 10px;
+        background-color: black; 
+        color: white;
+        font-size: 16px;
+        text-decoration: none;
+        text-align: center;
+        border-radius: 6px;
+        border: 2px solid green; 
+        margin-top: 20px;
+        width: 100%;
+        text-transform: uppercase;
+    }
+
     .input__container select {
         width: 100%; 
         padding: 12px 14px; 
@@ -309,6 +324,10 @@
 
                         <div class="container__component">
                             <button type="submit" class="btn-update">Modificar</button>      
+                        </div>
+
+                        <div class="container__component">
+                            <a href="index.php?c=contact&f=viewall&id=<?php echo limpiar($contacto['iniciativa_id']); ?>" class="btn-cancel">Cancelar</a>
                         </div>
                     </fieldset>
                 </section>

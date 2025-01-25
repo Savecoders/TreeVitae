@@ -115,13 +115,15 @@ CREATE TABLE `actividades` (
   `descripcion` text DEFAULT NULL,
   `fecha_inicio` date NOT NULL,
   `fecha_fin` date NOT NULL,
-  `ubicacion` text NOT NULL,
-  `virtual` tinyint(1) NOT NULL DEFAULT '0',
-  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `direccion` text NOT NULL,
+  `otorga_certificado` tinyint(1) NOT NULL DEFAULT 0,
+  `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp(),
+  `estado` tinyint(1) DEFAULT 1,
   PRIMARY KEY (`ID`),
   KEY `iniciativa_id` (`iniciativa_id`),
   CONSTRAINT `actividades_ibfk_1` FOREIGN KEY (`iniciativa_id`) REFERENCES `iniciativas` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- Estructura de tabla para la tabla `fotos`
 DROP TABLE IF EXISTS `fotos`;
@@ -239,8 +241,8 @@ INSERT INTO `tags` (nombre) VALUES
 
 INSERT INTO `roles` (nombre) VALUES ('Administrador'), ('Seguidor'), ('Join');
 
-INSERT INTO `usuarios` (nombre_usuario, email, password) 
-VALUES ('Savecoders', 'AbramVivancoAgu@ug.edu.ec', '123456');
+INSERT INTO `usuarios` (nombre_usuario, email, password, estado) 
+VALUES ('Savecoders', 'AbramVivancoAgu@ug.edu.ec', '123456', 1);
 
 --
 -- Finalización de la transacción
