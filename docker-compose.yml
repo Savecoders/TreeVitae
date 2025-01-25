@@ -1,16 +1,16 @@
 services:
-  web:
+  apache-php:
+    image: apache-mysqli
     build:
       context: .
       dockerfile: Dockerfile
-    image: php:8.0-apache
-    container_name: treevitae_web
-    hostname: treevitae.onrender.com
+    volumes:
+      - ./:/var/www/html
     ports:
       - '80:80'
-    volumes:
-      - .:/var/www/html:rw
-    environment:
-      - APACHE_DOCUMENT_ROOT=/var/www/html
-      - APACHE_SERVER_NAME=treevitae.onrender.com
-    restart: always
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
