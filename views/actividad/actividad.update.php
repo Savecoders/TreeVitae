@@ -1,4 +1,5 @@
 <?php
+//Autor:Agurto Pincay Jose
     require_once 'utils/cleanser.php';
     require_once HEADER;
 ?>

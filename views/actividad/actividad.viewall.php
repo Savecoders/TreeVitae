@@ -1,4 +1,5 @@
 <?php require_once HEADER; ?>
+<!--Autor:Agurto Pincay Jose-->
 <!DOCTYPE html>
 <html lang="es">
 <head>
