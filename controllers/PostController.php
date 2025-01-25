@@ -121,24 +121,26 @@ class PostController
     public function edit(){
         try{
             $parametro = htmlentities($_GET['id']);
-            $contacto = $this->populate();
-            $exito = $this->model->update($contacto);
-            header("Location: index.php?c=post&f=viewall&id=$parametro");
+            $parametro2 = htmlentities($_GET['i']);
+            $datos = $_POST;
+            $post = $this->populate($datos);
+            $post -> setId($parametro);
+            $post -> setIniciativaId($parametro2);
+            $exito = $this->model->update($post);
+            echo $parametro2? "Hola":"Chao";
+            var_dump($post);
         }catch(PDOException $e){
             error_log('Error en ContactController@update: ' . $e->getMessage());
         }
     }
-    
-    public function populate() {
+
+    public function populate($data) {
         $post = new Post();
-        $post->setId($_POST['id']);  
-        $post->setIniciativaId($_POST['iniciativa_id']);  
         $post->setAutorId($_SESSION['user']['ID']);  
-        $post->setTitulo($_POST['titulo']);
-        $post->setSubtitulo($_POST['subtitulo']);
-        $post->setContenido($_POST['contenido']);
-        $post->setPermiteComentarios($_POST['permite_comentarios']); 
-        $post->setFechaPublicacion($_POST['fecha_publicacion']);  
+        $post->setTitulo($data['titulo']);
+        $post->setSubtitulo($data['subtitulo']);
+        $post->setContenido($data['contenido']);
+        $post->setPermiteComentarios($data['permite_comentarios']); 
         
         return $post;
     }
