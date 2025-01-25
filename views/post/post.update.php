@@ -88,7 +88,8 @@
 
         <h1 class="title__principal">Editar Post</h1>
         <article class="container__principal">
-            <form class="container__form" id="formulario" method="POST" action="index.php?c=post&f=edit&id=<?php echo $post["ID"]; ?>&i=<?php echo $post["iniciativa_id"]; ?>">
+            <form class="container__form" id="formulario" method="POST" action="index.php?c=post&f=edit&id=<?php echo $post["ID"] ?>">
+            <input type="hidden" name="id" id="id" value="<?php echo $post["ID"] ?>"/>
                 <section id="container__second">
                     <legend id="label__form">Datos del Post</legend>
 
@@ -99,7 +100,7 @@
 
                     <div class="container__component">
                         <label class="label__name" for="subtitulo">Subtítulo: </label>
-                        <input type="text" id="subtitulo" name="subtitulo" value="<?php echo $post['subtitulo']; ?>" />
+                        <input type="text" id="subtitulo" name="subtitulo" value="<?php echo $post['subtitulo']; ?>" required />
                     </div>
 
                     <div class="container__component">

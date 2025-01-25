@@ -18,7 +18,6 @@ class PostRepository
         try {
             $sql = "INSERT INTO posts (iniciativa_id, autor_id, titulo, subtitulo, contenido, permite_comentarios, fecha_publicacion) 
                     VALUES (:iniciativa_id, :autor_id, :titulo, :subtitulo, :contenido, :permite_comentarios, :fecha_publicacion)";
-
             $stmt = $this->con->prepare($sql);
             $stmt->bindParam(':iniciativa_id', $post->getIniciativaId(), PDO::PARAM_INT);
             $stmt->bindParam(':autor_id', $post->getAutorId(), PDO::PARAM_INT);
@@ -27,7 +26,6 @@ class PostRepository
             $stmt->bindParam(':contenido', $post->getContenido(), PDO::PARAM_STR);
             $stmt->bindParam(':permite_comentarios', $post->getPermiteComentarios(), PDO::PARAM_INT);
             $stmt->bindParam(':fecha_publicacion', $post->getFechaPublicacion(), PDO::PARAM_STR);
-
             $res = $stmt->execute();
             return $res;
         } catch (PDOException $e) {
@@ -54,7 +52,6 @@ class PostRepository
                 ORDER BY 
                     posts.fecha_publicacion DESC
             ";
-
             $stmt = $this->con->prepare($sql);
             $stmt->bindParam(':id', $iniciativa_id, PDO::PARAM_INT);
             $stmt->execute();
@@ -70,18 +67,14 @@ class PostRepository
     public function isUserAutor($iniciativa_id, $usuario_id)
     {
         try {
-            // Consulta para verificar si el usuario es autor de la iniciativa en los posts
             $sql = "SELECT * FROM posts WHERE iniciativa_id = :iniciativa_id AND autor_id = :usuario_id";
-
             $stmt = $this->con->prepare($sql);
             $stmt->bindParam(':iniciativa_id', $iniciativa_id, PDO::PARAM_INT);
             $stmt->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);
 
             $stmt->execute();
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
-            // Si se encuentra un post que coincida con el usuario y la iniciativa, retorna true
-            return count($res) > 0;
+                        return count($res) > 0;
         } catch (PDOException $er) {
             error_log("Error en isUserAutor de PostRepository: " . $er->getMessage());
             return false;
@@ -124,38 +117,41 @@ class PostRepository
         }
     }
 
-    public function searchByAsunto($asunto, $parametro)
+    public function searchByTitle($titulo)
     {
         try {
-            $sql = "SELECT * FROM contacto_iniciativa WHERE asunto LIKE :asunto AND iniciativa_id = :id";
-
+            $sql = "SELECT * FROM posts WHERE titulo LIKE :titulo"; // Busca por título
+    
             $stmt = $this->con->prepare($sql);
-            $stmt->bindParam(':asunto', $asunto, PDO::PARAM_STR);
-            $stmt->bindParam(':id', $parametro, PDO::PARAM_INT);
+            $stmt->bindParam(':titulo', $titulo, PDO::PARAM_STR);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Devuelve los resultados
         } catch (PDOException $e) {
-            error_log("Error en searchByAsunto de ContactRepository" . $e->getMessage());
+            error_log("Error en searchByTitle de PostRepository" . $e->getMessage());
             return [];
         }
-    }   
+    }
+    
 
-    public function update($post)
-    {
+    public function update($post) {
         try {
-            $sql = "update posts set (iniciativa_id,titulo,subtitulo,contenido,permite_comentarios) values (:iniciativa_id, :titulo, :subtitulo, :contenido, :permite_comentarios) where ID = :id"; 
+            $sql = "UPDATE posts 
+                    SET 
+                        titulo = :titulo, 
+                        subtitulo = :subtitulo, 
+                        contenido = :contenido, 
+                        permite_comentarios = :permite_comentarios,
+                        fecha_publicacion = :fecha_publicacion
+                    WHERE 
+                        id = :id";   
             $stmt = $this->con->prepare($sql);        
-            // Vincula los parámetros de la consulta con los valores del objeto Post
-            $stmt->bindParam(':iniciativa_id', $post->getIniciativaId(), PDO::PARAM_INT);
             $stmt->bindParam(':titulo', $post->getTitulo(), PDO::PARAM_STR);
             $stmt->bindParam(':subtitulo', $post->getSubtitulo(), PDO::PARAM_STR);
             $stmt->bindParam(':contenido', $post->getContenido(), PDO::PARAM_STR);
-            $stmt->bindParam(':permite_comentarios', $post->getPermiteComentarios(), PDO::PARAM_BOOL);
+            $stmt->bindParam(':permite_comentarios', $post->getPermiteComentarios(), PDO::PARAM_INT);
+            $stmt->bindParam(':fecha_publicacion', $post->getFechaPublicacion(), PDO::PARAM_STR);
             $stmt->bindParam(':id', $post->getId(), PDO::PARAM_INT);
-
-            // Ejecuta la consulta
             $res = $stmt->execute();
-    
             return $res;
         } catch (PDOException $e) {
             error_log("Error en update de PostRepository: " . $e->getMessage());

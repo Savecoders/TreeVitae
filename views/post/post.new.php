@@ -100,7 +100,7 @@
 
                     <div class="container__component">
                         <label class="label__name" for="subtitulo">Subtítulo: </label>
-                        <input type="text" id="subtitulo" name="subtitulo" />
+                        <input type="text" id="subtitulo" name="subtitulo" required/>
                     </div>
 
                     <div class="container__component">
