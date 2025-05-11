@@ -1,5 +1,5 @@
 <?php require_once HEADER; ?>
-
+<!-- //Autor: Pincay Alvarez Pablo Salvador -->
 <style>
     .container__404 {
         display: flex;

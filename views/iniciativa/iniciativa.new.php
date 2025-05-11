@@ -1,4 +1,5 @@
 <?php require_once HEADER; ?>
+<!-- //Autor: Pincay Alvarez Pablo Salvador -->
 <style>
     .center {
         margin: 0 auto;

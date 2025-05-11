@@ -1,5 +1,5 @@
 <?php
-
+//Autor: Pincay Alvarez Pablo Salvador
 class Foto
 {
     private $id, $imagen;

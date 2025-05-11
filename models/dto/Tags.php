@@ -1,4 +1,5 @@
 <?php
+//Autor: Pincay Alvarez Pablo Salvador
 class Tags
 {
     private $id, $nombre;

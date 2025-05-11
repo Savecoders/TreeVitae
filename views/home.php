@@ -2,7 +2,7 @@
 
 <main class="main__container__content">
     <div class="hero">
-        <h1 id="hero__title__company">Conectando vida y naturaleza para un futuro sostenible</h1>
+        <h1 id="hero__title__company">Conectando la vida y la naturaleza para un futuro sostenible</h1>
         <section class="hero__figures" aria-label="hero figures section">
             <div class="hero__figure">
                 <img src="public/assets/images/image1.png" alt="Hero 1" />

@@ -1,4 +1,5 @@
 <?php
+//Autor: Pincay Alvarez Pablo Salvador
 class ErrorController
 {
     public function notFound()

@@ -1,7 +1,9 @@
 <?php
 require_once HEADER;
 require_once 'utils/dateFormatter.php';
+//Autor: Pincay Alvarez Pablo Salvador
 ?>
+<!-- //Autor: Pincay Alvarez Pablo Salvador -->
 
 <style>
     .card__picture {
