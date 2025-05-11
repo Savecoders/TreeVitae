@@ -1,9 +1,12 @@
 <?php
+//Autor: Pincay Alvarez Pablo Salvador
 require_once HEADER;
 if (!empty($SESSION['user'])) {
     header('Location: index.php?c=user&f=login');
 }
 ?>
+
+<!-- //Autor: Pincay Alvarez Pablo Salvador -->
 <style>
     .center {
         margin: 0 auto;

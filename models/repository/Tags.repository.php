@@ -1,4 +1,5 @@
 <?php
+//Autor: Pincay Alvarez Pablo Salvador
 //DAO: Data Access Object
 require_once 'core/DB.php';
 require_once 'models/repository/IRepository.php';

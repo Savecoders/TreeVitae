@@ -1,5 +1,5 @@
 <?php
-
+//Autor: Pincay Alvarez Pablo Salvador
 interface IRepository
 {
     public function add($entity): bool | int;

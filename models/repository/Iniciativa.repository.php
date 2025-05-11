@@ -1,4 +1,5 @@
 <?php
+//Autor: Pincay Alvarez Pablo Salvador
 require_once 'core/DB.php';
 require_once 'models/repository/IRepository.php';
 require_once 'models/dto/Iniciativa.php';
@@ -369,5 +370,4 @@ class IniciativaRespository implements IRepository
             return false;
         }
     }
-
 }

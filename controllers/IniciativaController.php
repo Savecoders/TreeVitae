@@ -1,4 +1,5 @@
 <?php
+//Autor: Pincay Alvarez Pablo Salvador
 if (!isset($_SESSION)) {
     session_start();
 }

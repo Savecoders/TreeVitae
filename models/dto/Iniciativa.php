@@ -1,4 +1,5 @@
 <?php
+//Autor: Pincay Alvarez Pablo Salvador
 // DTO: Data Transfer Object
 class Iniciativa
 {
